@@ -44,24 +44,25 @@ class MyApp extends StatelessWidget {
         GlobalWidgetsLocalizations.delegate,
         GlobalMaterialLocalizations.delegate,
       ],
-      initialRoute: Splash.id,
+      // initialRoute: Splash.id,
+      home: const Details(),
       routes: {
         Splash.id: (context) => const Splash(),
         Register.id: (context) => const Register(),
         Login.id: (context) => const Login(),
-        Home_Layout.id:(context) =>const Home_Layout(),
-        Notifications.id:(context) => const Notifications(),
-        drawerScreen.id:(context) => const drawerScreen(),
-        Home.id:(context) => const Home(),
-        Instuites.id:(context) =>  Instuites(),
-        Details.id:(context) => const Details(),
-        registrationForm.id:(context) =>  const registrationForm(),
-        Done.id:(context)  => const Done(),
-        InstuitPage.id:(context)  => const InstuitPage(),
-        Profile.id:(context) => const Profile(),
-        
-        
+        Home_Layout.id: (context) => const Home_Layout(),
+        Notifications.id: (context) => const Notifications(),
+        drawerScreen.id: (context) => const drawerScreen(),
+        Home.id: (context) => const Home(),
+        Instuites.id: (context) => Instuites(),
+        Details.id: (context) => const Details(),
+        registrationForm.id: (context) => const registrationForm(),
+        Done.id: (context) => const Done(),
+        InstuitPage.id: (context) => const InstuitPage(),
+        Profile.id: (context) => const Profile(),
       },
+      onUnknownRoute: (settings) =>
+          MaterialPageRoute(builder: (_) => const Text('dsjaoidkjsaopkdsao')),
       //home: Splash(),
     );
   }

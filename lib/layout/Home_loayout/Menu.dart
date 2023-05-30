@@ -9,17 +9,12 @@ class Menu extends StatelessWidget {
 
   @override
   Widget build(BuildContext context) {
-    return MaterialApp(
-      debugShowCheckedModeBanner: false,
-      home: Scaffold(
-        
-        body: Stack(
-          children: const [
-            drawerScreen(),
-            Home(),
-         
-          ],
-        ),
+    return const Scaffold(
+      body: Stack(
+        children: [
+          drawerScreen(),
+          Home(),
+        ],
       ),
     );
   }
