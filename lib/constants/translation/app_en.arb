@@ -1,0 +1,394 @@
+{
+    "language": "English",
+    "@language": {
+        "description": "the current language" 
+    },
+    "buildYourCv" : "Build Your CV",
+    "@buildYourCv": {
+        "description": "Build Your CV text" 
+    },
+    "buildYourCvDescription" : "We provide you with easy and quick ways to build your CV that will enable you to enter the Work space",
+    "@buildYourCvDescription": {
+        "description": "Build Your CV description text" 
+    },
+    "modernDesign" : "Modern Design",
+    "@modernDesign": {
+        "description": "Modern Design text" 
+    },
+    "modernDesignDescription" : "Attract the attention of business owners, we have chosen for you the latest and most beautiful modern designs",
+    "@modernDesignDescription": {
+        "description": "Modern Design description text" 
+    },
+    "done" : "Done",
+    "@done": {
+        "description": "Done text" 
+    },
+    "aboutYou" : "About you",
+    "@aboutYou": {
+        "description": "About you text" 
+    },
+    "email" : "Email Address",
+    "@email": {
+        "description": "Email Address text" 
+    },
+    "phoneNumber" : "Phone Number",
+    "@phoneNumber": {
+        "description": "Phone Number text" 
+    },
+    "firstName" : "First Name",
+    "@firstName": {
+        "description": "First Name text" 
+    },
+    "lastName" : "Last Name",
+    "@lastName": {
+        "description": "Last Name text" 
+    },
+    "password" : "password",
+    "@password": {
+        "description": "enter password"
+    },   
+    "birthDate" : "Birthdate",
+     "@birthDate": {
+        "description": "Birthdate text" 
+    },
+    "selectDay" : "Select Day",
+    "@selectDay": {
+        "description": "Select Day text" 
+    },
+    "selectMonth" : "Select Month",
+    "@selectMonth": {
+        "description": "Select Month text" 
+    },
+    "selectYear" : "Select Year",
+    "@selectYear": {
+        "description": "Select Year text" 
+    },
+    "natoinality" : "Nationality",
+    "@natoinality": {
+        "description": "Nationality text" 
+    },
+    "countryOfResidence" : "Country of Residence",
+    "@countryOfResidence": {
+        "description": "Country of Residence text" 
+    },
+    "sex" : "Sex",
+    "@sex": {
+        "description": "Sex text" 
+    },
+    "male" : "Male",
+    "@male": {
+        "description": "Male text" 
+    },
+    "female" : "Female",
+    "@female": {
+        "description": "Female text" 
+    },
+    "next" : "Next",
+    "@next" : {
+        "description": "Next text"
+    },
+    "requiredError" : "This field is required",
+    "@requiredError" : {
+        "description": "requiredError text"
+    },
+    "emailNotValidError" : "Email not valid",
+    "@emailNotValidError" : {
+        "description": "emailNotValidError text"
+    },
+    "educationInfo" : "Education Informations",
+    "@educationInfo" : {
+        "description": "Education Informations text"
+    },
+    "educationLevel" : "Educational Level",
+    "@educationLevel" : {
+        "description": "Educational Level text"
+    },
+    "universityCollegeName" : "University/College Name",
+    "@universityCollegeName" : {
+        "description": "University/College Name text"
+    },
+    "specialty" : "Specialty",
+    "@specialty" : {
+        "description": "Specialty text"
+    },
+    "studyYears" : "Study Years",
+    "@studyYears" : {
+        "description": "Study Years text"
+    },
+    "fromYear" : "From Year",
+    "@fromYear" : {
+        "description": "From Year text"
+    },
+    "toYear" : "To Year",
+    "@toYear" : {
+        "description": "To Year text"
+    },
+    "studyLocationCountry" : "Study Location Country",
+    "@studyLocationCountry" : {
+        "description": "Study Location Country text"
+    },
+    "shcoolName" : "Shcool Name",
+    "@shcoolName" : {
+        "description": "Shcool Name text"
+    },
+    "city" : "City",
+    "@city" : {
+        "description": "City text"
+    },
+    "gpa" : "GPA",
+    "@gpa" : {
+        "description": "GPA text"
+    },
+    "bachelor" : "Bachelor's",
+    "@bachelor" : {
+        "description": "Bachelor's text"
+    },
+    "master" : "Master's",
+    "@master" : {
+        "description": "Master's text"
+    },
+    "phd" : "PhD",
+    "@phd" : {
+        "description": "PhD text"
+    },
+    "highSchool" : "High School",
+    "@highSchool" : {
+        "description": "High School text"
+    },
+    "diploma" : "Diploma",
+    "@diploma" : {
+        "description": "diploma text"
+    },
+    "secandoryEducation" : "Secandory Education",
+    "@secandoryEducation" : {
+        "description": "Secandory Education text"
+    },
+    "preparatoryEducation" : "Preparatory Education",
+    "@preparatoryEducation" : {
+        "description": "Preparatory Education text"
+    },
+    "vocationalEducation" : "Vocational Education",
+    "@vocationalEducation" : {
+        "description": "Vocational Education text"
+    },
+    "primaryEducation" : "Primary Education",
+    "@primaryEducation" : {
+        "description": "primary education text"
+    },
+    "didntGetACertificateYet" : "I didn't get a certificate yet",
+    "@primaryEducation" : {
+        "description": "I didn't get a certificate yet text"
+    },
+    "workInfo" : "Work Informations",
+    "@workInfo" : {
+        "description": "Work Informations text"
+    },
+    "jobTitle" : "Job Title",
+    "@jobTitle" : {
+        "description": "Job Title text"
+    },
+    "workplaceName" : "Workplace Name",
+    "@workplaceName" : {
+        "description": "Workplace Name text"
+    },
+    "jobLoaction" : "Job Loaction",
+    "@jobLoaction" : {
+        "description": "Job Loaction text"
+    },
+    "tellUsAboutWork" : "Tell us about your work experience, role, responsiblities, achievements",
+    "@tellUsAboutWork" : {
+        "description": "Tell us about your work experience, role, responsiblities, achievements text"
+    },
+    "skillInfo" : "Skill Informations",
+    "@skillInfo" : {
+        "description": "Skill Informations text"
+    },
+    "yourSkills" : "Your Skills",
+    "@yourSkills" : {
+        "description": "Your Skills text"
+    },
+    "evaluateYourSkill" : "Evaluate Your Skill",
+    "@evaluateYourSkill" : {
+        "description": "Evaluate Your Skill text"
+    },
+    "workYears" : "Work Years",
+    "@workYears" : {
+        "description": "Work Years text"
+    },
+    "achievementsInfo" : "Achievements Informations",
+    "@achievementsInfo" : {
+        "description": "Achievements Informations text"
+    },
+    "projectName" : "Project Name",
+    "@projectName" : {
+        "description": "Project Name text"
+    },
+    "link" : "Link",
+    "@link" : {
+        "description": "Link text"
+    },
+    "whatIsTheNameOfTheCompany" : "What is the name of the company that did this work?",
+    "@whatIsTheNameOfTheCompany" : {
+        "description": "What is the name of the company that did this work? text"
+    },
+    "projectDescription" : "Project Description",
+    "@projectDescription" : {
+        "description": "Project Description text"
+    },
+    "exampleRoboticsCompanyFreelance" : "Example: Robotics Company | Freelance",
+    "@exampleRoboticsCompanyFreelance" : {
+        "description": "Example: Robotics Company | Freelance text"
+    },
+    "courseInfo" : "Course Informations",
+    "@courseInfo" : {
+        "description": "Course Informations text"
+    },
+    "courseName" : "Course Name",
+    "@courseName" : {
+        "description": "Course Name text"
+    },
+    "theNameOfTheSiteInstituteCenter" : "The name of the site / institute / center",
+    "@theNameOfTheSiteInstituteCenter" : {
+        "description": "The name of the site / institute / center text"
+    },
+    "courseLink" : "Course Link",
+    "@courseLink" : {
+        "description": "Course Link text"
+    },
+    "languageInfo" : "Language Informations",
+    "@languageInfo" : {
+        "description": "Language Informations text"
+    },
+    "languageText" : "Language",
+    "@languageText" : {
+        "description": "Language text"
+    },
+    "level" : "Level",
+    "@level" : {
+        "description": "Level text"
+    },
+    "save" : "Save",
+    "@save" : {
+        "description": "Save text"
+    },
+    "begginer" : "Begginer",
+    "@begginer" : {
+        "description": "Begginer A1 - A2 text"
+    },
+    "intermediate" : "Intermediate",
+    "@intermediate" : {
+        "description": "Intermediate B1 - B2 text"
+    },
+    "advanced" : "Advanced",
+    "@advanced" : {
+        "description": "Advanced C1 text"
+    },
+    "professional" : "Professional",
+    "@professional" : {
+        "description": "Professional C2 text"
+    },
+    "contact" : "Contact",
+    "@contact" : {
+        "description": "Contact text"
+    },
+    "skills" : "Skills",
+    "@skills" : {
+        "description": "Skills text"
+    },
+    "languages" : "Languages",
+    "@languages" : {
+        "description": "Languages text"
+    },
+    "downloadCv" : "Download Cv",
+    "@downloadCv" : {
+        "description": "Download Cv text"
+    },
+    "shareYourCv" : "Share your Cv",
+    "@shareYourCv" : {
+        "description": "Share your Cv text"
+    },
+    "profile" : "Profile",
+    "@profile" : {
+        "description": "Profile text"
+    },
+    "rateUs" : "Rate Us",
+    "@rateUs" : {
+        "description": "Rate Us text"
+    },
+    "shareApp" : "Share App",
+    "@shareApp" : {
+        "description": "Share App text"
+    },
+    "sponser" : "Sponser",
+    "@sponser" : {
+        "description": "Sponser text"
+    },
+    "back" : "Back",
+    "@back" : {
+        "description": "Back text"
+    },
+    "basic" : "Basic",
+    "@basic" : {
+        "description": "Basic text"
+    },
+    "education" : "Education",
+    "@education" : {
+        "description": "Education text"
+    },
+    "work" : "Work",
+    "@work" : {
+        "description": "Work text"
+    },
+    "achievements" : "Achievements",
+    "@achievements" : {
+        "description": "Achievements text"
+    },
+    "course" : "Course",
+    "@course" : {
+        "description": "Course text"
+    },
+    "homePage" : "Home Page",
+    "@homePage" : {
+        "description": "Home Page text"
+    },
+    "present" : "Present",
+    "@present" : {
+        "description": "Present text"
+    },
+    "addedSuccess" : "Added Successfuly",
+    "@addedSuccess" : {
+        "description": "Added Successfuly text"
+    },
+    "socialInfo" : "Social Informations",
+    "@socialInfo" : {
+        "description": "Social Informations text"
+    },
+    "enterYourUsernameOnSnapchat" : "Enter Your Username On Snapchat",
+    "@enterYourUsernameOnSnapchat" : {
+        "description": "Enter Your Username On Snapchat text"
+    },
+    "enterYourUsernameOnFacebook" : "Enter Your Username On Facebook",
+    "@enterYourUsernameOnFacebook" : {
+        "description": "Enter Your Username On Facebook text"
+    },
+    "enterYourUsernameOnInstagram" : "Enter Your Username On Instagram",
+    "@enterYourUsernameOnInstagram" : {
+        "description": "Enter Your Username On Instagram text"
+    },
+    "enterYourUsernameOnTwitter" : "Enter Your Username On Twitter",
+    "@enterYourUsernameOnTwitter" : {
+        "description": "Enter Your Username On Twitter text"
+    },
+    "enterYourUsernameOnLinkedin" : "Enter Your Username On Linkedin",
+    "@enterYourUsernameOnLinkedin" : {
+        "description": "Enter Your Username On Linkedin text"
+    },
+    "pleaseEnterYourUsernameOnSocialMedia" : "Please enter your username on social media:",
+    "@pleaseEnterYourUsernameOnSocialMedia" : {
+        "description": "Please enter your username on social media: text"
+    },
+    "skip" : "Skip",
+    "@skip": {
+        "description": "Skip text" 
+    }
+}
