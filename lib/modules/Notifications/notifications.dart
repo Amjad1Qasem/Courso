@@ -3,7 +3,7 @@ import 'package:flutter/material.dart';
 
 class Notifications extends StatelessWidget {
   const Notifications({super.key});
-  static String id = 'Notifications';
+  static String id = '/Notifications';
 
   @override
   Widget build(BuildContext context) {

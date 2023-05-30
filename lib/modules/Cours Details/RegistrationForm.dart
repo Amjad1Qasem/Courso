@@ -54,9 +54,9 @@ class _registrationFormState extends State<registrationForm> {
             key: formkey,
             child: Column(
               children: [
-                Row(
+                const Row(
                   mainAxisAlignment: MainAxisAlignment.center,
-                  children: const [
+                  children: [
                     Center(
                       child: Image(
                           fit: BoxFit.cover,
@@ -106,7 +106,7 @@ class _registrationFormState extends State<registrationForm> {
                           ),
                         ],
                       ),
-                    ),                 
+                    ),
                     const SizedBox(
                       width: 10,
                     ),
@@ -149,7 +149,6 @@ class _registrationFormState extends State<registrationForm> {
                         ],
                       ),
                     ),
-                 
                   ],
                 ),
                 const SizedBox(
@@ -193,6 +192,24 @@ class _registrationFormState extends State<registrationForm> {
                             controller: birthdateregcontroller,
                             keyboard: TextInputType.number,
                             labText: ' ',
+                          ),
+                          GestureDetector(
+                            onTap: () async {
+                              final DateTime? dateTime = await showDatePicker(
+                                context: context,
+                                initialDate: DateTime.now(),
+                                firstDate: DateTime.now(),
+                                lastDate: DateTime.now()
+                                    .add(const Duration(days: 30)),
+                              );
+                              if (dateTime != null) {
+                                setState(() {
+                                  birthdateregcontroller.text =
+                                      '${dateTime.year}/${dateTime.month}/${dateTime.day}';
+                                });
+                              }
+                            },
+                            child: const Text('اختر تاريخ'),
                           ),
                         ],
                       ),
@@ -241,7 +258,6 @@ class _registrationFormState extends State<registrationForm> {
                         ],
                       ),
                     ),
-                  
                   ],
                 ),
                 const SizedBox(
@@ -596,7 +612,6 @@ class _registrationFormState extends State<registrationForm> {
                 const SizedBox(
                   height: 18,
                 ),
-              
                 ListTile(
                     title: defText(
                         text: ' هل سجلت مسبقاً بإحدى دوراتنا!',

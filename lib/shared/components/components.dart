@@ -7,10 +7,6 @@ import 'package:form_field_validator/form_field_validator.dart';
 import '../../modules/Instuites/instuites.dart';
 import 'package:courso/modules/Cours%20Details/RegistrationForm.dart';
 
-
-
-
-
 // Button Login
 Widget defaultButton({
   required double width,
@@ -43,13 +39,12 @@ Widget defaultButton({
     );
 
 //TextFormField
-Widget defaultTextFormField(
-  {
+Widget defaultTextFormField({
   required TextEditingController controller,
   required TextInputType keyboard,
   required String labText,
   required double radius,
-   MultiValidator? validator,
+  MultiValidator? validator,
   required Function? Function() sufixfun,
   required String hintText,
   IconData? sufix,
@@ -57,26 +52,24 @@ Widget defaultTextFormField(
   bool securTrue = false,
 }) =>
     TextFormField(
-      
       //cursorColor: Colors.red,
       validator: validator!,
       style: const TextStyle(
         color: Color(0xFF333333),
-        
       ),
       obscureText: securTrue,
       controller: controller,
-      keyboardType: keyboard,   
+      keyboardType: keyboard,
       decoration: InputDecoration(
-      focusColor: Colors.deepOrange,  
+        focusColor: Colors.deepOrange,
         hintText: hintText,
-        contentPadding: const EdgeInsets.symmetric(vertical: 15),
+        contentPadding: const EdgeInsets.symmetric(vertical: 15, horizontal: 5),
         filled: true,
         fillColor: const Color(0xffCFD9F0),
         labelText: labText,
-        labelStyle: const TextStyle(fontFamily: 'cairo',fontSize: 20
-        ,color:Colors.black54),
-        prefixIcon: Icon(prifix,color: Colors.black54),
+        labelStyle: const TextStyle(
+            fontFamily: 'cairo', fontSize: 20, color: Colors.black54),
+        prefixIcon: prifix != null ? Icon(prifix, color: Colors.black54) : null,
         suffixIcon: sufix != null
             ? IconButton(onPressed: sufixfun, icon: Icon(sufix))
             : null,
@@ -118,16 +111,16 @@ Widget defaultApppar({
 Widget cours({
   required ImageProvider coursImage,
   required String coursName,
-   String ?instutName,
+  String? instutName,
   required String typeCours,
-    // required String  t='Details.id',
-    // required BuildContext con,
+  // required String  t='Details.id',
+  // required BuildContext con,
 }) =>
     Center(
       child: GestureDetector(
         onTap: () {
-         // Navigator.of(con).pushReplacementNamed(t);
-                  },
+          // Navigator.of(con).pushReplacementNamed(t);
+        },
         child: Container(
           height: 215,
           width: 155,
@@ -360,13 +353,30 @@ Widget category({
   required ImageProvider categoryImage,
   required String categoryName,
 }) =>
-    Center(
+    _Category(
+      categoryImage: categoryImage,
+      categoryName: categoryName,
+    );
+
+class _Category extends StatelessWidget {
+  const _Category({
+    required this.categoryImage,
+    required this.categoryName,
+  });
+
+  final ImageProvider categoryImage;
+  final String categoryName;
+
+  @override
+  Widget build(BuildContext context) {
+    return Center(
       child: GestureDetector(
         onTap: () {
-        //     Navigator.push(
-        //     context,
-        //     MaterialPageRoute(builder: (context) => CategoryCourses()),
-        //   );
+          print('djaskodk');
+          Navigator.push(
+            context,
+            MaterialPageRoute(builder: (context) => CategoryCourses()),
+          );
         },
         child: Container(
           height: 160,
@@ -425,3 +435,5 @@ Widget category({
         ),
       ),
     );
+  }
+}

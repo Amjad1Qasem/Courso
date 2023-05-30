@@ -86,62 +86,66 @@ class _HomeState extends State<Home> {
             appBar: AppBar(
               backgroundColor: const Color(0xFF72A7EE),
               elevation: 0.2,
-              title: Row(
-                children: const [
-                  CircleAvatar(
-                    radius: 20,
-                    backgroundImage:
-                        AssetImage('assets/images/userImagepng.png'),
-                  ),
-                  SizedBox(
-                    width: 8,
-                  ),
-                  Text(
-                    'Lisa Jain',
-                    style: TextStyle(
-                      fontSize: 20,
-                      fontFamily: 'cairo',
+              title: Directionality(
+                textDirection: TextDirection.ltr,
+                child: Row(
+                  children: const [
+                    CircleAvatar(
+                      radius: 20,
+                      backgroundImage:
+                          AssetImage('assets/images/userImagepng.png'),
                     ),
-                  ),
-                ],
-              ),
-              actions: [
-                // IconButton(
-                //     onPressed: () {
-                //       showSearch(
-                //         context: context,
-                //         delegate: CustomSearchDelegate(),
-                //       );
-                //     },
-                //     icon: Icon(Icons.search)),
-                isDrawerOpen
-                    ? IconButton(
-                        onPressed: () {
-                          setState(() {
-                            x0ffset = 0;
-                            y0ffset = 0;
-                            isDrawerOpen = false;
-                          });
-                        },
-                        icon: const Icon(
-                          Icons.arrow_back_ios_new_rounded,
-                          size: 25,
-                        ),
-                      )
-                    : IconButton(
-                        onPressed: () {
-                          setState(() {
-                            x0ffset = -120;
-                            y0ffset = -20;
-                            isDrawerOpen = true;
-                          });
-                        },
-                        icon: const Icon(
-                          Icons.menu,
-                          size: 25,
-                        ),
+                    SizedBox(
+                      width: 8,
+                    ),
+                    Text(
+                      'Lisa Jain',
+                      style: TextStyle(
+                        fontSize: 20,
+                        fontFamily: 'cairo',
                       ),
-              ],
+                    ),
+                  ],
+                ),
+              ),
+              leading:
+                  // [
+                  // IconButton(
+                  //     onPressed: () {
+                  //       showSearch(
+                  //         context: context,
+                  //         delegate: CustomSearchDelegate(),
+                  //       );
+                  //     },
+                  //     icon: Icon(Icons.search)),
+                  isDrawerOpen
+                      ? IconButton(
+                          onPressed: () {
+                            setState(() {
+                              x0ffset = 0;
+                              y0ffset = 0;
+                              isDrawerOpen = false;
+                            });
+                          },
+                          icon: const Icon(
+                            Icons.arrow_back_ios_new_rounded,
+                            size: 25,
+                          ),
+                        )
+                      : IconButton(
+                          onPressed: () {
+                            setState(() {
+                              x0ffset = -120;
+                              y0ffset = -20;
+                              isDrawerOpen = true;
+                            });
+                          },
+                          icon: const Icon(
+                            Icons.menu,
+                            size: 25,
+                          ),
+                        ),
+              // ],
             ),
             backgroundColor: const Color(0xffF2F7FF),
             body: SingleChildScrollView(
@@ -168,7 +172,6 @@ class _HomeState extends State<Home> {
                               child: Row(
                                 children: [
                                   cours(
-                                 
                                     coursImage:
                                         AssetImage('assets/images/C1.png'),
                                     coursName: 'التوعية الصحية',
@@ -179,7 +182,6 @@ class _HomeState extends State<Home> {
                                     width: 15,
                                   ),
                                   cours(
-                                   
                                     coursImage:
                                         AssetImage('assets/images/C2.png'),
                                     coursName: 'قيادة الحاسب ICDL',
@@ -190,7 +192,6 @@ class _HomeState extends State<Home> {
                                     width: 15,
                                   ),
                                   cours(
-                                   
                                     coursImage:
                                         AssetImage('assets/images/C3.png'),
                                     coursName: 'دورة CCNA',
@@ -201,7 +202,6 @@ class _HomeState extends State<Home> {
                                     width: 15,
                                   ),
                                   cours(
-                                    
                                     coursImage:
                                         AssetImage('assets/images/C4.png'),
                                     coursName: 'تأهيل المرأة',
@@ -212,7 +212,6 @@ class _HomeState extends State<Home> {
                                     width: 15,
                                   ),
                                   cours(
-                                     
                                     coursImage:
                                         AssetImage('assets/images/C5.png'),
                                     coursName: 'الفيزياء',
@@ -223,7 +222,6 @@ class _HomeState extends State<Home> {
                                     width: 15,
                                   ),
                                   cours(
-                                     
                                     coursImage:
                                         AssetImage('assets/images/C6.png'),
                                     coursName: 'إدارة الموارد البشرية',
@@ -272,7 +270,6 @@ class _HomeState extends State<Home> {
                               child: Row(
                                 children: [
                                   cours(
-                                    
                                     coursImage:
                                         AssetImage('assets/images/C7.png'),
                                     coursName: 'English',
@@ -283,7 +280,6 @@ class _HomeState extends State<Home> {
                                     width: 15,
                                   ),
                                   cours(
-                                    
                                     coursImage:
                                         AssetImage('assets/images/C2.png'),
                                     coursName: 'قيادة الحاسب ICDL',
@@ -294,7 +290,6 @@ class _HomeState extends State<Home> {
                                     width: 15,
                                   ),
                                   cours(
-                                    
                                     coursImage:
                                         AssetImage('assets/images/C8.png'),
                                     coursName: 'UI/UX desgin',
@@ -305,7 +300,6 @@ class _HomeState extends State<Home> {
                                     width: 15,
                                   ),
                                   cours(
-                                     
                                     coursImage:
                                         AssetImage('assets/images/C9.png'),
                                     coursName: 'التسويق الالكتروني',
@@ -316,7 +310,6 @@ class _HomeState extends State<Home> {
                                     width: 15,
                                   ),
                                   cours(
-                                     
                                     coursImage:
                                         AssetImage('assets/images/C5.png'),
                                     coursName: 'الفيزياء',
@@ -327,7 +320,6 @@ class _HomeState extends State<Home> {
                                     width: 15,
                                   ),
                                   cours(
-                                    
                                     coursImage:
                                         AssetImage('assets/images/C10png.png'),
                                     coursName: 'المحاسبة',

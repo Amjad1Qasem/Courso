@@ -54,7 +54,7 @@ class _CategoryState extends State<Category> {
             fontFamily: 'cairo',
             fontSize: 25,
             fontWeight: FontWeight.w400,
-            color: Colors.white, 
+            color: Colors.white,
           ),
         ),
         centerTitle: true,
@@ -67,12 +67,15 @@ class _CategoryState extends State<Category> {
             //مسؤلة عن طول الايتم
             childAspectRatio: 10 / 16,
             crossAxisCount: 3),
-        itemBuilder: (context, index) => defCategory(Listcategor[index]),
+        itemBuilder: (context, index) => category(
+            categoryName: Listcategor[index].categoryName,
+            categoryImage: Listcategor[index].categoryImage),
         itemCount: Listcategor.length,
       ),
     );
   }
 }
+
 Widget defCategory(CategoryModel categ) => Center(
       child: Container(
         // height: 140,
