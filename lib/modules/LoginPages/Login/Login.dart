@@ -38,13 +38,14 @@ class _LoginState extends State<Login> {
                   scrollDirection: Axis.horizontal,
                   clipBehavior: Clip.antiAliasWithSaveLayer,
                   child: Row(
-                    mainAxisAlignment: MainAxisAlignment.center,
+
+                    mainAxisAlignment: MainAxisAlignment.start,
                     mainAxisSize: MainAxisSize.max,
                     children: [
                       const Image(
                         image: AssetImage('assets/images/Welcome-ra.png'),
-                        width: 200,
-                        height: 200,
+                        width: 198,
+                        height: 198,
                       ),
                       Column(
                         children: const [
@@ -105,7 +106,7 @@ class _LoginState extends State<Login> {
                   controller: passcontroller,
                   keyboard: TextInputType.visiblePassword,
                   labText: 'كلمة المرور',
-                  radius: 18,
+                  radius: 15,
                   prifix: Icons.lock,
                   sufix: secure ? Icons.visibility : Icons.visibility_off,
                   sufixfun: () {

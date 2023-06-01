@@ -1,8 +1,10 @@
-// ignore_for_file: prefer_const_constructors, avoid_print, unused_import
+// ignore_for_file: prefer_const_constructors, avoid_print, unused_import, dead_code
 
+import 'package:courso/controllers/coursController.dart';
 import 'package:courso/modules/Cours%20Details/CoursDetails.dart';
 import 'package:courso/modules/Courses/allCourses.dart';
 import 'package:courso/modules/Courses/saleCourses.dart';
+import 'package:courso/modules/Instuites/InstuitPage.dart';
 import 'package:courso/modules/Instuites/instuites.dart';
 import 'package:courso/shared/components/components.dart';
 import 'package:flutter/material.dart';
@@ -160,89 +162,53 @@ class _HomeState extends State<Home> {
                       child: Column(
                         crossAxisAlignment: CrossAxisAlignment.start,
                         children: [
-                          defText(
-                              text: 'New Courses',
-                              size: 25,
-                              fontWeight: FontWeight.bold,
-                              color: Colors.black),
+                          Row(
+                            mainAxisAlignment: MainAxisAlignment.spaceBetween,
+                            children: [
+                              defText(
+                                  text: 'الدورات الجديدة',
+                                  size: 25,
+                                  fontWeight: FontWeight.w600,
+                                  color: Colors.black),
+                              TextButton(
+                                child: defText(
+                                    text: 'عرض الكل',
+                                    size: 15,
+                                    fontWeight: FontWeight.w400,
+                                    color: Colors.black),
+                                onPressed: () {
+                                  Navigator.push(
+                                    context,
+                                    MaterialPageRoute(builder: (context)=>AllCourses())
+                                  );
+                                },
+                              ),
+                            ],
+                          ),
                           SingleChildScrollView(
                             scrollDirection: Axis.horizontal,
                             child: Padding(
                               padding: const EdgeInsets.all(10.0),
-                              child: Row(
-                                children: [
-                                  cours(
-                                    coursImage:
-                                        AssetImage('assets/images/C1.png'),
-                                    coursName: 'التوعية الصحية',
-                                    instutName: 'منظمة اليونسيف',
-                                    typeCours: 'free',
-                                  ),
-                                  const SizedBox(
-                                    width: 15,
-                                  ),
-                                  cours(
-                                    coursImage:
-                                        AssetImage('assets/images/C2.png'),
-                                    coursName: 'قيادة الحاسب ICDL',
-                                    instutName: 'معهد رواد الحضارة',
-                                    typeCours: '',
-                                  ),
-                                  const SizedBox(
-                                    width: 15,
-                                  ),
-                                  cours(
-                                    coursImage:
-                                        AssetImage('assets/images/C3.png'),
-                                    coursName: 'دورة CCNA',
-                                    instutName: 'الجمعية المعلوماتية السورية',
-                                    typeCours: ' ',
-                                  ),
-                                  const SizedBox(
-                                    width: 15,
-                                  ),
-                                  cours(
-                                    coursImage:
-                                        AssetImage('assets/images/C4.png'),
-                                    coursName: 'تأهيل المرأة',
-                                    instutName: 'UNICEF',
-                                    typeCours: 'free',
-                                  ),
-                                  const SizedBox(
-                                    width: 15,
-                                  ),
-                                  cours(
-                                    coursImage:
-                                        AssetImage('assets/images/C5.png'),
-                                    coursName: 'الفيزياء',
-                                    instutName: 'معهد الناجي',
-                                    typeCours: ' ',
-                                  ),
-                                  const SizedBox(
-                                    width: 15,
-                                  ),
-                                  cours(
-                                    coursImage:
-                                        AssetImage('assets/images/C6.png'),
-                                    coursName: 'إدارة الموارد البشرية',
-                                    instutName: 'مركز الأمين',
-                                    typeCours: ' ',
-                                  ),
-                                  const SizedBox(
-                                    width: 15,
-                                  ),
-                                  TextButton(
-                                    child: Text('show all'),
-                                    onPressed: () {
-                                      Navigator.push(
-                                        context,
-                                        MaterialPageRoute(
-                                            builder: (context) => AllCourses()),
-                                      );
-                                    },
-                                  ),
-                                ],
-                              ),
+                              child: FutureBuilder<List<Course>>(
+                                  future: CourseController.getNewCourses(),
+                                  builder: (context, snapshot) {
+                                    if (!snapshot.hasData) {
+                                      return Center(
+                                          child: CircularProgressIndicator());
+                                    }
+                                    final courses = snapshot.data!;
+                                    return Row(
+                                      children: courses
+                                          .map((course) => cours(
+                                                coursImage:
+                                                    NetworkImage(course.image),
+                                                coursName: course.name,
+                                                instutName: course.institute,
+                                                isFree: course.isFree,
+                                              ))
+                                          .toList(),
+                                    );
+                                  }),
                             ),
                           ),
                         ],
@@ -258,90 +224,53 @@ class _HomeState extends State<Home> {
                       child: Column(
                         crossAxisAlignment: CrossAxisAlignment.start,
                         children: [
-                          defText(
-                              text: 'Sale %',
-                              size: 25,
-                              fontWeight: FontWeight.bold,
-                              color: Colors.black),
+                          Row(
+                            mainAxisAlignment: MainAxisAlignment.spaceBetween,
+                            children: [
+                              defText(
+                                  text: 'الحسوم %',
+                                  size: 25,
+                                  fontWeight: FontWeight.bold,
+                                  color: Colors.black),
+                              TextButton(
+                                child: defText(
+                                    text: 'عرض الكل',
+                                    size: 15,
+                                    fontWeight: FontWeight.w400,
+                                    color: Colors.black),
+                                onPressed: () {
+                                  Navigator.push(
+                                    context,
+                                    MaterialPageRoute(builder: (context)=>SaleCourses())
+                                  );
+                                },
+                              ),
+                            ],
+                          ),
                           SingleChildScrollView(
                             scrollDirection: Axis.horizontal,
                             child: Padding(
                               padding: const EdgeInsets.all(10.0),
-                              child: Row(
-                                children: [
-                                  cours(
-                                    coursImage:
-                                        AssetImage('assets/images/C7.png'),
-                                    coursName: 'English',
-                                    instutName: 'New Horizons',
-                                    typeCours: ' ',
-                                  ),
-                                  const SizedBox(
-                                    width: 15,
-                                  ),
-                                  cours(
-                                    coursImage:
-                                        AssetImage('assets/images/C2.png'),
-                                    coursName: 'قيادة الحاسب ICDL',
-                                    instutName: 'معهد رواد الحضارة',
-                                    typeCours: ' ',
-                                  ),
-                                  const SizedBox(
-                                    width: 15,
-                                  ),
-                                  cours(
-                                    coursImage:
-                                        AssetImage('assets/images/C8.png'),
-                                    coursName: 'UI/UX desgin',
-                                    instutName: 'معهد DTC (الاونروا)',
-                                    typeCours: ' ',
-                                  ),
-                                  const SizedBox(
-                                    width: 15,
-                                  ),
-                                  cours(
-                                    coursImage:
-                                        AssetImage('assets/images/C9.png'),
-                                    coursName: 'التسويق الالكتروني',
-                                    instutName: 'معهد الأمين',
-                                    typeCours: ' ',
-                                  ),
-                                  const SizedBox(
-                                    width: 15,
-                                  ),
-                                  cours(
-                                    coursImage:
-                                        AssetImage('assets/images/C5.png'),
-                                    coursName: 'الفيزياء',
-                                    instutName: 'معهد الناجي',
-                                    typeCours: ' ',
-                                  ),
-                                  const SizedBox(
-                                    width: 15,
-                                  ),
-                                  cours(
-                                    coursImage:
-                                        AssetImage('assets/images/C10png.png'),
-                                    coursName: 'المحاسبة',
-                                    instutName: 'معهد الأمين',
-                                    typeCours: ' ',
-                                  ),
-                                  const SizedBox(
-                                    width: 15,
-                                  ),
-                                  TextButton(
-                                    child: Text('show all'),
-                                    onPressed: () {
-                                      Navigator.push(
-                                        context,
-                                        MaterialPageRoute(
-                                            builder: (context) =>
-                                                SaleCourses()),
-                                      );
-                                    },
-                                  ),
-                                ],
-                              ),
+                              child: FutureBuilder<List<Sale>>(
+                                  future: CourseSaleController.getNewSales(),
+                                  builder: (context, snapshot) {
+                                    if (!snapshot.hasData) {
+                                      return Center(
+                                          child: CircularProgressIndicator());
+                                    }
+                                    final sales = snapshot.data!;
+                                    return Row(
+                                      children: sales
+                                          .map((sale) => cours(
+                                                coursImage:
+                                                    NetworkImage(sale.image),
+                                                coursName: sale.name,
+                                                instutName: sale.institute,
+                                                isFree: sale.isFree,
+                                              ))
+                                          .toList(),
+                                    );
+                                  }),
                             ),
                           ),
                         ],
@@ -357,99 +286,54 @@ class _HomeState extends State<Home> {
                       child: Column(
                         crossAxisAlignment: CrossAxisAlignment.start,
                         children: [
-                          defText(
-                              text: 'Institutes',
-                              size: 25,
-                              fontWeight: FontWeight.bold,
-                              color: Colors.black),
+                          Row(
+                            mainAxisAlignment: MainAxisAlignment.spaceBetween,
+                            children: [
+                              defText(
+                                  text: 'المعاهد والمنظمات',
+                                  size: 25,
+                                  fontWeight: FontWeight.bold,
+                                  color: Colors.black),
+                              TextButton(
+                                child: defText(
+                                    text: 'عرض الكل',
+                                    size: 15,
+                                    fontWeight: FontWeight.w400,
+                                    color: Colors.black),
+                                onPressed: () {
+                                   Navigator.push(
+                                    context,
+                                    MaterialPageRoute(builder: (context)=>Instuites())
+                                  );
+                                },
+                              ),
+                            ],
+                          ),
                           SingleChildScrollView(
                             scrollDirection: Axis.horizontal,
                             child: Padding(
                               padding: const EdgeInsets.all(10.0),
-                              child: Row(
-                                children: [
-                                  GestureDetector(
-                                    onTap: () {
-                                      Navigator.push(
-                                        context,
-                                        MaterialPageRoute(
-                                            builder: (context) => Details()),
-                                      );
-                                    },
-                                    child: Container(
-                                      child: instuitee(
-                                        instImage: AssetImage(
-                                            'assets/images/ins1.png'),
-                                        instName: 'معهد الرواد',
-                                        aboutInst:
-                                            'دورات تأهيل الطلبة في التعليم الثانوي والاعدادي بجميع المناهج الدراسية',
-                                      ),
-                                    ),
-                                  ),
-                                  const SizedBox(
-                                    width: 15,
-                                  ),
-                                  instuitee(
-                                    instImage:
-                                        AssetImage('assets/images/ins2.png'),
-                                    instName: 'Harvard ',
-                                    aboutInst:
-                                        'Harvard University is a private Ivy League research university in Cambridge, Massachusetts',
-                                  ),
-                                  const SizedBox(
-                                    width: 15,
-                                  ),
-                                  instuitee(
-                                    instImage:
-                                        AssetImage('assets/images/ins3.png'),
-                                    instName: 'مركزاكسبرت للتدريب والتأهيل',
-                                    aboutInst: "تدريب وتاهيل مركز ",
-                                  ),
-                                  const SizedBox(
-                                    width: 15,
-                                  ),
-                                  instuitee(
-                                    instImage:
-                                        AssetImage('assets/images/ins4.png'),
-                                    instName: 'New Horizons',
-                                    aboutInst:
-                                        'With over 300 centers in 70 countries,We are th best in',
-                                  ),
-                                  const SizedBox(
-                                    width: 15,
-                                  ),
-                                  instuitee(
-                                    instImage:
-                                        AssetImage('assets/images/ins5.png'),
-                                    instName: 'معهد تمكين للتدريب المجتمعي .',
-                                    aboutInst:
-                                        'معهد تمكين لتمكين المرأة اقتصاديا ومهنيا',
-                                  ),
-                                  const SizedBox(
-                                    width: 15,
-                                  ),
-                                  instuitee(
-                                    instImage:
-                                        AssetImage('assets/images/ins6.png'),
-                                    instName: 'منظمة الصليب الأحمر ICRC',
-                                    aboutInst:
-                                        'تسعى هذه المنظمة إلى الحفاظ على قدر من',
-                                  ),
-                                  const SizedBox(
-                                    width: 15,
-                                  ),
-                                  TextButton(
-                                    child: Text('show all'),
-                                    onPressed: () {
-                                      Navigator.push(
-                                          context,
-                                          MaterialPageRoute(
-                                              builder: (context) =>
-                                                  Instuites()));
-                                    },
-                                  ),
-                                ],
-                              ),
+                              child: FutureBuilder<List<Institute>>(
+                                  future:
+                                      InstituteController.getNewInstitutes(),
+                                  builder: (context, snapshot) {
+                                    if (!snapshot.hasData) {
+                                      return Center(
+                                          child: CircularProgressIndicator());
+                                    }
+                                    final institutes = snapshot.data!;
+                                    return Row(
+                                      children: institutes
+                                          .map((institute) => instuitee(
+                                                instImage: NetworkImage(
+                                                    institute.image),
+                                                instName: institute.name,
+                                                aboutInst:
+                                                    institute.description,
+                                              ))
+                                          .toList(),
+                                    );
+                                  }),
                             ),
                           ),
                         ],
@@ -461,117 +345,102 @@ class _HomeState extends State<Home> {
                   ),
                 ],
               ),
-            )
-            //list////////
-            // Padding(
-            //   padding: const EdgeInsets.all(8.0),
-            //   child: Container(
-            //     height: double.maxFinite,
-            //     child: ListView.separated(
-            //       shrinkWrap: true,
-            //       scrollDirection: Axis.horizontal,
-            //       itemBuilder:(context,index)=>buildCours(courss[index]) ,
-            //      separatorBuilder:(context,index)=>const SizedBox(width: 1,) ,
-            //       itemCount:courss.length,
-            //       ),
-            //   ),
-            // ),
-            ),
+            )),
       ),
     );
   }
 }
 
-// search bar
-class CustomSearchDelegate extends SearchDelegate {
-  // ignore: non_constant_identifier_names
-  List<String> SearchCours = [
-    'التوعية الصحية',
-    'قيادة الحاسب ICDL',
-    'دورة CCNA',
-    'تأهيل المرأة',
-    'الفيزياء',
-    'إدارة الموارد البشرية',
-    'English',
-    'UI/UX desgin',
-    'المحاسبة',
-  ];
+// // search bar
+// class CustomSearchDelegate extends SearchDelegate {
+//   // ignore: non_constant_identifier_names
+//   List<String> SearchCours = [
+//     'التوعية الصحية',
+//     'قيادة الحاسب ICDL',
+//     'دورة CCNA',
+//     'تأهيل المرأة',
+//     'الفيزياء',
+//     'إدارة الموارد البشرية',
+//     'English',
+//     'UI/UX desgin',
+//     'المحاسبة',
+//   ];
 
-//       To Clear Query        //
-  @override
-  List<Widget> buildActions(BuildContext context) {
-    return [
-      IconButton(
-        icon: const Icon(Icons.clear),
-        onPressed: () {
-          query = '';
-        },
-      ),
-    ];
-  }
+// //       To Clear Query        //
+//   @override
+//   List<Widget> buildActions(BuildContext context) {
+//     return [
+//       IconButton(
+//         icon: const Icon(Icons.clear),
+//         onPressed: () {
+//           query = '';
+//         },
+//       ),
+//     ];
+//   }
 
-//       To Close and Leave The Search Bar       //
-  @override
-  Widget buildLeading(BuildContext context) {
-    return IconButton(
-        onPressed: () {
-          close(context, null);
-        },
-        icon: const Icon(Icons.arrow_back));
-  }
+// //       To Close and Leave The Search Bar       //
+//   @override
+//   Widget buildLeading(BuildContext context) {
+//     return IconButton(
+//         onPressed: () {
+//           close(context, null);
+//         },
+//         icon: const Icon(Icons.arrow_back));
+//   }
 
-  @override
-  Widget buildResults(BuildContext context) {
-    List<String> matchQuery = [];
-    for (var cours in SearchCours) {
-      if (cours.toLowerCase().contains(query.toLowerCase())) {
-        matchQuery.add(cours);
-      }
-    }
-    return SingleChildScrollView(
-      child: ListView.builder(
-          itemCount: matchQuery.length,
-          itemBuilder: (context, index) {
-            final result = matchQuery[index];
-            return ListTile(
-              title: Text(
-                result,
-                style: TextStyle(fontFamily: 'cairo'),
-              ),
-              onTap: () {
-                query = result;
-              },
-            );
-          }),
-    );
-  }
+//   @override
+//   Widget buildResults(BuildContext context) {
+//     List<String> matchQuery = [];
+//     for (var cours in SearchCours) {
+//       if (cours.toLowerCase().contains(query.toLowerCase())) {
+//         matchQuery.add(cours);
+//       }
+//     }
+//     return SingleChildScrollView(
+//       child: ListView.builder(
+//           itemCount: matchQuery.length,
+//           itemBuilder: (context, index) {
+//             final result = matchQuery[index];
+//             return ListTile(
+//               title: Text(
+//                 result,
+//                 style: TextStyle(fontFamily: 'cairo'),
+//               ),
+//               onTap: () {
+//                 query = result;
+//               },
+//             );
+//           }),
+//     );
+//   }
 
-  @override
-  Widget buildSuggestions(BuildContext context) {
-    List<String> matchQuery = [];
-    for (var cours in SearchCours) {
-      if (cours.toLowerCase().contains(query.toLowerCase())) {
-        matchQuery.add(cours);
-      }
-    }
-    return Center(
-      child: ListView.builder(
-          itemCount: matchQuery.length,
-          itemBuilder: (context, index) {
-            final result = matchQuery[index];
-            return ListTile(
-              title: Text(
-                result,
-                style: TextStyle(fontFamily: 'cairo'),
-              ),
-              onTap: () {
-                query = result;
-              },
-            );
-          }),
-    );
-  }
-}
+//   @override
+//   Widget buildSuggestions(BuildContext context) {
+//     List<String> matchQuery = [];
+//     for (var cours in SearchCours) {
+//       if (cours.toLowerCase().contains(query.toLowerCase())) {
+//         matchQuery.add(cours);
+//       }
+//     }
+//     return Center(
+//       child: ListView.builder(
+//           itemCount: matchQuery.length,
+//           itemBuilder: (context, index) {
+//             final result = matchQuery[index];
+//             return ListTile(
+//               title: Text(
+//                 result,
+//                 style: TextStyle(fontFamily: 'cairo'),
+//               ),
+//               onTap: () {
+//                 query = result;
+//               },
+//             );
+//           }),
+//     );
+//   }
+// }
 
 
 // // Build Item for list

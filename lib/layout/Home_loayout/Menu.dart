@@ -9,13 +9,12 @@ class Menu extends StatelessWidget {
 
   @override
   Widget build(BuildContext context) {
-    return const Scaffold(
-      body: Stack(
-        children: [
+    return 
+       Stack(
+        children: const  [
           drawerScreen(),
           Home(),
         ],
-      ),
     );
   }
 }

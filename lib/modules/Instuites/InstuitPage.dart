@@ -13,8 +13,9 @@ var courscontroller = TextEditingController();
 GlobalKey<ScaffoldState> ScaffoldKey = new GlobalKey<ScaffoldState>();
 
 class InstuitPage extends StatefulWidget {
-  const InstuitPage({super.key});
+  const InstuitPage({super.key, required this.insttuitId});
   static String id = 'InstuitPage';
+  final int insttuitId;
 
   @override
   State<InstuitPage> createState() => _InstuitPageState();
@@ -55,7 +56,6 @@ class _InstuitPageState extends State<InstuitPage> {
                               begin: Alignment.topCenter,
                               end: Alignment.bottomCenter)),
                     ),
-                    
                     const SizedBox(
                       height: 50,
                     ),
@@ -71,6 +71,7 @@ class _InstuitPageState extends State<InstuitPage> {
                       height: 305,
                     ),
                   ),
+               
                 ),
               ],
             ),
@@ -246,18 +247,25 @@ class _InstuitPageState extends State<InstuitPage> {
                                 courscontroller.clear();
                                 ScaffoldMessenger.of(context).showSnackBar(
                                   SnackBar(
-                                   behavior: SnackBarBehavior.floating,
-                                   backgroundColor: const Color.fromARGB(255, 23, 29, 36).withOpacity(0.9),
-                                    margin: const EdgeInsetsDirectional.only(start: 6,end: 6,bottom: 6),
-                                    content: Padding(
-                                      padding: const EdgeInsetsDirectional.only(start: 10),
-                                      child: defText(text: 'تم ارسال الطلب بنجاح', size: 20, fontWeight: FontWeight.w500, color: Colors.white),
-                                    ),
-                                    duration:  const Duration(seconds:2 ),
-                                    action: SnackBarAction(
-                                      label: 'اغلاق',
-                                       onPressed:(){}
-                                       ) ),
+                                      behavior: SnackBarBehavior.floating,
+                                      backgroundColor:
+                                          const Color.fromARGB(255, 23, 29, 36)
+                                              .withOpacity(0.9),
+                                      margin: const EdgeInsetsDirectional.only(
+                                          start: 6, end: 6, bottom: 6),
+                                      content: Padding(
+                                        padding:
+                                            const EdgeInsetsDirectional.only(
+                                                start: 10),
+                                        child: defText(
+                                            text: 'تم ارسال الطلب بنجاح',
+                                            size: 20,
+                                            fontWeight: FontWeight.w500,
+                                            color: Colors.white),
+                                      ),
+                                      duration: const Duration(seconds: 2),
+                                      action: SnackBarAction(
+                                          label: 'اغلاق', onPressed: () {})),
                                 );
                                 return null;
                               },
@@ -296,54 +304,59 @@ class _InstuitPageState extends State<InstuitPage> {
                       child: Padding(
                         padding: const EdgeInsets.all(10.0),
                         child: Row(
-                          children: [
-                            cours(
-                              coursImage: const AssetImage('assets/images/C2.png'),
-                              coursName: 'قيادة الحاسب ICDL',
-                              instutName: '',
-                              typeCours: ' ',
-                            ),
-                            const SizedBox(
-                              width: 15,
-                            ),
-                            cours(
-                              coursImage: const AssetImage('assets/images/C8.png'),
-                              coursName: 'UI/UX desgin',
-                              instutName: '',
-                              typeCours: 'free',
-                            ),
-                            const SizedBox(
-                              width: 15,
-                            ),
-                            cours(
-                              coursImage: const AssetImage('assets/images/C9.png'),
-                              coursName: 'التسويق الالكتروني',
-                              instutName: '',
-                              typeCours: ' ',
-                            ),
-                            const SizedBox(
-                              width: 15,
-                            ),
-                            cours(
-                              coursImage: const AssetImage('assets/images/C5.png'),
-                              coursName: 'الفيزياء',
-                              instutName: '',
-                              typeCours: 'free',
-                            ),
-                            const SizedBox(
-                              width: 15,
-                            ),
-                            cours(
-                              coursImage:
-                                  const AssetImage('assets/images/C10png.png'),
-                              coursName: 'المحاسبة',
-                              instutName: ' ',
-                              typeCours: ' ',
-                            ),
-                            const SizedBox(
-                              width: 15,
-                            ),
-                          ],
+                          // children: [
+                          //   cours(
+                          //     coursImage:
+                          //         const AssetImage('assets/images/C2.png'),
+                          //     coursName: 'قيادة الحاسب ICDL',
+                          //     instutName: '',
+                          //     isFree: ' ',
+                          //   ),
+                          //   const SizedBox(
+                          //     width: 15,
+                          //   ),
+                          //   cours(
+                          //     coursImage:
+                          //         const AssetImage('assets/images/C8.png'),
+                          //     coursName: 'UI/UX desgin',
+                          //     instutName: '',
+                          //     isFree: 'free',
+                          //   ),
+                          //   const SizedBox(
+                          //     width: 15,
+                          //   ),
+                          //   cours(
+                          //     coursImage:
+                          //         const AssetImage('assets/images/C9.png'),
+                          //     coursName: 'التسويق الالكتروني',
+                          //     instutName: '',
+                          //     isFree: ' ',
+                          //   ),
+                          //   const SizedBox(
+                          //     width: 15,
+                          //   ),
+                          //   cours(
+                          //     coursImage:
+                          //         const AssetImage('assets/images/C5.png'),
+                          //     coursName: 'الفيزياء',
+                          //     instutName: '',
+                          //     isFree: 'free',
+                          //   ),
+                          //   const SizedBox(
+                          //     width: 15,
+                          //   ),
+                          //   cours(
+                          //     coursImage:
+                          //         const AssetImage('assets/images/C10png.png'),
+                          //     coursName: 'المحاسبة',
+                          //     instutName: ' ',
+                          //     isFree: ' ',
+                          //   ),
+                          //   const SizedBox(
+                          //     width: 15,
+                          //   ),
+                          // ],
+                     
                         ),
                       ),
                     ),
@@ -383,35 +396,39 @@ class _InstuitPageState extends State<InstuitPage> {
                       child: Padding(
                         padding: const EdgeInsets.all(10.0),
                         child: Row(
-                          children: [
-                            cours(
-                              coursImage: const AssetImage('assets/images/C7.png'),
-                              coursName: 'English',
-                              instutName: '',
-                              typeCours: ' ',
-                            ),
-                            const SizedBox(
-                              width: 15,
-                            ),
-                            cours(
-                              coursImage: const AssetImage('assets/images/C6.png'),
-                              coursName: 'إدارة الموارد البشرية',
-                              instutName: '',
-                              typeCours: ' ',
-                            ),
-                            const SizedBox(
-                              width: 15,
-                            ),
-                            cours(
-                              coursImage: const AssetImage('assets/images/C3.png'),
-                              coursName: 'دورة CCNA',
-                              instutName: '',
-                              typeCours: ' ',
-                            ),
-                            const SizedBox(
-                              width: 15,
-                            ),
-                          ],
+                          // children: [
+                          //   cours(
+                          //     coursImage:
+                          //         const AssetImage('assets/images/C7.png'),
+                          //     coursName: 'English',
+                          //     instutName: '',
+                          //     isFree: ' ',
+                          //   ),
+                          //   const SizedBox(
+                          //     width: 15,
+                          //   ),
+                          //   cours(
+                          //     coursImage:
+                          //         const AssetImage('assets/images/C6.png'),
+                          //     coursName: 'إدارة الموارد البشرية',
+                          //     instutName: '',
+                          //     isFree: ' ',
+                          //   ),
+                          //   const SizedBox(
+                          //     width: 15,
+                          //   ),
+                          //   cours(
+                          //     coursImage:
+                          //         const AssetImage('assets/images/C3.png'),
+                          //     coursName: 'دورة CCNA',
+                          //     instutName: '',
+                          //     isFree: ' ',
+                          //   ),
+                          //   const SizedBox(
+                          //     width: 15,
+                          //   ),
+                          // ],
+                       
                         ),
                       ),
                     ),
