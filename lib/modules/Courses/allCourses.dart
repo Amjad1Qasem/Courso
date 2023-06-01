@@ -123,7 +123,7 @@ class AllCourses extends StatelessWidget {
         ),
         centerTitle: true,
       ),
-      body: FutureBuilder<List<AllCourse>>(
+      body: FutureBuilder<List<Course>>(
           future: AllCourseController.getNewAllCourses(),
           builder: (context, snapshot) {
             if (!snapshot.hasData) {
@@ -134,10 +134,8 @@ class AllCourses extends StatelessWidget {
             final courses = snapshot.data!;
             return GestureDetector(
               onTap: () {
-                Navigator.push(
-                  context,
-                  MaterialPageRoute(builder: (context)=>Details())
-                );
+                Navigator.push(context,
+                    MaterialPageRoute(builder: (context) => Details()));
               },
               child: GridView.builder(
                   padding: EdgeInsets.all(20),
@@ -148,7 +146,7 @@ class AllCourses extends StatelessWidget {
                     crossAxisCount: 3,
                   ),
                   itemCount: courses.length,
-                  itemBuilder: (context, index) => buildCours(courss[index])),
+                  itemBuilder: (context, index) => buildCours(courses[index])),
             );
           }),
     );
@@ -157,7 +155,7 @@ class AllCourses extends StatelessWidget {
 
 bool isFree = false;
 // Build Item for list
-Widget buildCours(CoursModel courses) => Center(
+Widget buildCours(Course course) => Center(
       child: Container(
         height: 200,
         width: 117,
@@ -188,7 +186,7 @@ Widget buildCours(CoursModel courses) => Center(
                       ),
                       clipBehavior: Clip.antiAliasWithSaveLayer,
                       child: Image(
-                        image: courses.coursImage,
+                        image: NetworkImage(course.image),
                         fit: BoxFit.cover,
                         width: 115,
                         height: 120,
@@ -241,7 +239,7 @@ Widget buildCours(CoursModel courses) => Center(
                 child: Padding(
                   padding: const EdgeInsets.all(8.0),
                   child: Text(
-                    courses.coursName,
+                    course.name,
                     maxLines: 1,
                     overflow: TextOverflow.ellipsis,
                     textAlign: TextAlign.center,
@@ -261,7 +259,7 @@ Widget buildCours(CoursModel courses) => Center(
                 child: Padding(
                   padding: const EdgeInsets.all(2.0),
                   child: Text(
-                    courses.instutName,
+                    course.institute,
                     maxLines: 1,
                     textAlign: TextAlign.center,
                     overflow: TextOverflow.ellipsis,

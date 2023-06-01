@@ -7,45 +7,44 @@ import 'package:http/http.dart' as http;
 
 class CourseController {
   static Future<List<Course>> getNewCourses() async {
-    final response =
-        await http.get(Uri.parse('http://10.0.2.2:8000/api/course?new=true&&limit=6'));
+    final response = await http
+        .get(Uri.parse('http://10.0.2.2:8000/api/course?new=true&&limit=6'));
     print(response.body);
-    //فك تشفير json 
-    //وتحويله الى ليست 'date' 
+    //فك تشفير json
+    //وتحويله الى ليست 'date'
     return (jsonDecode(response.body)['data'] as List)
-    //تحويل كل عنصر من ال (json) الcours
+        //تحويل كل عنصر من ال (json) الcours
         .map((json) => Course.fromJson(json))
-     //   إضافة الكائنات المحولة إلى القائمة وإرجاعها
+        //   إضافة الكائنات المحولة إلى القائمة وإرجاعها
         .toList();
   }
 }
 
 class AllCourseController {
-  static Future<List<AllCourse>> getNewAllCourses() async {
+  static Future<List<Course>> getNewAllCourses() async {
     final response =
         await http.get(Uri.parse('http://10.0.2.2:8000/api/course?new=true'));
     print(response.body);
-    //فك تشفير json 
-    //وتحويله الى ليست 'date' 
+    //فك تشفير json
+    //وتحويله الى ليست 'date'
     return (jsonDecode(response.body)['data'] as List)
-    //تحويل كل عنصر من ال (json) الcours
-        .map((json) => AllCourse.fromJson(json))
-     //   إضافة الكائنات المحولة إلى القائمة وإرجاعها
+        //تحويل كل عنصر من ال (json) الcours
+        .map((json) => Course.fromJson(json))
+        //   إضافة الكائنات المحولة إلى القائمة وإرجاعها
         .toList();
   }
 }
+
 class CourseSaleController {
   static Future<List<Sale>> getNewSales() async {
-    final response =
-        await http.get(Uri.parse('http://10.0.2.2:8000/api/course?discount=true&&limit=6'));
+    final response = await http.get(
+        Uri.parse('http://10.0.2.2:8000/api/course?discount=true&&limit=6'));
     print(response.body);
     return (jsonDecode(response.body)['data'] as List)
         .map((json) => Sale.fromJson(json))
         .toList();
   }
 }
-
-
 
 class InstituteController {
   static Future<List<Institute>> getNewInstitutes() async {
