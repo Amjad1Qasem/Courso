@@ -85,7 +85,8 @@ class SaleCourses extends StatelessWidget {
         ),
         centerTitle: true,
       ),
-      body: GridView.builder(
+      body: 
+      GridView.builder(
          padding: EdgeInsets.all(20),
           gridDelegate: SliverGridDelegateWithFixedCrossAxisCount(     
           mainAxisSpacing: 10, 

@@ -1,5 +1,7 @@
 // ignore_for_file: prefer_const_constructors, must_be_immutable, unused_import, file_names, avoid_print
 
+import 'package:courso/controllers/coursController.dart';
+import 'package:courso/modules/Cours%20Details/CoursDetails.dart';
 import 'package:courso/shared/components/components.dart';
 import 'package:flutter/material.dart';
 
@@ -15,7 +17,7 @@ class AllCourses extends StatelessWidget {
       instutName: 'معهد DTC (الاونروا)',
       typeCours: '',
     ),
-     CoursModel(
+    CoursModel(
       coursImage: AssetImage('assets/images/C1.png'),
       coursName: 'التوعية الصحية',
       instutName: 'منظمة اليونسيف',
@@ -27,7 +29,7 @@ class AllCourses extends StatelessWidget {
       instutName: 'معهد الأمين',
       typeCours: '',
     ),
-     CoursModel(
+    CoursModel(
       coursImage: AssetImage('assets/images/C2.png'),
       coursName: 'قيادة الحاسب ICDL',
       instutName: 'معهد رواد الحضارة',
@@ -35,11 +37,11 @@ class AllCourses extends StatelessWidget {
     ),
     CoursModel(
       coursImage: AssetImage('assets/images/C10png.png'),
-      coursName:  'المحاسبة',
+      coursName: 'المحاسبة',
       instutName: 'معهد الأمين',
       typeCours: ' ',
     ),
-     CoursModel(
+    CoursModel(
       coursImage: AssetImage('assets/images/C3.png'),
       coursName: 'دورة CCNA',
       instutName: 'الجمعية المعلوماتية السورية',
@@ -51,7 +53,7 @@ class AllCourses extends StatelessWidget {
       instutName: 'معهد الهمك',
       typeCours: ' ',
     ),
-     CoursModel(
+    CoursModel(
       coursImage: AssetImage('assets/images/C4.png'),
       coursName: 'تأهيل المرأة',
       instutName: 'UNICEF',
@@ -63,7 +65,7 @@ class AllCourses extends StatelessWidget {
       instutName: 'مؤسسة الشام',
       typeCours: ' ',
     ),
-     CoursModel(
+    CoursModel(
       coursImage: AssetImage('assets/images/C5.png'),
       coursName: 'الفيزياء',
       instutName: 'معهد الناجي',
@@ -75,7 +77,7 @@ class AllCourses extends StatelessWidget {
       instutName: 'مركز الاتقان',
       typeCours: ' ',
     ),
-     CoursModel(
+    CoursModel(
       coursImage: AssetImage('assets/images/C6.png'),
       coursName: 'إدارة الموارد البشرية',
       instutName: 'مركز الأمين',
@@ -87,7 +89,7 @@ class AllCourses extends StatelessWidget {
       instutName: 'معهد  DTC (الاونروا)',
       typeCours: 'free',
     ),
-     CoursModel(
+    CoursModel(
       coursImage: AssetImage('assets/images/C7.png'),
       coursName: 'English',
       instutName: 'New Horizons',
@@ -100,6 +102,9 @@ class AllCourses extends StatelessWidget {
       typeCours: '',
     ),
   ];
+
+  List<CoursModel> course = [];
+
   @override
   Widget build(BuildContext context) {
     return Scaffold(
@@ -118,144 +123,159 @@ class AllCourses extends StatelessWidget {
         ),
         centerTitle: true,
       ),
-      body: GridView.builder(
-         padding: EdgeInsets.all(20),
-          gridDelegate: SliverGridDelegateWithFixedCrossAxisCount(     
-          mainAxisSpacing: 10, 
-          crossAxisSpacing: 10, 
-          childAspectRatio: 10 / 16,     
-          crossAxisCount:3, ),
-          itemCount: courss.length,
-          itemBuilder: (context, index) => buildCours(courss[index])),
+      body: FutureBuilder<List<AllCourse>>(
+          future: AllCourseController.getNewAllCourses(),
+          builder: (context, snapshot) {
+            if (!snapshot.hasData) {
+              return Center(
+                child: CircularProgressIndicator(),
+              );
+            }
+            final courses = snapshot.data!;
+            return GestureDetector(
+              onTap: () {
+                Navigator.push(
+                  context,
+                  MaterialPageRoute(builder: (context)=>Details())
+                );
+              },
+              child: GridView.builder(
+                  padding: EdgeInsets.all(20),
+                  gridDelegate: SliverGridDelegateWithFixedCrossAxisCount(
+                    mainAxisSpacing: 10,
+                    crossAxisSpacing: 10,
+                    childAspectRatio: 10 / 16,
+                    crossAxisCount: 3,
+                  ),
+                  itemCount: courses.length,
+                  itemBuilder: (context, index) => buildCours(courss[index])),
+            );
+          }),
     );
   }
 }
 
+bool isFree = false;
 // Build Item for list
 Widget buildCours(CoursModel courses) => Center(
-      child: GestureDetector(
-        onTap: () {
-          print('pageCours');
-        },
-        child: Container(
-          height: 200,
-          width: 117,
-          decoration: BoxDecoration(
-            color: Colors.white,
-            borderRadius: BorderRadius.circular(20),
-            boxShadow: [
-              BoxShadow(
-                  color: Colors.grey.withOpacity(0.3),
-                  spreadRadius: 2,
-                  blurRadius: 3,
-                  offset: Offset(0, 0)),
-            ],
-          ),
-          child: Column(
-            mainAxisSize: MainAxisSize.max,
+      child: Container(
+        height: 200,
+        width: 117,
+        decoration: BoxDecoration(
+          color: Colors.white,
+          borderRadius: BorderRadius.circular(20),
+          boxShadow: [
+            BoxShadow(
+                color: Colors.grey.withOpacity(0.3),
+                spreadRadius: 2,
+                blurRadius: 3,
+                offset: Offset(0, 0)),
+          ],
+        ),
+        child: Column(
+          mainAxisSize: MainAxisSize.max,
           //  crossAxisAlignment: CrossAxisAlignment.start,
-            children: [
-              Expanded(
-                flex: 3,
-                child: Padding(
-                  padding: const EdgeInsets.all(3.0),
-                  child: Stack(
-                    children: [
-                      Container(
-                        decoration: BoxDecoration(
-                          borderRadius: BorderRadius.circular(15),
-                        ),
-                        clipBehavior: Clip.antiAliasWithSaveLayer,
-                        child: Image(
-                          image: courses.coursImage,
-                          fit: BoxFit.cover,
-                          width: 115,
-                          height: 120,
-                        ),
+          children: [
+            Expanded(
+              flex: 3,
+              child: Padding(
+                padding: const EdgeInsets.all(3.0),
+                child: Stack(
+                  children: [
+                    Container(
+                      decoration: BoxDecoration(
+                        borderRadius: BorderRadius.circular(15),
                       ),
-                      Container(
-                        width: 38,
-                        height: 22,
+                      clipBehavior: Clip.antiAliasWithSaveLayer,
+                      child: Image(
+                        image: courses.coursImage,
+                        fit: BoxFit.cover,
+                        width: 115,
+                        height: 120,
+                      ),
+                    ),
+                    Container(
+                      width: 44,
+                      height: 25,
+                      decoration: BoxDecoration(
+                          borderRadius: const BorderRadius.only(
+                            topLeft: Radius.circular(15),
+                            bottomRight: Radius.circular(15),
+                          ),
+                          color: isFree
+                              ? const Color(0xffFF0F00).withOpacity(0.5)
+                              : null),
+                    ),
+                    Padding(
+                      padding: const EdgeInsets.all(4.0),
+                      child: Container(
+                        width: 44,
+                        height: 25,
                         decoration: BoxDecoration(
                             borderRadius: const BorderRadius.only(
                               topLeft: Radius.circular(15),
                               bottomRight: Radius.circular(15),
                             ),
-                            color: courses.typeCours != 'free'
-                                ? null
-                                : const Color(0xffFF0F00).withOpacity(0.5)),
-                      ),
-                      Padding(
-                        padding: const EdgeInsets.all(4.0),
-                        child: Container(
-                          width: 38,
-                          height: 22,
-                          decoration: BoxDecoration(
-                              borderRadius: const BorderRadius.only(
-                                topLeft: Radius.circular(15),
-                                bottomRight: Radius.circular(15),
-                              ),
-                              color: courses.typeCours != "free"
-                                  ? null
-                                  : const Color(0xffFF0F00).withOpacity(0.5)),
-                          child: Text(
-                            courses.typeCours.toUpperCase(),
-                            textAlign: TextAlign.center,
-                            style: const TextStyle(
-                              color: Colors.black,
-                              fontFamily: 'cairo',
-                              fontWeight: FontWeight.w600,
-                              fontSize: 10,
-                            ),
+                            color: isFree
+                                ? const Color(0xffFF0F00).withOpacity(0.5)
+                                : null),
+                        child: Text(
+                          isFree ? 'مجاني' : '',
+                          textAlign: TextAlign.center,
+                          style: const TextStyle(
+                            color: Colors.black,
+                            fontFamily: 'cairo',
+                            fontWeight: FontWeight.w600,
+                            fontSize: 12,
                           ),
                         ),
                       ),
-                    ],
-                  ),
+                    ),
+                  ],
                 ),
               ),
-              Expanded(
-                flex: 1,
-                child: Center(
-                  child: Padding(
-                    padding: const EdgeInsets.all(8.0),
-                    child: Text(
-                      courses.coursName,
-                      maxLines: 1,
-                      overflow: TextOverflow.ellipsis,
-                      textAlign: TextAlign.center,
-                      style: const TextStyle(
-                        color: Colors.black,
-                        fontFamily: 'cairo',
-                        fontWeight: FontWeight.w900,
-                        fontSize: 12,
-                      ),
+            ),
+            Expanded(
+              flex: 1,
+              child: Center(
+                child: Padding(
+                  padding: const EdgeInsets.all(8.0),
+                  child: Text(
+                    courses.coursName,
+                    maxLines: 1,
+                    overflow: TextOverflow.ellipsis,
+                    textAlign: TextAlign.center,
+                    style: const TextStyle(
+                      color: Colors.black,
+                      fontFamily: 'cairo',
+                      fontWeight: FontWeight.w900,
+                      fontSize: 12,
                     ),
                   ),
                 ),
               ),
-              Expanded(
-                flex: 1,
-                child: Center(
-                  child: Padding(
-                    padding: const EdgeInsets.all(2.0),
-                    child: Text(
-                      courses.instutName,
-                      maxLines: 1,
-                      textAlign: TextAlign.center,
-                      overflow: TextOverflow.ellipsis,
-                      style: const TextStyle(
-                        color: Colors.black,
-                        fontFamily: 'cairo',
-                        fontWeight: FontWeight.w300,
-                        fontSize: 10,
-                      ),
+            ),
+            Expanded(
+              flex: 1,
+              child: Center(
+                child: Padding(
+                  padding: const EdgeInsets.all(2.0),
+                  child: Text(
+                    courses.instutName,
+                    maxLines: 1,
+                    textAlign: TextAlign.center,
+                    overflow: TextOverflow.ellipsis,
+                    style: const TextStyle(
+                      color: Colors.black,
+                      fontFamily: 'cairo',
+                      fontWeight: FontWeight.w300,
+                      fontSize: 10,
                     ),
                   ),
                 ),
               ),
-            ],
-          ),
+            ),
+          ],
         ),
       ),
     );

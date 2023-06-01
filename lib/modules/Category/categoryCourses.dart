@@ -14,14 +14,14 @@ class CategoryCourses extends StatelessWidget {
       coursName: 'UI/UX desgin',
       instutName: 'معهد DTC (الاونروا)',
       typeCours: '',
-    ),  
+    ),
     CoursModel(
       coursImage: AssetImage('assets/images/C9.png'),
       coursName: 'التسويق الالكتروني',
       instutName: 'معهد الأمين',
       typeCours: '',
     ),
-     CoursModel(
+    CoursModel(
       coursImage: AssetImage('assets/images/C2.png'),
       coursName: 'قيادة الحاسب ICDL',
       instutName: 'معهد رواد الحضارة',
@@ -29,23 +29,23 @@ class CategoryCourses extends StatelessWidget {
     ),
     CoursModel(
       coursImage: AssetImage('assets/images/C10png.png'),
-      coursName:  'المحاسبة',
+      coursName: 'المحاسبة',
       instutName: 'معهد الأمين',
       typeCours: ' ',
-    ), 
+    ),
     CoursModel(
       coursImage: AssetImage('assets/images/C11.png'),
       coursName: 'تعلم لغة MY SQL',
       instutName: 'معهد الهمك',
       typeCours: ' ',
-    ),  
+    ),
     CoursModel(
       coursImage: AssetImage('assets/images/C12.png'),
       coursName: 'احتراف برامج Adobe',
       instutName: 'مؤسسة الشام',
       typeCours: ' ',
     ),
-     CoursModel(
+    CoursModel(
       coursImage: AssetImage('assets/images/C5.png'),
       coursName: 'الفيزياء',
       instutName: 'معهد الناجي',
@@ -57,14 +57,12 @@ class CategoryCourses extends StatelessWidget {
       instutName: 'مركز الاتقان',
       typeCours: ' ',
     ),
-     CoursModel(
+    CoursModel(
       coursImage: AssetImage('assets/images/C7.png'),
       coursName: 'English',
       instutName: 'New Horizons',
       typeCours: ' ',
     ),
-   
-
   ];
 
   @override
@@ -86,12 +84,13 @@ class CategoryCourses extends StatelessWidget {
         centerTitle: true,
       ),
       body: GridView.builder(
-         padding: EdgeInsets.all(20),
-          gridDelegate: SliverGridDelegateWithFixedCrossAxisCount(     
-          mainAxisSpacing: 10, 
-          crossAxisSpacing: 10, 
-          childAspectRatio: 10 / 16,     
-          crossAxisCount:3, ),
+          padding: EdgeInsets.all(20),
+          gridDelegate: SliverGridDelegateWithFixedCrossAxisCount(
+            mainAxisSpacing: 10,
+            crossAxisSpacing: 10,
+            childAspectRatio: 10 / 16,
+            crossAxisCount: 3,
+          ),
           itemCount: courss.length,
           itemBuilder: (context, index) => buildCours(courss[index])),
     );
@@ -99,6 +98,7 @@ class CategoryCourses extends StatelessWidget {
 }
 
 // Build Item for list
+
 Widget buildCours(CoursModel courses) => Center(
       child: GestureDetector(
         onTap: () {
@@ -120,7 +120,7 @@ Widget buildCours(CoursModel courses) => Center(
           ),
           child: Column(
             mainAxisSize: MainAxisSize.max,
-          //  crossAxisAlignment: CrossAxisAlignment.start,
+            //  crossAxisAlignment: CrossAxisAlignment.start,
             children: [
               Expanded(
                 flex: 3,

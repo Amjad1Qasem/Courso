@@ -2,6 +2,7 @@
 
 import 'package:courso/Profile/Setting.dart';
 import 'package:courso/Profile/profilePage.dart';
+import 'package:courso/layout/Home_loayout/Home_layout.dart';
 import 'package:courso/modules/Home/home.dart';
 import 'package:courso/modules/LoginPages/Login/Login.dart';
 import 'package:courso/modules/LoginPages/Register/Register.dart';
@@ -55,8 +56,8 @@ class _drawerScreenState extends State<drawerScreen> {
             padding: const EdgeInsetsDirectional.only(start: 100, top: 180),
             child: Column(
               children: [
-                const Row(
-                  children: [
+                Row(
+                  children: const [
                     Expanded(
                       child: Padding(
                         padding: EdgeInsetsDirectional.only(end: 20),
@@ -83,8 +84,11 @@ class _drawerScreenState extends State<drawerScreen> {
                       Expanded(
                         child: GestureDetector(
                           onTap: () {
-                            Navigator.of(context)
-                                .pushReplacementNamed(Notifications.id);
+                            Navigator.push(
+                              context,
+                              MaterialPageRoute(
+                                  builder: (context) => const Notifications()),
+                            );
                           },
                           // ignore: avoid_unnecessary_containers
                           child: Container(
@@ -121,8 +125,11 @@ class _drawerScreenState extends State<drawerScreen> {
                       Expanded(
                         child: GestureDetector(
                           onTap: () {
-                            Navigator.of(context)
-                                .pushReplacementNamed(Profile.id);
+                            Navigator.push(
+                              context,
+                              MaterialPageRoute(
+                                  builder: (context) => const Profile()),
+                            );
                           },
                           // ignore: avoid_unnecessary_containers
                           child: Container(
@@ -159,8 +166,10 @@ class _drawerScreenState extends State<drawerScreen> {
                       Expanded(
                         child: GestureDetector(
                           onTap: () {
-                            Navigator.of(context)
-                                .pushReplacementNamed(Setting.id);
+                            Navigator.pop(
+                              context,
+                              MaterialPageRoute(builder: (context)=>const Setting()),
+                            );
                           },
                           // ignore: avoid_unnecessary_containers
                           child: Container(

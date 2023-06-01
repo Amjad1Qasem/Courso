@@ -27,149 +27,163 @@ class Profile extends StatelessWidget {
         ),
         centerTitle: true,
       ),
-      body: Column(
-        children: [
-          Container(
-            decoration: const BoxDecoration(
-                color: Color.fromARGB(255, 208, 231, 255),
-                borderRadius: BorderRadius.only(
-                  bottomLeft: Radius.circular(40),
-                  bottomRight: Radius.circular(40),
-                )),
-            child: Center(
-              child: Padding(
-                padding: const EdgeInsets.all(20.0),
-                child: Column(
-                    crossAxisAlignment: CrossAxisAlignment.center,
-                    children: [
-                      // ignore: prefer_const_constructors
-                      CircleAvatar(
-                        backgroundImage:
-                            const AssetImage('assets/images/userImagepng.png'),
-                        radius: 75,
-                      ),
-                      const SizedBox(
-                        height: 0,
-                      ),
-                      defText(
-                          text: 'Lisa Jain',
-                          size: 25,
-                          fontWeight: FontWeight.bold,
-                          color: const Color(0xff2D527C)),
-                      const SizedBox(
-                        height: 0,
-                      ),
-                      defText(
-                          text: 'LisaJain@email.com',
-                          size: 15,
-                          fontWeight: FontWeight.bold,
-                          color: const Color(0xff333333)),
-                      const SizedBox(
-                        height: 0,
-                      ),
-                      defText(
-                          text: '+963-994722907',
-                          size: 15,
-                          fontWeight: FontWeight.bold,
-                          color: const Color(0xff333333)),
-                      const SizedBox(
-                        height: 10,
-                      ),
-                      Row(
-                        children: [
-                          Expanded(
-                            child: TextButton(
-                                onPressed: () {
-                                  Navigator.push(
-                                    context,
-                                    MaterialPageRoute(
-                                        builder: (context) =>
-                                            const EditProfile()),
-                                  );
-                                },
-                                child: Container(
-                                    width: double.infinity,
-                                    height: 44,
-                                    decoration: BoxDecoration(
-                                      borderRadius: BorderRadius.circular(12),
-                                      color: const Color(0xff0163e2),
-                                    ),
-                                    child: Padding(
-                                      padding: const EdgeInsets.symmetric(
-                                          horizontal: 0, vertical: 3),
-                                      child: Center(
-                                          child: defText(
-                                              text: 'تعديل الملف الشخصي',
-                                              size: 16,
-                                              fontWeight: FontWeight.w600,
-                                              color: Colors.white)),
-                                    ))),
-                          ),
-                          Expanded(
-                            child: TextButton(
-                                onPressed: () {
-                                  Navigator.push(
-                                    context,
-                                    MaterialPageRoute(builder: (context)=>const Setting()),
-                                  );
-                                },
-                                child: Container(
-                                    width: double.infinity,
-                                    height: 44,
-                                    decoration: BoxDecoration(
-                                      borderRadius: BorderRadius.circular(12),
-                                      color: const Color(0xff0163e2),
-                                    ),
-                                    child: Padding(
-                                      padding: const EdgeInsets.symmetric(
-                                          horizontal: 0, vertical: 3),
-                                      child: Center(
-                                          child: defText(
-                                              text: 'الاعدادات',
-                                              size: 16,
-                                              fontWeight: FontWeight.w600,
-                                              color: Colors.white)),
-                                    ))),
-                          )
-                        ],
-                      ),
-                      const SizedBox(
-                        height: 10,
-                      ),
-                    ]),
+      body: SingleChildScrollView(
+        child: Column(
+          children: [
+            Container(
+              decoration: const BoxDecoration(
+                  color: Color.fromARGB(255, 208, 231, 255),
+                  borderRadius: BorderRadius.only(
+                    bottomLeft: Radius.circular(40),
+                    bottomRight: Radius.circular(40),
+                  )),
+              child: Center(
+                child: Padding(
+                  padding: const EdgeInsets.all(20.0),
+                  child: Column(
+                      crossAxisAlignment: CrossAxisAlignment.center,
+                      children: [
+                        // ignore: prefer_const_constructors
+                        CircleAvatar(
+                          backgroundImage:
+                              const AssetImage('assets/images/userImagepng.png'),
+                          radius: 75,
+                        ),
+                        const SizedBox(
+                          height: 0,
+                        ),
+                        defText(
+                            text: 'Lisa Jain',
+                            size: 25,
+                            fontWeight: FontWeight.bold,
+                            color: const Color(0xff2D527C)),
+                        const SizedBox(
+                          height: 0,
+                        ),
+                        defText(
+                            text: 'LisaJain@email.com',
+                            size: 15,
+                            fontWeight: FontWeight.bold,
+                            color: const Color(0xff333333)),
+                        const SizedBox(
+                          height: 0,
+                        ),
+                        defText(
+                            text: '+963-994722907',
+                            size: 15,
+                            fontWeight: FontWeight.bold,
+                            color: const Color(0xff333333)),
+                        const SizedBox(
+                          height: 10,
+                        ),
+                        Row(
+                          children: [
+                            Expanded(
+                              child: TextButton(
+                                  onPressed: () {
+                                    Navigator.push(
+                                      context,
+                                      MaterialPageRoute(
+                                          builder: (context) =>
+                                              const EditProfile()),
+                                    );
+                                  },
+                                  child: Container(
+                                      width: double.infinity,
+                                      height: 44,
+                                      decoration: BoxDecoration(
+                                        borderRadius: BorderRadius.circular(12),
+                                        color: const Color(0xff0163e2).withOpacity(0.5),
+                                      ),
+                                      child: Padding(
+                                        padding: const EdgeInsets.symmetric(
+                                            horizontal: 0, vertical: 3),
+                                        child: Center(
+                                            child: defText(
+                                                text: 'تعديل الملف الشخصي',
+                                                size: 16,
+                                                fontWeight: FontWeight.w600,
+                                                color: Colors.white)),
+                                      ))),
+                            ),
+                            Expanded(
+                              child: TextButton(
+                                  onPressed: () {
+                                    Navigator.push(
+                                      context,
+                                      MaterialPageRoute(builder: (context)=>const Setting()),
+                                    );
+                                  },
+                                  child: Container(
+                                      width: double.infinity,
+                                      height: 44,
+                                      decoration: BoxDecoration(
+                                        borderRadius: BorderRadius.circular(12),
+                                        color: const Color(0xff0163e2).withOpacity(0.5),
+                                      ),
+                                      child: Padding(
+                                        padding: const EdgeInsets.symmetric(
+                                            horizontal: 0, vertical: 3),
+                                        child: Center(
+                                            child: defText(
+                                                text: 'الاعدادات',
+                                                size: 16,
+                                                fontWeight: FontWeight.w600,
+                                                color: Colors.white)),
+                                      ))),
+                            )
+                          ],
+                        ),
+                        const SizedBox(
+                          height: 10,
+                        ),
+                      ]),
+                ),
               ),
             ),
-          ),
-          const SizedBox(
-            height: 20,
-          ),
-          Expanded(
-            child: SingleChildScrollView(
-              child: Column(
-                children: [
-                  Mycours(
-                      coursImage: const AssetImage('assets/images/C2.png'),
-                      coursName: ' قيادة الحاسب ICDL',
-                      instutName: ' معهد رواد الحضارة',
-                      typeCours: 'مستمرة  الآن'),
-                  Mycours(
-                      coursImage: const AssetImage('assets/images/C3.png'),
-                      coursName: 'أساسيات CCNA',
-                      instutName: 'الجمعية المعلوماتية السورية',
-                      typeCours: 'انتهت'),
-                  Mycours(
-                      coursImage: const AssetImage('assets/images/C6.png'),
-                      coursName: 'إدارة الموارد البشرية',
-                      instutName: 'معهد الفرسان الثلاثة',
-                      typeCours: 'انتهت'),
-                  const SizedBox(
-                    height: 5,
-                  ),
-                ],
-              ),
+            const SizedBox(
+              height: 20,
             ),
-          ),
-        ],
+            Column(
+              children: [
+                Row(
+                  mainAxisAlignment: MainAxisAlignment.start,
+                  children: [
+                    Container(
+                      alignment: Alignment.center,
+                      width: 120,
+                      height: 40,
+                      decoration: const BoxDecoration(
+                        color:  Color(0XFF0063e2),
+                        borderRadius: BorderRadius.only(topLeft: Radius.circular(5),bottomLeft: Radius.circular(5))
+                        
+                        ),
+                      child: defText(text: 'دوراتي :', size: 18, fontWeight: FontWeight.w600, color: Colors.white)),
+                  ],
+                ),
+
+                Mycours(
+                    coursImage: const AssetImage('assets/images/C2.png'),
+                    coursName: ' قيادة الحاسب ICDL',
+                    instutName: ' معهد رواد الحضارة',
+                    typeCours: 'مستمرة  الآن'),
+                Mycours(
+                    coursImage: const AssetImage('assets/images/C3.png'),
+                    coursName: 'أساسيات CCNA',
+                    instutName: 'الجمعية المعلوماتية السورية',
+                    typeCours: 'انتهت'),
+                Mycours(
+                    coursImage: const AssetImage('assets/images/C6.png'),
+                    coursName: 'إدارة الموارد البشرية',
+                    instutName: 'معهد الفرسان الثلاثة',
+                    typeCours: 'انتهت'),
+                const SizedBox(
+                  height: 5,
+                ),
+              ],
+            ),
+          ],
+        ),
       ),
     );
   }
@@ -229,7 +243,7 @@ Widget Mycours({
                       coursName,
                       style: const TextStyle(
                           fontFamily: 'cairo',
-                          fontSize: 22,
+                          fontSize: 20,
                           fontWeight: FontWeight.w600,
                           color: Color(0xff333333)),
                       maxLines: 1,
@@ -239,7 +253,7 @@ Widget Mycours({
                       instutName,
                       style: const TextStyle(
                           fontFamily: 'cairo',
-                          fontSize: 16,
+                          fontSize: 15,
                           fontWeight: FontWeight.w500,
                           color: Color(0xff333333)),
                       maxLines: 1,

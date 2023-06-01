@@ -3,7 +3,9 @@
 // import 'package:courso/modules/LoginPages/SignUp/Login.dart';
 // ignore_for_file: unused_import, duplicate_ignore
 
+import 'package:courso/Profile/Setting.dart';
 import 'package:courso/Profile/profilePage.dart';
+import 'package:courso/modules/Category/categoryCourses.dart';
 import 'package:courso/modules/Cours%20Details/CoursDetails.dart';
 import 'package:courso/modules/Cours%20Details/DoneRegistr.dart';
 import 'package:courso/modules/Cours%20Details/RegistrationForm.dart';
@@ -45,7 +47,7 @@ class MyApp extends StatelessWidget {
         GlobalMaterialLocalizations.delegate,
       ],
       // initialRoute: Splash.id,
-      home: const Details(),
+      home: const  Home_Layout(),
       routes: {
         Splash.id: (context) => const Splash(),
         Register.id: (context) => const Register(),
@@ -58,11 +60,11 @@ class MyApp extends StatelessWidget {
         Details.id: (context) => const Details(),
         registrationForm.id: (context) => const registrationForm(),
         Done.id: (context) => const Done(),
-        InstuitPage.id: (context) => const InstuitPage(),
+        InstuitPage.id: (context) =>  InstuitPage(insttuitId: 1,),
         Profile.id: (context) => const Profile(),
       },
       onUnknownRoute: (settings) =>
-          MaterialPageRoute(builder: (_) => const Text('dsjaoidkjsaopkdsao')),
+          MaterialPageRoute(builder: (_) => const Setting()),
       //home: Splash(),
     );
   }

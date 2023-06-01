@@ -25,7 +25,7 @@ String CertificateType = 'المرحلة الابتدائية';
 bool ischacked = false;
 
 class registrationForm extends StatefulWidget {
-  const registrationForm({super.key});
+  const registrationForm ({super.key});
   static String id = 'registrationForm';
 
   @override
@@ -54,9 +54,9 @@ class _registrationFormState extends State<registrationForm> {
             key: formkey,
             child: Column(
               children: [
-                const Row(
+                 Row(
                   mainAxisAlignment: MainAxisAlignment.center,
-                  children: [
+                  children: const [
                     Center(
                       child: Image(
                           fit: BoxFit.cover,

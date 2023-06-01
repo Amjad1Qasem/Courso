@@ -1,11 +1,13 @@
-// ignore_for_file: avoid_print, prefer_const_constructors, unused_import
+// ignore_for_file: avoid_print, prefer_const_constructors, unused_import, camel_case_types
 
 import 'package:courso/modules/Category/categoryCourses.dart';
 import 'package:courso/modules/Cours%20Details/CoursDetails.dart';
+import 'package:courso/modules/Instuites/InstuitPage.dart';
 import 'package:flutter/material.dart';
 import 'package:form_field_validator/form_field_validator.dart';
 import '../../modules/Instuites/instuites.dart';
 import 'package:courso/modules/Cours%20Details/RegistrationForm.dart';
+
 
 // Button Login
 Widget defaultButton({
@@ -61,7 +63,7 @@ Widget defaultTextFormField({
       controller: controller,
       keyboardType: keyboard,
       decoration: InputDecoration(
-        focusColor: Colors.deepOrange,
+        // focusColor: Colors.deepOrange,
         hintText: hintText,
         contentPadding: const EdgeInsets.symmetric(vertical: 15, horizontal: 5),
         filled: true,
@@ -112,64 +114,75 @@ Widget cours({
   required ImageProvider coursImage,
   required String coursName,
   String? instutName,
-  required String typeCours,
-  // required String  t='Details.id',
-  // required BuildContext con,
+  required bool isFree,
 }) =>
-    Center(
+    _Cours(
+      coursImage: coursImage,
+      coursName: coursName,
+      instutName: instutName!,
+      isFree: isFree,
+    );
+
+class _Cours extends StatelessWidget {
+  const _Cours({
+    required this.coursImage,
+    required this.coursName,
+    required this.instutName,
+    required this.isFree,
+  });
+
+  final ImageProvider coursImage;
+  final String coursName;
+  final String instutName;
+  final bool isFree;
+
+  @override
+  Widget build(BuildContext context) {
+    return Center(
       child: GestureDetector(
         onTap: () {
-          // Navigator.of(con).pushReplacementNamed(t);
+          Navigator.push(
+            context,
+            MaterialPageRoute(builder: (context) => Details()),
+          );
         },
-        child: Container(
-          height: 215,
-          width: 155,
-          decoration: BoxDecoration(
-            color: Colors.white,
-            borderRadius: BorderRadius.circular(20),
-            boxShadow: [
-              BoxShadow(
-                  color: Colors.grey.withOpacity(0.5),
-                  spreadRadius: 2,
-                  blurRadius: 4,
-                  offset: Offset(0, 0)),
-            ],
-          ),
-          child: Column(
-            mainAxisSize: MainAxisSize.min,
-            crossAxisAlignment: CrossAxisAlignment.start,
-            children: [
-              Padding(
-                padding: const EdgeInsets.all(2.0),
-                child: Stack(
-                  children: [
-                    Container(
-                      decoration: BoxDecoration(
-                        borderRadius: BorderRadius.circular(20),
+        child: Padding(
+          padding: const EdgeInsets.all(10.0),
+          child: Container(
+            height: 215,
+            width: 155,
+            decoration: BoxDecoration(
+              color: Colors.white,
+              borderRadius: BorderRadius.circular(20),
+              boxShadow: [
+                BoxShadow(
+                    color: Colors.grey.withOpacity(0.5),
+                    spreadRadius: 2,
+                    blurRadius: 4,
+                    offset: Offset(0, 0)),
+              ],
+            ),
+            child: Column(
+              mainAxisSize: MainAxisSize.min,
+              crossAxisAlignment: CrossAxisAlignment.start,
+              children: [
+                Padding(
+                  padding: const EdgeInsets.all(2.0),
+                  child: Stack(
+                    children: [
+                      Container(
+                        decoration: BoxDecoration(
+                          borderRadius: BorderRadius.circular(20),
+                        ),
+                        clipBehavior: Clip.antiAliasWithSaveLayer,
+                        child: Image(
+                          image: coursImage,
+                          fit: BoxFit.cover,
+                          width: 150,
+                          height: 125,
+                        ),
                       ),
-                      clipBehavior: Clip.antiAliasWithSaveLayer,
-                      child: Image(
-                        image: coursImage,
-                        fit: BoxFit.cover,
-                        width: 150,
-                        height: 125,
-                      ),
-                    ),
-                    Container(
-                      width: 44,
-                      height: 25,
-                      decoration: BoxDecoration(
-                          borderRadius: const BorderRadius.only(
-                            topLeft: Radius.circular(15),
-                            bottomRight: Radius.circular(15),
-                          ),
-                          color: typeCours != 'free'
-                              ? null
-                              : const Color(0xffFF0F00).withOpacity(0.5)),
-                    ),
-                    Padding(
-                      padding: const EdgeInsets.all(4.0),
-                      child: Container(
+                      Container(
                         width: 44,
                         height: 25,
                         decoration: BoxDecoration(
@@ -177,30 +190,161 @@ Widget cours({
                               topLeft: Radius.circular(15),
                               bottomRight: Radius.circular(15),
                             ),
-                            color: typeCours != "free"
-                                ? null
-                                : const Color(0xffFF0F00).withOpacity(0.5)),
-                        child: Text(
-                          typeCours.toUpperCase(),
-                          textAlign: TextAlign.center,
-                          style: const TextStyle(
-                            color: Colors.black,
-                            fontFamily: 'cairo',
-                            fontWeight: FontWeight.w600,
-                            fontSize: 12,
+                            color: isFree 
+                                
+                                ? const Color(0xffFF0F00).withOpacity(0.5)
+                                : null),
+                       ),
+                       Padding(
+                        padding: const EdgeInsets.all(4.0),
+                        child: Container(
+                          width: 44,
+                          height: 25,
+                          decoration: BoxDecoration(
+                              borderRadius: const BorderRadius.only(
+                                topLeft: Radius.circular(15),
+                                bottomRight: Radius.circular(15),
+                              ),
+                              color: isFree 
+                                  ?const Color(0xffFF0F00).withOpacity(0.5)
+                                  : null),
+                          child: Text(
+                            isFree ? 'مجاني' : '',
+                            textAlign: TextAlign.center,
+                            style: const TextStyle(
+                              color: Colors.black,
+                              fontFamily: 'cairo',
+                              fontWeight: FontWeight.w600,
+                              fontSize: 12,
+                            ),
                           ),
                         ),
                       ),
-                    ),
-                  ],
+                    ],
+                  ),
                 ),
-              ),
-              Expanded(
-                child: Center(
+                Expanded(
+                  child: Center(
+                    child: Padding(
+                      padding: const EdgeInsets.all(8.0),
+                      child: Text(
+                        coursName,
+                        maxLines: 1,
+                        overflow: TextOverflow.ellipsis,
+                        style: const TextStyle(
+                          color: Colors.black,
+                          fontFamily: 'cairo',
+                          fontWeight: FontWeight.w900,
+                          fontSize: 16,
+                        ),
+                      ),
+                    ),
+                  ),
+                ),
+                Expanded(
+                  child: Center(
+                    child: Padding(
+                      padding: const EdgeInsets.all(7.0),
+                      child: Text(
+                        instutName,
+                        maxLines: 1,
+                        textAlign: TextAlign.start,
+                        overflow: TextOverflow.ellipsis,
+                        style: const TextStyle(
+                          color: Colors.black,
+                          fontFamily: 'cairo',
+                          fontWeight: FontWeight.w300,
+                          fontSize: 14,
+                        ),
+                      ),
+                    ),
+                  ),
+                ),
+              ],
+            ),
+          ),
+        ),
+      ),
+    );
+  }
+}
+
+//instuit
+Widget instuitee({
+  ImageProvider? instImage,
+  String? instName,
+  String? aboutInst,
+}) =>
+    _instuitee(
+      instImage: instImage!,
+      instName: instName!,
+      aboutInst: aboutInst!,
+    );
+
+class _instuitee extends StatelessWidget {
+  const _instuitee({
+    required this.aboutInst,
+    required this.instImage,
+    required this.instName,
+  });
+  final ImageProvider instImage;
+  final String instName;
+  final String aboutInst;
+
+  @override
+  Widget build(BuildContext context) {
+    return Padding(
+      padding: const EdgeInsets.all(10.0),
+      child: Center(
+        child: GestureDetector(
+          onTap: () {
+            Navigator.push(
+              context,
+              MaterialPageRoute(builder: (context) => InstuitPage(insttuitId: 1,)),
+            );
+          },
+          child: Container(
+            height: 225,
+            width: 155,
+            decoration: BoxDecoration(
+              color: Colors.white,
+              borderRadius: BorderRadius.circular(20),
+              boxShadow: [
+                BoxShadow(
+                    color: Colors.grey.withOpacity(0.7),
+                    spreadRadius: 2,
+                    blurRadius: 5,
+                    offset: Offset(0, 0)),
+              ],
+            ),
+            child: Column(
+              mainAxisSize: MainAxisSize.min,
+              crossAxisAlignment: CrossAxisAlignment.start,
+              children: [
+                Padding(
+                  padding: const EdgeInsets.all(2.0),
+                  child: Stack(
+                    children: [
+                      Container(
+                        decoration: BoxDecoration(
+                          borderRadius: BorderRadius.circular(20),
+                        ),
+                        clipBehavior: Clip.antiAliasWithSaveLayer,
+                        child: Image(
+                          image: instImage,
+                          fit: BoxFit.cover,
+                          width: 150,
+                          height: 125,
+                        ),
+                      ),
+                    ],
+                  ),
+                ),
+                Center(
                   child: Padding(
                     padding: const EdgeInsets.all(8.0),
                     child: Text(
-                      coursName,
+                      instName,
                       maxLines: 1,
                       overflow: TextOverflow.ellipsis,
                       style: const TextStyle(
@@ -212,120 +356,30 @@ Widget cours({
                     ),
                   ),
                 ),
-              ),
-              Expanded(
-                child: Center(
+                Center(
                   child: Padding(
                     padding: const EdgeInsets.all(7.0),
                     child: Text(
-                      instutName!,
+                      aboutInst,
                       maxLines: 1,
-                      textAlign: TextAlign.start,
                       overflow: TextOverflow.ellipsis,
                       style: const TextStyle(
                         color: Colors.black,
                         fontFamily: 'cairo',
                         fontWeight: FontWeight.w300,
-                        fontSize: 14,
+                        fontSize: 12,
                       ),
                     ),
                   ),
                 ),
-              ),
-            ],
+              ],
+            ),
           ),
         ),
       ),
     );
-
-//instuit
-Widget instuitee({
-  ImageProvider? instImage,
-  String? instName,
-  String? aboutInst,
-}) =>
-    Center(
-      child: GestureDetector(
-        onTap: () {
-          // Navigator.push(
-          //   context,
-          //   MaterialPageRoute(builder: (context) => Instuites()),
-          // );
-        },
-        child: Container(
-          height: 225,
-          width: 155,
-          decoration: BoxDecoration(
-            color: Colors.white,
-            borderRadius: BorderRadius.circular(20),
-            boxShadow: [
-              BoxShadow(
-                  color: Colors.grey.withOpacity(0.7),
-                  spreadRadius: 2,
-                  blurRadius: 5,
-                  offset: Offset(0, 0)),
-            ],
-          ),
-          child: Column(
-            mainAxisSize: MainAxisSize.min,
-            crossAxisAlignment: CrossAxisAlignment.start,
-            children: [
-              Padding(
-                padding: const EdgeInsets.all(2.0),
-                child: Stack(
-                  children: [
-                    Container(
-                      decoration: BoxDecoration(
-                        borderRadius: BorderRadius.circular(20),
-                      ),
-                      clipBehavior: Clip.antiAliasWithSaveLayer,
-                      child: Image(
-                        image: instImage!,
-                        fit: BoxFit.cover,
-                        width: 150,
-                        height: 125,
-                      ),
-                    ),
-                  ],
-                ),
-              ),
-              Center(
-                child: Padding(
-                  padding: const EdgeInsets.all(8.0),
-                  child: Text(
-                    instName!,
-                    maxLines: 1,
-                    overflow: TextOverflow.ellipsis,
-                    style: const TextStyle(
-                      color: Colors.black,
-                      fontFamily: 'cairo',
-                      fontWeight: FontWeight.w900,
-                      fontSize: 16,
-                    ),
-                  ),
-                ),
-              ),
-              Center(
-                child: Padding(
-                  padding: const EdgeInsets.all(7.0),
-                  child: Text(
-                    aboutInst!,
-                    maxLines: 1,
-                    overflow: TextOverflow.ellipsis,
-                    style: const TextStyle(
-                      color: Colors.black,
-                      fontFamily: 'cairo',
-                      fontWeight: FontWeight.w300,
-                      fontSize: 12,
-                    ),
-                  ),
-                ),
-              ),
-            ],
-          ),
-        ),
-      ),
-    );
+  }
+}
 
 //Text
 Widget defText({
@@ -372,7 +426,6 @@ class _Category extends StatelessWidget {
     return Center(
       child: GestureDetector(
         onTap: () {
-          print('djaskodk');
           Navigator.push(
             context,
             MaterialPageRoute(builder: (context) => CategoryCourses()),
@@ -437,3 +490,4 @@ class _Category extends StatelessWidget {
     );
   }
 }
+
