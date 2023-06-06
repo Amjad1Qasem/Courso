@@ -38,7 +38,7 @@ class AllCourseController {
 class CourseSaleController {
   static Future<List<Sale>> getNewSales() async {
     final response = await http.get(
-        Uri.parse('http://10.0.2.2:8000/api/course?discount=true&&limit=6'));
+        Uri.parse('http://10.0.2.2:8000/api/course?discount=true'));
     print(response.body);
     return (jsonDecode(response.body)['data'] as List)
         .map((json) => Sale.fromJson(json))
@@ -56,3 +56,28 @@ class InstituteController {
         .toList();
   }
 }
+
+class CategoryController{
+  static Future<List<Categor>> getNewCategory() async {
+    final response =
+        await http.get(Uri.parse('http://10.0.2.2:8000/api/category'));
+    print(response.body);
+    return (jsonDecode(response.body)['data'] as List)
+        .map((json) => Categor.fromJson(json))
+        .toList();
+
+  }
+}
+class CoursDetailsController{
+  static Future<CourseDetails> getNewCategory(
+    int id
+  ) async {
+    final response =
+        await http.get(Uri.parse('http://10.0.2.2:8000/api/course/$id'));
+    print(response.body);
+    return CourseDetails.fromJson(jsonDecode(response.body)['data'] as Map<String, dynamic>);
+
+  }
+}
+
+

@@ -57,10 +57,10 @@ class MyApp extends StatelessWidget {
         drawerScreen.id: (context) => const drawerScreen(),
         Home.id: (context) => const Home(),
         Instuites.id: (context) => Instuites(),
-        Details.id: (context) => const Details(),
+        Details.id: (context) => const Details(CoursId: 1,),
         registrationForm.id: (context) => const registrationForm(),
         Done.id: (context) => const Done(),
-        InstuitPage.id: (context) =>  InstuitPage(insttuitId: 1,),
+        InstuitPage.id: (context) => const  InstuitPage(insttuitId: 1,),
         Profile.id: (context) => const Profile(),
       },
       onUnknownRoute: (settings) =>

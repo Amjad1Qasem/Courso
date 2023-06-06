@@ -1,5 +1,6 @@
 // ignore_for_file: prefer_const_constructors, must_be_immutable, unused_import, file_names, avoid_print
 
+import 'package:courso/modules/Cours%20Details/CoursDetails.dart';
 import 'package:courso/shared/components/components.dart';
 import 'package:flutter/material.dart';
 
@@ -83,27 +84,57 @@ class CategoryCourses extends StatelessWidget {
         ),
         centerTitle: true,
       ),
-      body: GridView.builder(
-          padding: EdgeInsets.all(20),
-          gridDelegate: SliverGridDelegateWithFixedCrossAxisCount(
-            mainAxisSpacing: 10,
-            crossAxisSpacing: 10,
-            childAspectRatio: 10 / 16,
-            crossAxisCount: 3,
-          ),
-          itemCount: courss.length,
-          itemBuilder: (context, index) => buildCours(courss[index])),
+      body: GestureDetector(
+        onTap: () {
+          Navigator.push(
+            context,
+            MaterialPageRoute(
+                builder: (context) => Details(
+                      CoursId: 1,
+                    )),
+          );
+        },
+        child: GridView.builder(
+            padding: EdgeInsets.all(20),
+            gridDelegate: SliverGridDelegateWithFixedCrossAxisCount(
+              mainAxisSpacing: 10,
+              crossAxisSpacing: 10,
+              childAspectRatio: 10 / 16,
+              crossAxisCount: 3,
+            ),
+            itemCount: courss.length,
+            itemBuilder: (context, index) => buildCours(courss[index])),
+      ),
     );
   }
 }
 
 // Build Item for list
 
-Widget buildCours(CoursModel courses) => Center(
-      child: GestureDetector(
-        onTap: () {
-          print('pageCours');
-        },
+Widget buildCours(CoursModel courses) => CategoryCoursesItem( courses: courses,);
+
+class CategoryCoursesItem extends StatelessWidget {
+  final CoursModel courses;
+  const CategoryCoursesItem({
+    super.key, required this.courses
+  });
+
+  @override
+  Widget build(BuildContext context) {
+    return GestureDetector(
+      onTap: (){
+
+         Navigator.push(
+
+                context,
+
+                MaterialPageRoute(builder: (context)=>Details(CoursId: courses.id,)),
+
+              );
+
+      },
+
+      child: Center(
         child: Container(
           height: 200,
           width: 117,
@@ -120,7 +151,9 @@ Widget buildCours(CoursModel courses) => Center(
           ),
           child: Column(
             mainAxisSize: MainAxisSize.max,
+
             //  crossAxisAlignment: CrossAxisAlignment.start,
+
             children: [
               Expanded(
                 flex: 3,
@@ -226,3 +259,5 @@ Widget buildCours(CoursModel courses) => Center(
         ),
       ),
     );
+  }
+}

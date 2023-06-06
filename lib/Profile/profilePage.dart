@@ -101,8 +101,8 @@ class Profile extends StatelessWidget {
                                         child: Center(
                                             child: defText(
                                                 text: 'تعديل الملف الشخصي',
-                                                size: 16,
-                                                fontWeight: FontWeight.w600,
+                                                size: 14,
+                                                fontWeight: FontWeight.w400,
                                                 color: Colors.white)),
                                       ))),
                             ),
@@ -127,8 +127,8 @@ class Profile extends StatelessWidget {
                                         child: Center(
                                             child: defText(
                                                 text: 'الاعدادات',
-                                                size: 16,
-                                                fontWeight: FontWeight.w600,
+                                                size: 15,
+                                                fontWeight: FontWeight.w400,
                                                 color: Colors.white)),
                                       ))),
                             )

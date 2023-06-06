@@ -25,7 +25,7 @@ String CertificateType = 'المرحلة الابتدائية';
 bool ischacked = false;
 
 class registrationForm extends StatefulWidget {
-  const registrationForm ({super.key});
+  const registrationForm({super.key});
   static String id = 'registrationForm';
 
   @override
@@ -54,7 +54,7 @@ class _registrationFormState extends State<registrationForm> {
             key: formkey,
             child: Column(
               children: [
-                 Row(
+                Row(
                   mainAxisAlignment: MainAxisAlignment.center,
                   children: const [
                     Center(
@@ -174,10 +174,12 @@ class _registrationFormState extends State<registrationForm> {
                           const SizedBox(
                             height: 10,
                           ),
-                          defaultTextFormField(
+                          Stack(
+                            children: [
+                              
+                               defaultTextFormField(
                             hintText: ' ',
                             sufixfun: () {
-                              return null;
                             },
                             validator: MultiValidator([
                               RequiredValidator(
@@ -185,7 +187,6 @@ class _registrationFormState extends State<registrationForm> {
                               // MinLengthValidator(8,
                               //     errorText:
                               //         'first name must be at least 8 digits long'),
-
                               // PatternValidator(r'(?=.*?[#?!@$%^&*-])', errorText: 'first name must have at least one special character')
                             ]),
                             radius: 10,
@@ -193,25 +194,31 @@ class _registrationFormState extends State<registrationForm> {
                             keyboard: TextInputType.number,
                             labText: ' ',
                           ),
-                          GestureDetector(
-                            onTap: () async {
-                              final DateTime? dateTime = await showDatePicker(
-                                context: context,
-                                initialDate: DateTime.now(),
-                                firstDate: DateTime.now(),
-                                lastDate: DateTime.now()
-                                    .add(const Duration(days: 30)),
-                              );
-                              if (dateTime != null) {
-                                setState(() {
-                                  birthdateregcontroller.text =
-                                      '${dateTime.year}/${dateTime.month}/${dateTime.day}';
-                                });
-                              }
-                            },
-                            child: const Text('اختر تاريخ'),
+                          Padding(
+                            padding: const EdgeInsets.only(top:8,right:5),
+                            child: GestureDetector(
+                              onTap: () async {
+                                final DateTime? dateTime = await showDatePicker(
+                                  context: context,
+                                  initialDate: DateTime.now(),
+                                  firstDate: DateTime.now(),
+                                  lastDate: DateTime.now()
+                                      .add(const Duration(days: 30)),
+                                );
+                                if (dateTime != null) {
+                                  setState(() {
+                                    birthdateregcontroller.text =
+                                        '${dateTime.year}/${dateTime.month}/${dateTime.day}';
+                                  });
+                                }
+                              },
+                              child: 
+                              const Icon(Icons.date_range),
+                              ),
                           ),
-                        ],
+                            ],
+                          ),
+                        ]
                       ),
                     ),
                     const SizedBox(

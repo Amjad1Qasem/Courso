@@ -111,12 +111,14 @@ Widget defaultApppar({
 
 // Coures
 Widget cours({
+  required int courseId, 
   required ImageProvider coursImage,
   required String coursName,
   String? instutName,
   required bool isFree,
 }) =>
     _Cours(
+      courseId : courseId,
       coursImage: coursImage,
       coursName: coursName,
       instutName: instutName!,
@@ -124,11 +126,15 @@ Widget cours({
     );
 
 class _Cours extends StatelessWidget {
+   final int courseId;
+
   const _Cours({
+    
     required this.coursImage,
     required this.coursName,
     required this.instutName,
-    required this.isFree,
+    required this.isFree, 
+    required  this.courseId,
   });
 
   final ImageProvider coursImage;
@@ -143,7 +149,7 @@ class _Cours extends StatelessWidget {
         onTap: () {
           Navigator.push(
             context,
-            MaterialPageRoute(builder: (context) => Details()),
+            MaterialPageRoute(builder: (context) => Details(CoursId: courseId,)),
           );
         },
         child: Padding(

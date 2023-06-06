@@ -168,20 +168,20 @@ class _HomeState extends State<Home> {
                               defText(
                                   text: 'الدورات الجديدة',
                                   size: 25,
-                                  fontWeight: FontWeight.w600,
+                                  fontWeight: FontWeight.w400,
                                   color: Colors.black),
                               TextButton(
                                 child: defText(
                                     text: 'عرض الكل',
                                     size: 15,
-                                    fontWeight: FontWeight.w400,
+                                    fontWeight: FontWeight.w300,
                                     color: Colors.black),
                                 onPressed: () {
                                   Navigator.push(
                                     context,
                                     MaterialPageRoute(builder: (context)=>AllCourses())
                                   );
-                                },
+                                 },
                               ),
                             ],
                           ),
@@ -204,7 +204,7 @@ class _HomeState extends State<Home> {
                                                     NetworkImage(course.image),
                                                 coursName: course.name,
                                                 instutName: course.institute,
-                                                isFree: course.isFree,
+                                                isFree: course.isFree, courseId: course.id,
                                               ))
                                           .toList(),
                                     );
@@ -230,7 +230,7 @@ class _HomeState extends State<Home> {
                               defText(
                                   text: 'الحسوم %',
                                   size: 25,
-                                  fontWeight: FontWeight.bold,
+                                  fontWeight: FontWeight.w300,
                                   color: Colors.black),
                               TextButton(
                                 child: defText(
@@ -266,7 +266,8 @@ class _HomeState extends State<Home> {
                                                     NetworkImage(sale.image),
                                                 coursName: sale.name,
                                                 instutName: sale.institute,
-                                                isFree: sale.isFree,
+                                                isFree: sale.isFree, 
+                                                courseId: sale.id,
                                               ))
                                           .toList(),
                                     );
@@ -292,13 +293,13 @@ class _HomeState extends State<Home> {
                               defText(
                                   text: 'المعاهد والمنظمات',
                                   size: 25,
-                                  fontWeight: FontWeight.bold,
+                                  fontWeight: FontWeight.w400,
                                   color: Colors.black),
                               TextButton(
                                 child: defText(
                                     text: 'عرض الكل',
                                     size: 15,
-                                    fontWeight: FontWeight.w400,
+                                    fontWeight: FontWeight.w300,
                                     color: Colors.black),
                                 onPressed: () {
                                    Navigator.push(
