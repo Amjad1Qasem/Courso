@@ -2,18 +2,16 @@
 
 import 'dart:math';
 import 'package:courso/controllers/coursController.dart';
-import 'package:courso/models/class.dart';
+import 'package:courso/models/class.dart' as models ;
 import 'package:courso/modules/Category/categoryCourses.dart';
-import 'package:courso/shared/components/components.dart';
-import 'package:flutter/material.dart';
+import 'package:flutter/material.dart'; 
 
 class Category extends StatefulWidget {
-  const Category({super.key});
+  const Category ({super.key});
 
   @override
   State<Category> createState() => _CategoryState();
 }
-
 class _CategoryState extends State<Category> {
   // List<CategoryModel> Listcategor = [
   //   CategoryModel(
@@ -61,7 +59,7 @@ class _CategoryState extends State<Category> {
         ),
         centerTitle: true,
       ),
-      body: FutureBuilder<List<Categor>>(
+      body: FutureBuilder<List<models.Categor>>(
           future: CategoryController.getNewCategory(),
           builder: (context, snapshot) {
             if (!snapshot.hasData) {
@@ -77,11 +75,11 @@ class _CategoryState extends State<Category> {
                   childAspectRatio: 10 / 16,
                   crossAxisCount: 3),
               itemCount: categories.length,
-              itemBuilder: (context, index) => Container(color: Colors.blueAccent,),
-              // defCategory(
-              //   categories[index],
-              //   // categoryImage: categories[index],
-              // ),
+              itemBuilder: (context, index) => 
+              defCategory(
+                categories[index],
+                // categoryImage: categories[index],
+              ),
           
             );
           }),
@@ -89,86 +87,87 @@ class _CategoryState extends State<Category> {
   }
 }
 
-// Widget defCategory(Categor category) => CategoryCoursItem(category: category,);
+Widget defCategory( models.Categor categor) => CategoryCoursItem(category: categor,);
 
-// class CategoryCoursItem extends StatelessWidget {
-//   //final Category category ;
-//   final Category category ;
-//   const CategoryCoursItem({
-//     super.key, required this.category
-//   });
+class CategoryCoursItem extends StatelessWidget {
+  //final Category category ;
+  final models.Categor category ;
 
-//   @override
-//   Widget build(BuildContext context) {
-//     return GestureDetector(
-//       onTap: () {
-//         Navigator.push(
-//           context,
-//           MaterialPageRoute(builder: (context) => CategoryCourses()),
-//         );
-//       },
-//       child: Center(
-//         child: Container(
-//           decoration: BoxDecoration(
-//             color: Colors.white,
-//             borderRadius: BorderRadius.circular(18),
-//             boxShadow: [
-//               BoxShadow(
-//                   color: Colors.grey.withOpacity(0.2),
-//                   spreadRadius: 2,
-//                   blurRadius: 5,
-//                   offset: Offset(0, 0)),
-//             ],
-//           ),
-//           child: Column(
-//             mainAxisSize: MainAxisSize.min,
+  const CategoryCoursItem({
+    super.key, required this.category
+  });
 
-//             //crossAxisAlignment: CrossAxisAlignment.start,
+  @override
+  Widget build(BuildContext context) {
+    return GestureDetector(
+      onTap: () {
+        Navigator.push(
+          context,
+          MaterialPageRoute(builder: (context) => CategoryCourses()),
+        );
+      },
+      child: Center(
+        child: Container(
+          decoration: BoxDecoration(
+            color: Colors.white,
+            borderRadius: BorderRadius.circular(18),
+            boxShadow: [
+              BoxShadow(
+                  color: Colors.grey.withOpacity(0.2),
+                  spreadRadius: 2,
+                  blurRadius: 5,
+                  offset: Offset(0, 0)),
+            ],
+          ),
+          child: Column(
+            mainAxisSize: MainAxisSize.min,
 
-//             children: [
-//               Expanded(
-//                 flex: 2,
-//                 child: Center(
-//                   child: Padding(
-//                     padding: const EdgeInsets.all(10.0),
-//                     child: Container(
-//                       decoration: BoxDecoration(
-//                         borderRadius: BorderRadius.circular(18),
-//                       ),
-//                       child: Image(
-//                         image: NetworkImage(category.image),
-//                         fit: BoxFit.contain,
-//                         width: 80,
-//                         height: 80,
-//                       ),
-//                     ),
-//                   ),
-//                 ),
-//               ),
-//               Expanded(
-//                 flex: 1,
-//                 child: Center(
-//                   child: Padding(
-//                     padding: const EdgeInsets.all(5.0),
-//                     child: Text(
-//                       category.name,
-//                       maxLines: 2,
-//                       textAlign: TextAlign.center,
-//                       overflow: TextOverflow.ellipsis,
-//                       style: const TextStyle(
-//                         color: Colors.black,
-//                         fontFamily: 'cairo',
-//                         fontWeight: FontWeight.w800,
-//                         fontSize: 12,
-//                       ),
-//                     ),
-//                   ),
-//                 ),
-//               ),
-//             ],
-//           ),
-//         ),
-//       ),
-//     );
-//   }
-// }
+            //crossAxisAlignment: CrossAxisAlignment.start,
+
+            children: [
+              Expanded(
+                flex: 2,
+                child: Center(
+                  child: Padding(
+                    padding: const EdgeInsets.all(10.0),
+                    child: Container(
+                      decoration: BoxDecoration(
+                        borderRadius: BorderRadius.circular(18),
+                      ),
+                      child: Image(
+                        image: NetworkImage(category.image),
+                        fit: BoxFit.contain,
+                        width: 80,
+                        height: 80,
+                      ),
+                    ),
+                  ),
+                ),
+              ),
+              Expanded(
+                flex: 1,
+                child: Center(
+                  child: Padding(
+                    padding: const EdgeInsets.all(5.0),
+                    child: Text(
+                      category.name,
+                      maxLines: 2,
+                      textAlign: TextAlign.center,
+                      overflow: TextOverflow.ellipsis,
+                      style: const TextStyle(
+                        color: Colors.black,
+                        fontFamily: 'cairo',
+                        fontWeight: FontWeight.w800,
+                        fontSize: 12,
+                      ),
+                    ),
+                  ),
+                ),
+              ),
+            ],
+          ),
+        ),
+      ),
+    );
+  }
+}

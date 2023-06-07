@@ -1,5 +1,6 @@
 // ignore_for_file: prefer_const_constructors, must_be_immutable, unused_import, file_names, avoid_print
 
+import 'package:courso/controllers/coursController.dart';
 import 'package:courso/modules/Cours%20Details/CoursDetails.dart';
 import 'package:courso/shared/components/components.dart';
 import 'package:flutter/material.dart';
@@ -9,62 +10,62 @@ import '../../models/class.dart';
 class CategoryCourses extends StatelessWidget {
   CategoryCourses({super.key});
 
-  List<CoursModel> courss = [
-    CoursModel(
-      coursImage: AssetImage('assets/images/C8.png'),
-      coursName: 'UI/UX desgin',
-      instutName: 'معهد DTC (الاونروا)',
-      typeCours: '',
-    ),
-    CoursModel(
-      coursImage: AssetImage('assets/images/C9.png'),
-      coursName: 'التسويق الالكتروني',
-      instutName: 'معهد الأمين',
-      typeCours: '',
-    ),
-    CoursModel(
-      coursImage: AssetImage('assets/images/C2.png'),
-      coursName: 'قيادة الحاسب ICDL',
-      instutName: 'معهد رواد الحضارة',
-      typeCours: '',
-    ),
-    CoursModel(
-      coursImage: AssetImage('assets/images/C10png.png'),
-      coursName: 'المحاسبة',
-      instutName: 'معهد الأمين',
-      typeCours: ' ',
-    ),
-    CoursModel(
-      coursImage: AssetImage('assets/images/C11.png'),
-      coursName: 'تعلم لغة MY SQL',
-      instutName: 'معهد الهمك',
-      typeCours: ' ',
-    ),
-    CoursModel(
-      coursImage: AssetImage('assets/images/C12.png'),
-      coursName: 'احتراف برامج Adobe',
-      instutName: 'مؤسسة الشام',
-      typeCours: ' ',
-    ),
-    CoursModel(
-      coursImage: AssetImage('assets/images/C5.png'),
-      coursName: 'الفيزياء',
-      instutName: 'معهد الناجي',
-      typeCours: ' ',
-    ),
-    CoursModel(
-      coursImage: AssetImage('assets/images/C13.png'),
-      coursName: 'الذكاء الاصطناعي',
-      instutName: 'مركز الاتقان',
-      typeCours: ' ',
-    ),
-    CoursModel(
-      coursImage: AssetImage('assets/images/C7.png'),
-      coursName: 'English',
-      instutName: 'New Horizons',
-      typeCours: ' ',
-    ),
-  ];
+  // List<CoursModel> courss = [
+  //   CoursModel(
+  //     coursImage: AssetImage('assets/images/C8.png'),
+  //     coursName: 'UI/UX desgin',
+  //     instutName: 'معهد DTC (الاونروا)',
+  //     typeCours: '',
+  //   ),
+  //   CoursModel(
+  //     coursImage: AssetImage('assets/images/C9.png'),
+  //     coursName: 'التسويق الالكتروني',
+  //     instutName: 'معهد الأمين',
+  //     typeCours: '',
+  //   ),
+  //   CoursModel(
+  //     coursImage: AssetImage('assets/images/C2.png'),
+  //     coursName: 'قيادة الحاسب ICDL',
+  //     instutName: 'معهد رواد الحضارة',
+  //     typeCours: '',
+  //   ),
+  //   CoursModel(
+  //     coursImage: AssetImage('assets/images/C10png.png'),
+  //     coursName: 'المحاسبة',
+  //     instutName: 'معهد الأمين',
+  //     typeCours: ' ',
+  //   ),
+  //   CoursModel(
+  //     coursImage: AssetImage('assets/images/C11.png'),
+  //     coursName: 'تعلم لغة MY SQL',
+  //     instutName: 'معهد الهمك',
+  //     typeCours: ' ',
+  //   ),
+  //   CoursModel(
+  //     coursImage: AssetImage('assets/images/C12.png'),
+  //     coursName: 'احتراف برامج Adobe',
+  //     instutName: 'مؤسسة الشام',
+  //     typeCours: ' ',
+  //   ),
+  //   CoursModel(
+  //     coursImage: AssetImage('assets/images/C5.png'),
+  //     coursName: 'الفيزياء',
+  //     instutName: 'معهد الناجي',
+  //     typeCours: ' ',
+  //   ),
+  //   CoursModel(
+  //     coursImage: AssetImage('assets/images/C13.png'),
+  //     coursName: 'الذكاء الاصطناعي',
+  //     instutName: 'مركز الاتقان',
+  //     typeCours: ' ',
+  //   ),
+  //   CoursModel(
+  //     coursImage: AssetImage('assets/images/C7.png'),
+  //     coursName: 'English',
+  //     instutName: 'New Horizons',
+  //     typeCours: ' ',
+  //   ),
+  // ];
 
   @override
   Widget build(BuildContext context) {
@@ -84,26 +85,26 @@ class CategoryCourses extends StatelessWidget {
         ),
         centerTitle: true,
       ),
-      body: GestureDetector(
-        onTap: () {
-          Navigator.push(
-            context,
-            MaterialPageRoute(
-                builder: (context) => Details(
-                      CoursId: 1,
-                    )),
-          );
-        },
-        child: GridView.builder(
-            padding: EdgeInsets.all(20),
-            gridDelegate: SliverGridDelegateWithFixedCrossAxisCount(
-              mainAxisSpacing: 10,
-              crossAxisSpacing: 10,
-              childAspectRatio: 10 / 16,
-              crossAxisCount: 3,
-            ),
-            itemCount: courss.length,
-            itemBuilder: (context, index) => buildCours(courss[index])),
+      body: FutureBuilder<List<Categor>>(
+        future: CategoryController.getNewCategory(),
+        builder: (context, snapshot) {
+          if (!snapshot.hasData) {
+              return Center(
+                child: CircularProgressIndicator(),
+              );
+            }
+            final cat = snapshot.data!;
+          return GridView.builder(
+              padding: EdgeInsets.all(20),
+              gridDelegate: SliverGridDelegateWithFixedCrossAxisCount(
+                mainAxisSpacing: 10,
+                crossAxisSpacing: 10,
+                childAspectRatio: 10 / 16,
+                crossAxisCount: 3,
+              ),
+              itemCount: cat.length,
+              itemBuilder: (context, index) => buildCours(cat[index] as CoursModel));
+        }
       ),
     );
   }

@@ -97,7 +97,6 @@ class Categor {
   }
 }
 
-
 class CourseDetails {
   int id;
   String name;

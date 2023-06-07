@@ -274,14 +274,14 @@ class _DetailsState extends State<Details> {
                                       )),
                                     ],
                                     //table row
-                                    rows: const [
+                                    rows:  [
                                       DataRow(selected: true, cells: [
                                         DataCell(Text(
                                           'الأحد',
                                           style: TextStyle(fontFamily: 'cairo'),
                                         )),
                                         DataCell(Text(
-                                            '8:00 - 4:30',
+                                            '${Coursdetail.sundayEndTime} - ${Coursdetail.sundayEndTime}',
                                           style: TextStyle(fontFamily: 'cairo'),
                                         )),
                                       ]),
@@ -291,7 +291,7 @@ class _DetailsState extends State<Details> {
                                           style: TextStyle(fontFamily: 'cairo'),
                                         )),
                                         DataCell(Text(
-                                          '8:00 - 4:30',
+                                          '${Coursdetail.mondayStartTime} - ${Coursdetail.mondayEndTime}',
                                           style: TextStyle(fontFamily: 'cairo'),
                                         )),
                                       ]),
@@ -301,7 +301,7 @@ class _DetailsState extends State<Details> {
                                           style: TextStyle(fontFamily: 'cairo'),
                                         )),
                                         DataCell(Text(
-                                          '10:00 - 2:00',
+                                          '${Coursdetail.thursdayStartTime} - ${Coursdetail.thursdayEndTime}',
                                           style: TextStyle(fontFamily: 'cairo'),
                                         )),
                                       ]
@@ -313,7 +313,7 @@ class _DetailsState extends State<Details> {
                                           style: TextStyle(fontFamily: 'cairo'),
                                         )),
                                         DataCell(Text(
-                                          '11:00 - 5:30',
+                                          '${Coursdetail.wednesdayStartTime} - ${Coursdetail.wednesdayEndTime}',
                                           style: TextStyle(fontFamily: 'cairo'),
                                         )),
                                       ]),
@@ -368,14 +368,14 @@ class _DetailsState extends State<Details> {
                                       )),
                                     ],
                                     //table row
-                                    rows: const [
+                                    rows:  [
                                       DataRow(selected: true, cells: [
                                         DataCell(Text(
                                           'الخميس',
                                           style: TextStyle(fontFamily: 'cairo'),
                                         )),
                                         DataCell(Text(
-                                          '11:00 - 5:30',
+                                          '${Coursdetail.thursdayStartTime} - ${Coursdetail.thursdayEndTime}',
                                           style: TextStyle(fontFamily: 'cairo'),
                                         )),
                                       ]
@@ -391,7 +391,7 @@ class _DetailsState extends State<Details> {
                                                   fontFamily: 'cairo'),
                                             )),
                                             DataCell(Text(
-                                              'مغلق',
+                                              '${Coursdetail.fridayStartTime} - ${Coursdetail.fridayEndTime}',
                                               style: TextStyle(
                                                   fontFamily: 'cairo'),
                                             )),
@@ -408,7 +408,7 @@ class _DetailsState extends State<Details> {
                                                   fontFamily: 'cairo'),
                                             )),
                                             DataCell(Text(
-                                              '9:00 - 5:30',
+                                              '${Coursdetail.saturdayStartTime} - ${Coursdetail.saturdayStartTime}',
                                               style: TextStyle(
                                                   fontFamily: 'cairo'),
                                             )),
