@@ -274,9 +274,10 @@ class _Cours extends StatelessWidget {
     );
   }
 }
+
 //instuit
 Widget instuitee({
-  required int ?instId,
+  required int? instId,
   ImageProvider? instImage,
   String? instName,
   String? aboutInst,
@@ -287,15 +288,13 @@ Widget instuitee({
       instName: instName!,
       aboutInst: aboutInst!,
     );
-    
+
 class _instuitee extends StatelessWidget {
-  
   const _instuitee({
     required this.aboutInst,
     required this.instImage,
     required this.instName,
     required this.instId,
-    
   });
   final ImageProvider instImage;
   final String instName;
@@ -313,7 +312,7 @@ class _instuitee extends StatelessWidget {
               context,
               MaterialPageRoute(
                   builder: (context) => InstuitPage(
-                        insttuitId : instId ,
+                        insttuitId: instId,
                       )),
             );
           },
@@ -420,20 +419,24 @@ Widget defText({
 Widget category({
   required ImageProvider categoryImage,
   required String categoryName,
+  required int categoryId,
 }) =>
     _Category(
       categoryImage: categoryImage,
       categoryName: categoryName,
+      categoryId: categoryId,
     );
 
 class _Category extends StatelessWidget {
   const _Category({
     required this.categoryImage,
     required this.categoryName,
+    required this.categoryId,
   });
 
   final ImageProvider categoryImage;
   final String categoryName;
+  final int categoryId;
 
   @override
   Widget build(BuildContext context) {
@@ -442,7 +445,10 @@ class _Category extends StatelessWidget {
         onTap: () {
           Navigator.push(
             context,
-            MaterialPageRoute(builder: (context) => CategoryCourses()),
+            MaterialPageRoute(
+                builder: (context) => CategoryCourses(
+                      idCat: categoryId,
+                    )),
           );
         },
         child: Container(
