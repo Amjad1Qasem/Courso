@@ -37,7 +37,7 @@ class MyApp extends StatelessWidget {
 
       supportedLocales: const [
         //Locale('en'),
-        Locale('ar'),
+       Locale('ar'),
       ],
       locale: const Locale('ar'),
       localizationsDelegates: const [
@@ -58,7 +58,7 @@ class MyApp extends StatelessWidget {
         Home.id: (context) => const Home(),
         Instuites.id: (context) => Instuites(),
         Details.id: (context) => const Details(CoursId: 1,),
-        registrationForm.id: (context) => const registrationForm(),
+        //registrationForm.id: (context) => const registrationForm(),
         Done.id: (context) => const Done(),
         InstuitPage.id: (context) => const  InstuitPage(insttuitId: 1,),
         Profile.id: (context) => const Profile(),

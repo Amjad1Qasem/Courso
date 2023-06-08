@@ -105,7 +105,7 @@ class InstuiteItem extends StatelessWidget {
       onTap: () {
         Navigator.push(
           context,
-          MaterialPageRoute(builder: (context) => instuitee()),
+          MaterialPageRoute(builder: (context) => instuitee(instId: institute.id)),
         );
       },
       child: Center(

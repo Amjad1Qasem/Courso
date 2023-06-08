@@ -8,6 +8,7 @@ import 'dart:ffi';
 
 import 'package:courso/controllers/coursController.dart';
 import 'package:courso/models/class.dart';
+import 'package:courso/modules/Cours%20Details/DoneRegistr.dart';
 import 'package:courso/modules/Cours%20Details/RegistrationForm.dart';
 // ignore: unused_import
 import 'package:courso/modules/Instuites/InstuitPage.dart';
@@ -30,7 +31,7 @@ class _DetailsState extends State<Details> {
     return Scaffold(
       backgroundColor: const Color(0xfff2f7ff),
       body: FutureBuilder<CourseDetails>(
-          future: CoursDetailsController.getNewCategory(widget.CoursId),
+          future: CoursDetailsController.getNewDetails(widget.CoursId),
           builder: (context, snapshot) {
             if (!snapshot.hasData) {
               // ignore: prefer_const_constructors
@@ -39,6 +40,8 @@ class _DetailsState extends State<Details> {
               );
             }
             final Coursdetail = snapshot.data!;
+
+            
             return SingleChildScrollView(
               child: Column(
                 children: [
@@ -78,12 +81,13 @@ class _DetailsState extends State<Details> {
                         padding: const EdgeInsets.only(top: 140, bottom: 10),
                         child: Center(
                           child: ClipRRect(
-                            borderRadius: BorderRadius.circular(15.0),
-                            child: Image(
-                              width: 320,
-                              fit: BoxFit.cover,
-                              image:NetworkImage(Coursdetail.image,))
-                          ),
+                              borderRadius: BorderRadius.circular(15.0),
+                              child: Image(
+                                  width: 320,
+                                  fit: BoxFit.cover,
+                                  image: NetworkImage(
+                                    Coursdetail.image,
+                                  ))),
                         ),
                       ),
                     ],
@@ -164,29 +168,57 @@ class _DetailsState extends State<Details> {
                                   start: 50, top: 5),
                               child: Row(
                                 children: [
-                                  defText(
-                                      text: Coursdetail.regularPrice.toString(),
-                                      textDecoration:
-                                          TextDecoration.lineThrough,
+                                  // Check if regular price is zero and sale price is null
+                                  if (Coursdetail.regularPrice == 0 &&
+                                      Coursdetail.salePrice == null)
+                                    defText(
+                                      text: 'مجاني',
+                                      size: 16,
+                                      fontWeight: FontWeight.w400,
+                                      color: Color.fromARGB(255, 255, 0, 0),
+                                    )
+                                  // Check if sale price is null and regular price is not zero
+                                  else if (Coursdetail.salePrice == null &&
+                                      Coursdetail.regularPrice != 0)
+                                    defText(
+                                      text: Coursdetail.regularPrice
+                                          .toString()
+                                          .replaceAll('null', ''),
                                       size: 15,
                                       fontWeight: FontWeight.w400,
-                                      color: const Color(0xff333333)),
-                                  const SizedBox(
-                                    width: 10,
-                                  ),
-                                  const Icon(
-                                    Icons.arrow_forward,
-                                    size: 30,
-                                    color: Colors.red,
-                                  ),
-                                  const SizedBox(
-                                    width: 10,
-                                  ),
-                                  defText(
-                                      text: Coursdetail.salePrice.toString(),
-                                      size: 15,
-                                      fontWeight: FontWeight.w400,
-                                      color: const Color(0xff333333)),
+                                      color: const Color(0xff333333),
+                                    )
+                                  // Otherwise, show regular and sale prices
+                                  else
+                                    Row(
+                                      children: [
+                                        defText(
+                                          text: Coursdetail.regularPrice
+                                              .toString()
+                                              .replaceAll('null', ''),
+                                          textDecoration:
+                                              TextDecoration.lineThrough,
+                                          size: 15,
+                                          fontWeight: FontWeight.w400,
+                                          color: const Color(0xff333333),
+                                        ),
+                                        const SizedBox(width: 10),
+                                        const Icon(
+                                          Icons.arrow_forward,
+                                          size: 30,
+                                          color: Colors.red,
+                                        ),
+                                        const SizedBox(width: 10),
+                                        defText(
+                                          text: Coursdetail.salePrice
+                                              .toString()
+                                              .replaceAll('null', ''),
+                                          size: 15,
+                                          fontWeight: FontWeight.w400,
+                                          color: const Color(0xff333333),
+                                        ),
+                                      ],
+                                    ),
                                 ],
                               ),
                             )
@@ -274,14 +306,14 @@ class _DetailsState extends State<Details> {
                                       )),
                                     ],
                                     //table row
-                                    rows:  [
+                                    rows: [
                                       DataRow(selected: true, cells: [
                                         DataCell(Text(
                                           'الأحد',
                                           style: TextStyle(fontFamily: 'cairo'),
                                         )),
                                         DataCell(Text(
-                                            '${Coursdetail.sundayEndTime} - ${Coursdetail.sundayEndTime}',
+                                          '${Coursdetail.sundayEndTime} - ${Coursdetail.sundayEndTime}',
                                           style: TextStyle(fontFamily: 'cairo'),
                                         )),
                                       ]),
@@ -368,7 +400,7 @@ class _DetailsState extends State<Details> {
                                       )),
                                     ],
                                     //table row
-                                    rows:  [
+                                    rows: [
                                       DataRow(selected: true, cells: [
                                         DataCell(Text(
                                           'الخميس',
@@ -381,17 +413,17 @@ class _DetailsState extends State<Details> {
                                       ]
                                           //selected: true,
                                           ),
-                                      DataRow(
+                                     DataRow(
                                           selected: true,
                                           //  color: MaterialStatePropertyAll(Color.fromARGB(255, 251, 161, 154)),
                                           cells: [
                                             DataCell(Text(
-                                              'الجمعة',
+                                              'السبت',
                                               style: TextStyle(
                                                   fontFamily: 'cairo'),
                                             )),
                                             DataCell(Text(
-                                              '${Coursdetail.fridayStartTime} - ${Coursdetail.fridayEndTime}',
+                                              Coursdetail.saturdayStartTime == null ? 'مغلق' : '${Coursdetail.saturdayStartTime} - ${Coursdetail.saturdayStartTime}',
                                               style: TextStyle(
                                                   fontFamily: 'cairo'),
                                             )),
@@ -418,7 +450,7 @@ class _DetailsState extends State<Details> {
                                       DataRow(
                                           selected: true,
                                           //  color: MaterialStatePropertyAll(Color.fromARGB(255, 251, 161, 154)),
-                                          cells: [
+                                          cells: const [
                                             DataCell(Text(
                                               '',
                                               style: TextStyle(
@@ -468,8 +500,7 @@ class _DetailsState extends State<Details> {
                                         color: Colors.black),
                                     // const SizedBox(width: 25,),
                                     defText(
-                                        text:
-                                            Coursdetail.registerOpen,
+                                        text: Coursdetail.registerOpen,
                                         size: 18,
                                         fontWeight: FontWeight.w500,
                                         color: const Color(0xFF333333)),
@@ -545,6 +576,9 @@ class _DetailsState extends State<Details> {
                             ),
                           ),
                         ),
+                        SizedBox(
+                          height: 15,
+                        ),
                         Row(
                           children: [
                             const Image(
@@ -568,39 +602,25 @@ class _DetailsState extends State<Details> {
                         ),
                         Column(
                           children: [
-                            Row(
-                              children: [
-                                defText(
-                                    text: '-',
-                                    size: 15,
-                                    fontWeight: FontWeight.bold,
-                                    color: const Color(0xff333333)),
-                                const SizedBox(
-                                  width: 10,
-                                ),
-                                defText(
-                                    text: 'Coursdetail.teachers',
-                                    size: 15,
-                                    fontWeight: FontWeight.w400,
-                                    color: const Color(0xff333333)),
-                              ],
-                            ),
-                            Row(
-                              children: [
-                                defText(
-                                    text: '-',
-                                    size: 15,
-                                    fontWeight: FontWeight.bold,
-                                    color: const Color(0xff333333)),
-                                const SizedBox(
-                                  width: 10,
-                                ),
-                                defText(
-                                    text: 'Coursdetail.teacherName',
-                                    size: 15,
-                                    fontWeight: FontWeight.w400,
-                                    color: const Color(0xff333333)),
-                              ],
+                            //
+                            ...Coursdetail.teachers.map(
+                              (teacher) => Row(
+                                children: [
+                                  defText(
+                                      text: '-',
+                                      size: 15,
+                                      fontWeight: FontWeight.bold,
+                                      color: const Color(0xff333333)),
+                                  const SizedBox(
+                                    width: 10,
+                                  ),
+                                  defText(
+                                      text: teacher,
+                                      size: 15,
+                                      fontWeight: FontWeight.w400,
+                                      color: const Color(0xff333333)),
+                                ],
+                              ),
                             ),
                           ],
                         ),
@@ -652,6 +672,7 @@ class _DetailsState extends State<Details> {
                           height: 10,
                         ),
                         Row(
+                          textBaseline: TextBaseline.alphabetic,
                           children: [
                             const Image(
                               image: AssetImage('assets/images/checkIcon.png'),
@@ -659,66 +680,16 @@ class _DetailsState extends State<Details> {
                               height: 25,
                             ),
                             const SizedBox(
-                              width: 10,
+                              width: 13,
                             ),
                             defText(
-                                text: Coursdetail.mainPoints[String],
+                                text: Coursdetail.mainPoints,
                                 size: 15,
                                 fontWeight: FontWeight.w400,
                                 color: const Color(0xff333333))
                           ],
                         ),
-                        Row(
-                          children: [
-                            const Image(
-                              image: AssetImage('assets/images/checkIcon.png'),
-                              width: 25,
-                              height: 25,
-                            ),
-                            const SizedBox(
-                              width: 10,
-                            ),
-                            defText(
-                                text: Coursdetail.mainPoints[String],
-                                size: 15,
-                                fontWeight: FontWeight.w400,
-                                color: const Color(0xff333333))
-                          ],
-                        ),
-                        Row(
-                          children: [
-                            const Image(
-                              image: AssetImage('assets/images/checkIcon.png'),
-                              width: 25,
-                              height: 25,
-                            ),
-                            const SizedBox(
-                              width: 10,
-                            ),
-                            defText(
-                                text: Coursdetail.mainPoints[String],
-                                size: 15,
-                                fontWeight: FontWeight.w400,
-                                color: const Color(0xff333333))
-                          ],
-                        ),
-                        Row(
-                          children: [
-                            const Image(
-                              image: AssetImage('assets/images/checkIcon.png'),
-                              width: 25,
-                              height: 25,
-                            ),
-                            const SizedBox(
-                              width: 10,
-                            ),
-                            defText(
-                                text: Coursdetail.mainPoints[String],
-                                size: 15,
-                                fontWeight: FontWeight.w400,
-                                color: const Color(0xff333333))
-                          ],
-                        ),
+
                         ///TextButton///
                         const SizedBox(
                           height: 50,
@@ -731,7 +702,7 @@ class _DetailsState extends State<Details> {
                                   context,
                                   MaterialPageRoute(
                                       builder: (context) =>
-                                          const registrationForm()));
+                                           Done()));
                             },
                             child: Container(
                                 width: double.infinity,
@@ -741,7 +712,7 @@ class _DetailsState extends State<Details> {
                                     color: const Color(0xff0163E2)),
                                 child: Center(
                                   child: defText(
-                                      text: 'سجل الدخول واحجز مقعدك الأن',
+                                      text: 'احجز مقعدك الأن',
                                       size: 18,
                                       fontWeight: FontWeight.w500,
                                       color: Colors.white),
@@ -768,3 +739,35 @@ class _DetailsState extends State<Details> {
     );
   }
 }
+
+// DataRow(
+//   selected: true,
+//   cells: [
+//     DataCell(
+//       Text(
+//         'الجمعة',
+//         style: TextStyle(fontFamily: 'cairo'),
+//       ),
+//     ),
+//     DataCell(
+//       Text(
+//         _getFridayHoursText(Coursdetail.fridayStartTime, Coursdetail.fridayEndTime),
+//         style: TextStyle(fontFamily: 'cairo'),
+//       ),
+//     ),
+//   ],
+// ),
+
+
+// // Define a function to get the formatted text for Friday hours
+// String _getFridayHoursText(String startTime, String endTime) {
+//   if (startTime == null && endTime == null) {
+//     return 'مغلق';
+//   } else if (startTime == null && endTime != null) {
+//     return 'مغلق - $endTime';
+//   } else if (startTime != null && endTime == null) {
+//     return '$startTime - فراغ';
+//   } else {
+//     return '$startTime - $endTime';
+//   }
+// }

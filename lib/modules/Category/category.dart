@@ -2,16 +2,17 @@
 
 import 'dart:math';
 import 'package:courso/controllers/coursController.dart';
-import 'package:courso/models/class.dart' as models ;
+import 'package:courso/models/class.dart' as models;
 import 'package:courso/modules/Category/categoryCourses.dart';
-import 'package:flutter/material.dart'; 
+import 'package:flutter/material.dart';
 
 class Category extends StatefulWidget {
-  const Category ({super.key});
+  const Category({super.key});
 
   @override
   State<Category> createState() => _CategoryState();
 }
+
 class _CategoryState extends State<Category> {
   // List<CategoryModel> Listcategor = [
   //   CategoryModel(
@@ -40,6 +41,7 @@ class _CategoryState extends State<Category> {
   //   ),
   // ];
 
+   final int idCat;
   bool isHovering = false;
   @override
   Widget build(BuildContext context) {
@@ -75,27 +77,25 @@ class _CategoryState extends State<Category> {
                   childAspectRatio: 10 / 16,
                   crossAxisCount: 3),
               itemCount: categories.length,
-              itemBuilder: (context, index) => 
-              defCategory(
+              itemBuilder: (context, index) => defCategory(
                 categories[index],
                 // categoryImage: categories[index],
               ),
-          
             );
           }),
     );
   }
 }
 
-Widget defCategory( models.Categor categor) => CategoryCoursItem(category: categor,);
+Widget defCategory(models.Categor categor) => CategoryCoursItem(
+      category: categor,
+    );
 
 class CategoryCoursItem extends StatelessWidget {
   //final Category category ;
-  final models.Categor category ;
+  final models.Categor category;
 
-  const CategoryCoursItem({
-    super.key, required this.category
-  });
+  const CategoryCoursItem({super.key, required this.category});
 
   @override
   Widget build(BuildContext context) {
@@ -103,7 +103,10 @@ class CategoryCoursItem extends StatelessWidget {
       onTap: () {
         Navigator.push(
           context,
-          MaterialPageRoute(builder: (context) => CategoryCourses()),
+          MaterialPageRoute(
+              builder: (context) => CategoryCourses(
+                    idCat: category.id,
+                  )),
         );
       },
       child: Center(

@@ -105,61 +105,61 @@ class CourseDetails {
   int instituteId;
   String instituteName;
   String instituteImage;
-  List<Map<String, dynamic>> teachers;
-  int regularPrice;
-  int salePrice;
-  String sundayStartTime;
-  String sundayEndTime;
-  String mondayStartTime;
-  String mondayEndTime;
-  String tuesdayStartTime;
-  String tuesdayEndTime;
-  String wednesdayStartTime;
-  String wednesdayEndTime;
-  String thursdayStartTime;
-  String thursdayEndTime;
-  String fridayStartTime;
-  String fridayEndTime;
-  String saturdayStartTime;
-  String saturdayEndTime;
+  List<String> teachers;
+  int  regularPrice;
+  int ? salePrice;
+  String ? sundayStartTime;
+  String ? sundayEndTime;
+  String ? mondayStartTime;
+  String ? mondayEndTime;
+  String ? tuesdayStartTime;
+  String ? tuesdayEndTime;
+  String ? wednesdayStartTime;
+  String ? wednesdayEndTime;
+  String ? thursdayStartTime;
+  String ? thursdayEndTime;
+  String ? fridayStartTime;
+  String ? fridayEndTime;
+  String ? saturdayStartTime;
+  String ? saturdayEndTime;
   String address;
-  Map<String, dynamic> mainPoints;
+  String mainPoints;
   String registerOpen;
   String registerClose;
   int hours;
   String startAt;
 
   CourseDetails({
-  required  this.id,
-  required  this.name,
-  required  this.image,
-  required  this.description,
-  required  this.instituteId,
-  required  this.instituteName,
-  required  this.instituteImage,
-  required  this.teachers,
-  required  this.regularPrice,
-  required  this.salePrice,
-  required  this.sundayStartTime,
-  required  this.sundayEndTime,
-  required  this.mondayStartTime,
-  required  this.mondayEndTime,
-  required  this.tuesdayStartTime,
-  required  this.tuesdayEndTime,
-  required  this.wednesdayStartTime,
-  required  this.wednesdayEndTime,
-  required  this.thursdayStartTime,
-  required  this.thursdayEndTime,
-  required  this.fridayStartTime,
-  required  this.fridayEndTime,
-  required  this.saturdayStartTime,
-  required  this.saturdayEndTime,
-  required  this.address,
-  required  this.mainPoints,
-  required  this.registerOpen,
-  required  this.registerClose,
-  required  this.hours,
-  required  this.startAt,
+    required this.id,
+    required this.name,
+    required this.image,
+    required this.description,
+    required this.instituteId,
+    required this.instituteName,
+    required this.instituteImage,
+    required this.teachers,
+    required this.regularPrice,
+    required this.salePrice,
+    required this.sundayStartTime,
+    required this.sundayEndTime,
+    required this.mondayStartTime,
+    required this.mondayEndTime,
+    required this.tuesdayStartTime,
+    required this.tuesdayEndTime,
+    required this.wednesdayStartTime,
+    required this.wednesdayEndTime,
+    required this.thursdayStartTime,
+    required this.thursdayEndTime,
+    required this.fridayStartTime,
+    required this.fridayEndTime,
+    required this.saturdayStartTime,
+    required this.saturdayEndTime,
+    required this.address,
+    required this.mainPoints,
+    required this.registerOpen,
+    required this.registerClose,
+    required this.hours,
+    required this.startAt,
   });
 
   factory CourseDetails.fromJson(Map<String, dynamic> json) {
@@ -171,10 +171,10 @@ class CourseDetails {
       instituteId: json['institute_id'],
       instituteName: json['institute_name'],
       instituteImage: json['institute_image'],
-      teachers: List<Map<String, dynamic>>.from(json['teachers']),
+      teachers: List<String>.from(json['teachers']),
       regularPrice: json['regular_price'],
       salePrice: json['sale_price'],
-      sundayStartTime: json['sunday_start_time'],
+     sundayStartTime: json['sunday_start_time'],
       sundayEndTime: json['sunday_end_time'],
       mondayStartTime: json['monday_start_time'],
       mondayEndTime: json['monday_end_time'],
@@ -189,7 +189,7 @@ class CourseDetails {
       saturdayStartTime: json['saturday_start_time'],
       saturdayEndTime: json['saturday_end_time'],
       address: json['address'],
-      mainPoints: Map<String, dynamic>.from(json['main_points']),
+      mainPoints: json['main_points'],
       registerOpen: json['register_open'],
       registerClose: json['register_close'],
       hours: json['hours'],
@@ -200,22 +200,109 @@ class CourseDetails {
 
 
 
-class CoursModel {
-  final ImageProvider coursImage;
-  final String coursName;
-  final String instutName;
-  final String typeCours;
-  // static var length;
 
-  CoursModel({
-    required this.coursImage,
-    required this.coursName,
-    required this.instutName,
-    required this.typeCours,
+
+
+class InstituteDetails {
+  int id;
+  String name;
+  String image;
+  String description;
+  String address;
+  String website;
+  String phone;
+  String facebook;
+  List<dynamic> currentCourses;
+  List<ComingCourse> comingCourses;
+
+  InstituteDetails({
+   required this.id,
+   required this.name,
+   required this.image,
+   required this.description,
+   required this.address,
+   required this.website,
+   required this.phone,
+   required this.facebook,
+   required this.currentCourses,
+   required this.comingCourses,
   });
 
-  get id => null;
+  factory InstituteDetails.fromJson(Map<String, dynamic> json) {
+    var comingCoursesList = json['coming_courses'] as List;
+    List<ComingCourse> comingCourses =
+        comingCoursesList.map((e) => ComingCourse.fromJson(e)).toList();
+
+    return InstituteDetails(
+      id: json['id'],
+      name: json['name'],
+      image: json['image'],
+      description: json['description'],
+      address: json['address'],
+      website: json['website'],
+      phone: json['phone'],
+      facebook: json['facebook'],
+      currentCourses: json['current_courses'],
+      comingCourses: comingCourses,
+    );
+  }
 }
+
+class ComingCourse {
+  int id;
+  String name;
+  String image;
+  String institute;
+  bool isFree;
+
+  ComingCourse({
+   required this.id,
+   required this.name,
+   required this.image,
+   required this.institute,
+   required this.isFree,
+  });
+
+  factory ComingCourse.fromJson(Map<String, dynamic> json) {
+    return ComingCourse(
+      id: json['id'],
+      name: json['name'],
+      image: json['image'],
+      institute: json['institute'],
+      isFree: json['is_free'],
+    );
+  }
+}
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+// class CoursModel {
+//   final ImageProvider coursImage;
+//   final String coursName;
+//   final String instutName;
+//   final String typeCours;
+//   // static var length;
+
+//   CoursModel({
+//     required this.coursImage,
+//     required this.coursName,
+//     required this.instutName,
+//     required this.typeCours,
+//   });
+
+//   get id => null;
+// }
 
 class CategoryModel {
   final ImageProvider categoryImage;

@@ -1,5 +1,7 @@
 // ignore_for_file: prefer_const_constructors, must_be_immutable, unused_import, file_names, avoid_print
 
+import 'dart:ui';
+
 import 'package:courso/controllers/coursController.dart';
 import 'package:courso/modules/Cours%20Details/CoursDetails.dart';
 import 'package:courso/shared/components/components.dart';
@@ -8,7 +10,7 @@ import 'package:flutter/material.dart';
 import '../../models/class.dart';
 
 class CategoryCourses extends StatelessWidget {
-  CategoryCourses({super.key});
+  const CategoryCourses({super.key, required this.idCat});
 
   // List<CoursModel> courss = [
   //   CoursModel(
@@ -67,6 +69,8 @@ class CategoryCourses extends StatelessWidget {
   //   ),
   // ];
 
+  final int idCat;
+
   @override
   Widget build(BuildContext context) {
     return Scaffold(
@@ -75,7 +79,7 @@ class CategoryCourses extends StatelessWidget {
         backgroundColor: const Color(0xFF72A7EE),
         elevation: 0.2,
         title: const Text(
-          'Courses',
+          'الدورات',
           style: TextStyle(
             fontFamily: 'cairo',
             fontSize: 25,
@@ -85,56 +89,58 @@ class CategoryCourses extends StatelessWidget {
         ),
         centerTitle: true,
       ),
-      body: FutureBuilder<List<Categor>>(
-        future: CategoryController.getNewCategory(),
-        builder: (context, snapshot) {
-          if (!snapshot.hasData) {
+      body: FutureBuilder<List<Course>>(
+          future: CategoryController.getNewCategory(idCat),
+          builder: (context, snapshot) {
+            if (!snapshot.hasData) {
               return Center(
                 child: CircularProgressIndicator(),
               );
             }
             final cat = snapshot.data!;
-          return GridView.builder(
-              padding: EdgeInsets.all(20),
-              gridDelegate: SliverGridDelegateWithFixedCrossAxisCount(
-                mainAxisSpacing: 10,
-                crossAxisSpacing: 10,
-                childAspectRatio: 10 / 16,
-                crossAxisCount: 3,
-              ),
-              itemCount: cat.length,
-              itemBuilder: (context, index) => buildCours(cat[index] as CoursModel));
-        }
-      ),
+            return GridView.builder(
+                padding: EdgeInsets.all(20),
+                gridDelegate: SliverGridDelegateWithFixedCrossAxisCount(
+                  mainAxisSpacing: 10,
+                  crossAxisSpacing: 10,
+                  childAspectRatio: 10 / 16,
+                  crossAxisCount: 3,
+                ),
+                itemCount: cat.length,
+                itemBuilder: (context, index) => buildCours(cat[index]));
+          }),
     );
   }
 }
 
+
+
 // Build Item for list
 
-Widget buildCours(CoursModel courses) => CategoryCoursesItem( courses: courses,);
+bool isFree = false;
+// Build Item for list
 
-class CategoryCoursesItem extends StatelessWidget {
-  final CoursModel courses;
-  const CategoryCoursesItem({
-    super.key, required this.courses
+Widget buildCours(Course course) => AllCourseItem(
+      course: course,
+    );
+class AllCourseItem extends StatelessWidget {
+  final Course course;
+  const AllCourseItem({
+    super.key,
+    required this.course,
   });
 
   @override
   Widget build(BuildContext context) {
     return GestureDetector(
-      onTap: (){
-
-         Navigator.push(
-
-                context,
-
-                MaterialPageRoute(builder: (context)=>Details(CoursId: courses.id,)),
-
-              );
-
+      onTap: () {
+        Navigator.push(
+            context,
+            MaterialPageRoute(
+                builder: (context) => Details(
+                      CoursId: course.id,
+                    )));
       },
-
       child: Center(
         child: Container(
           height: 200,
@@ -168,45 +174,45 @@ class CategoryCoursesItem extends StatelessWidget {
                         ),
                         clipBehavior: Clip.antiAliasWithSaveLayer,
                         child: Image(
-                          image: courses.coursImage,
+                          image: NetworkImage(course.image),
                           fit: BoxFit.cover,
                           width: 115,
                           height: 120,
                         ),
                       ),
                       Container(
-                        width: 38,
-                        height: 22,
+                        width: 44,
+                        height: 25,
                         decoration: BoxDecoration(
                             borderRadius: const BorderRadius.only(
                               topLeft: Radius.circular(15),
                               bottomRight: Radius.circular(15),
                             ),
-                            color: courses.typeCours != 'free'
-                                ? null
-                                : const Color(0xffFF0F00).withOpacity(0.5)),
+                            color: isFree
+                                ? const Color(0xffFF0F00).withOpacity(0.5)
+                                : null),
                       ),
                       Padding(
                         padding: const EdgeInsets.all(4.0),
                         child: Container(
-                          width: 38,
-                          height: 22,
+                          width: 44,
+                          height: 25,
                           decoration: BoxDecoration(
                               borderRadius: const BorderRadius.only(
                                 topLeft: Radius.circular(15),
                                 bottomRight: Radius.circular(15),
                               ),
-                              color: courses.typeCours != "free"
-                                  ? null
-                                  : const Color(0xffFF0F00).withOpacity(0.5)),
+                              color: isFree
+                                  ? const Color(0xffFF0F00).withOpacity(0.5)
+                                  : null),
                           child: Text(
-                            courses.typeCours.toUpperCase(),
+                            isFree ? 'مجاني' : '',
                             textAlign: TextAlign.center,
                             style: const TextStyle(
                               color: Colors.black,
                               fontFamily: 'cairo',
                               fontWeight: FontWeight.w600,
-                              fontSize: 10,
+                              fontSize: 12,
                             ),
                           ),
                         ),
@@ -221,7 +227,7 @@ class CategoryCoursesItem extends StatelessWidget {
                   child: Padding(
                     padding: const EdgeInsets.all(8.0),
                     child: Text(
-                      courses.coursName,
+                      course.name,
                       maxLines: 1,
                       overflow: TextOverflow.ellipsis,
                       textAlign: TextAlign.center,
@@ -241,7 +247,7 @@ class CategoryCoursesItem extends StatelessWidget {
                   child: Padding(
                     padding: const EdgeInsets.all(2.0),
                     child: Text(
-                      courses.instutName,
+                      course.institute,
                       maxLines: 1,
                       textAlign: TextAlign.center,
                       overflow: TextOverflow.ellipsis,

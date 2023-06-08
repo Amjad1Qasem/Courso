@@ -10,62 +10,62 @@ import '../../models/class.dart';
 class SaleCourses extends StatelessWidget {
   SaleCourses({super.key});
 
-  List<CoursModel> courss = [
-    CoursModel(
-      coursImage: AssetImage('assets/images/C8.png'),
-      coursName: 'UI/UX desgin',
-      instutName: 'معهد DTC (الاونروا)',
-      typeCours: '',
-    ),
-    CoursModel(
-      coursImage: AssetImage('assets/images/C9.png'),
-      coursName: 'التسويق الالكتروني',
-      instutName: 'معهد الأمين',
-      typeCours: '',
-    ),
-    CoursModel(
-      coursImage: AssetImage('assets/images/C2.png'),
-      coursName: 'قيادة الحاسب ICDL',
-      instutName: 'معهد رواد الحضارة',
-      typeCours: '',
-    ),
-    CoursModel(
-      coursImage: AssetImage('assets/images/C10png.png'),
-      coursName: 'المحاسبة',
-      instutName: 'معهد الأمين',
-      typeCours: ' ',
-    ),
-    CoursModel(
-      coursImage: AssetImage('assets/images/C11.png'),
-      coursName: 'تعلم لغة MY SQL',
-      instutName: 'معهد الهمك',
-      typeCours: ' ',
-    ),
-    CoursModel(
-      coursImage: AssetImage('assets/images/C12.png'),
-      coursName: 'احتراف برامج Adobe',
-      instutName: 'مؤسسة الشام',
-      typeCours: ' ',
-    ),
-    CoursModel(
-      coursImage: AssetImage('assets/images/C5.png'),
-      coursName: 'الفيزياء',
-      instutName: 'معهد الناجي',
-      typeCours: ' ',
-    ),
-    CoursModel(
-      coursImage: AssetImage('assets/images/C13.png'),
-      coursName: 'الذكاء الاصطناعي',
-      instutName: 'مركز الاتقان',
-      typeCours: ' ',
-    ),
-    CoursModel(
-      coursImage: AssetImage('assets/images/C7.png'),
-      coursName: 'English',
-      instutName: 'New Horizons',
-      typeCours: ' ',
-    ),
-  ];
+  // List<CoursModel> courss = [
+  //   CoursModel(
+  //     coursImage: AssetImage('assets/images/C8.png'),
+  //     coursName: 'UI/UX desgin',
+  //     instutName: 'معهد DTC (الاونروا)',
+  //     typeCours: '',
+  //   ),
+  //   CoursModel(
+  //     coursImage: AssetImage('assets/images/C9.png'),
+  //     coursName: 'التسويق الالكتروني',
+  //     instutName: 'معهد الأمين',
+  //     typeCours: '',
+  //   ),
+  //   CoursModel(
+  //     coursImage: AssetImage('assets/images/C2.png'),
+  //     coursName: 'قيادة الحاسب ICDL',
+  //     instutName: 'معهد رواد الحضارة',
+  //     typeCours: '',
+  //   ),
+  //   CoursModel(
+  //     coursImage: AssetImage('assets/images/C10png.png'),
+  //     coursName: 'المحاسبة',
+  //     instutName: 'معهد الأمين',
+  //     typeCours: ' ',
+  //   ),
+  //   CoursModel(
+  //     coursImage: AssetImage('assets/images/C11.png'),
+  //     coursName: 'تعلم لغة MY SQL',
+  //     instutName: 'معهد الهمك',
+  //     typeCours: ' ',
+  //   ),
+  //   CoursModel(
+  //     coursImage: AssetImage('assets/images/C12.png'),
+  //     coursName: 'احتراف برامج Adobe',
+  //     instutName: 'مؤسسة الشام',
+  //     typeCours: ' ',
+  //   ),
+  //   CoursModel(
+  //     coursImage: AssetImage('assets/images/C5.png'),
+  //     coursName: 'الفيزياء',
+  //     instutName: 'معهد الناجي',
+  //     typeCours: ' ',
+  //   ),
+  //   CoursModel(
+  //     coursImage: AssetImage('assets/images/C13.png'),
+  //     coursName: 'الذكاء الاصطناعي',
+  //     instutName: 'مركز الاتقان',
+  //     typeCours: ' ',
+  //   ),
+  //   CoursModel(
+  //     coursImage: AssetImage('assets/images/C7.png'),
+  //     coursName: 'English',
+  //     instutName: 'New Horizons',
+  //     typeCours: ' ',
+  //   ),
+  // ];
 
   @override
   Widget build(BuildContext context) {

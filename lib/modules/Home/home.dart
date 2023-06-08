@@ -150,7 +150,8 @@ class _HomeState extends State<Home> {
               // ],
             ),
             backgroundColor: const Color(0xffF2F7FF),
-            body: SingleChildScrollView(
+            body:
+             SingleChildScrollView(
               child: Column(
                 children: [
                   const SizedBox(
@@ -204,7 +205,8 @@ class _HomeState extends State<Home> {
                                                     NetworkImage(course.image),
                                                 coursName: course.name,
                                                 instutName: course.institute,
-                                                isFree: course.isFree, courseId: course.id,
+                                                isFree: course.isFree,
+                                                courseId: course.id,
                                               ))
                                           .toList(),
                                     );
@@ -331,6 +333,7 @@ class _HomeState extends State<Home> {
                                                 instName: institute.name,
                                                 aboutInst:
                                                     institute.description,
+                                                     instId:institute.id ,
                                               ))
                                           .toList(),
                                     );
@@ -351,6 +354,16 @@ class _HomeState extends State<Home> {
     );
   }
 }
+
+
+
+
+
+
+
+
+
+
 
 // // search bar
 // class CustomSearchDelegate extends SearchDelegate {

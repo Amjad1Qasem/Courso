@@ -166,10 +166,8 @@ class _drawerScreenState extends State<drawerScreen> {
                       Expanded(
                         child: GestureDetector(
                           onTap: () {
-                            Navigator.pop(
-                              context,
-                              MaterialPageRoute(builder: (context)=>const Setting()),
-                            );
+                            Navigator.of(context)
+                                .pushReplacementNamed(Setting.id);
                           },
                           // ignore: avoid_unnecessary_containers
                           child: Container(
