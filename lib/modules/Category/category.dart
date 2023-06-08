@@ -41,7 +41,6 @@ class _CategoryState extends State<Category> {
   //   ),
   // ];
 
-   final int idCat;
   bool isHovering = false;
   @override
   Widget build(BuildContext context) {
@@ -62,7 +61,7 @@ class _CategoryState extends State<Category> {
         centerTitle: true,
       ),
       body: FutureBuilder<List<models.Categor>>(
-          future: CategoryController.getNewCategory(),
+          future: CategoryCoursController.getNewCategoryCours(),
           builder: (context, snapshot) {
             if (!snapshot.hasData) {
               return Center(child: CircularProgressIndicator());
