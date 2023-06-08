@@ -1,5 +1,7 @@
 // ignore_for_file: prefer_const_constructors, must_be_immutable, unused_import, avoid_print
 
+import 'package:courso/controllers/coursController.dart';
+import 'package:courso/modules/Instuites/InstuitPage.dart';
 import 'package:courso/shared/components/components.dart';
 import 'package:flutter/material.dart';
 
@@ -62,26 +64,51 @@ class Instuites extends StatelessWidget {
         ),
         centerTitle: true,
       ),
-      body: GridView.builder(
-          padding: EdgeInsets.all(20),
-          gridDelegate: SliverGridDelegateWithFixedCrossAxisCount(
-            mainAxisSpacing: 10,
-            crossAxisSpacing: 10,
-            childAspectRatio: 10 / 16,
-            crossAxisCount: 3,
-          ),
-          itemCount: instuitList.length,
-          itemBuilder: (context, index) => buildInstuit(instuitList[index])),
+      body: FutureBuilder<List<Institute>>(
+          future: InstituteController.getNewInstitutes(),
+          builder: (context, snapshot) {
+            if (!snapshot.hasData) {
+              return Center(
+                child: CircularProgressIndicator(),
+              );
+            }
+            final institutes = snapshot.data!;
+            return GridView.builder(
+                padding: EdgeInsets.all(20),
+                gridDelegate: SliverGridDelegateWithFixedCrossAxisCount(
+                  mainAxisSpacing: 10,
+                  crossAxisSpacing: 10,
+                  childAspectRatio: 10 / 16,
+                  crossAxisCount: 3,
+                ),
+                itemCount: institutes.length,
+                itemBuilder: (context, index) =>
+                    buildInstuit(institutes[index]));
+          }),
     );
   }
 }
 
 // Build Item for list
-Widget buildInstuit(InstuitModel inst) => Center(
-      child: GestureDetector(
-        onTap: () {
-          print('inst');
-        },
+
+Widget buildInstuit(Institute institute) => InstuiteItem(institute: institute,);
+
+class InstuiteItem extends StatelessWidget {
+  final Institute institute;
+  const InstuiteItem({
+    super.key, required this.institute
+  });
+
+  @override
+  Widget build(BuildContext context) {
+    return GestureDetector(
+      onTap: () {
+        Navigator.push(
+          context,
+          MaterialPageRoute(builder: (context) => instuitee(instId: institute.id)),
+        );
+      },
+      child: Center(
         child: Container(
           height: 225,
           width: 155,
@@ -112,7 +139,7 @@ Widget buildInstuit(InstuitModel inst) => Center(
                         ),
                         clipBehavior: Clip.antiAliasWithSaveLayer,
                         child: Image(
-                          image: inst.instImage,
+                          image: NetworkImage(institute.image),
                           fit: BoxFit.cover,
                           width: 150,
                           height: 125,
@@ -128,7 +155,7 @@ Widget buildInstuit(InstuitModel inst) => Center(
                   child: Padding(
                     padding: const EdgeInsets.all(8.0),
                     child: Text(
-                      inst.instName,
+                      institute.name,
                       maxLines: 2,
                       overflow: TextOverflow.ellipsis,
                       style: const TextStyle(
@@ -147,7 +174,7 @@ Widget buildInstuit(InstuitModel inst) => Center(
                   child: Padding(
                     padding: const EdgeInsets.all(7.0),
                     child: Text(
-                      inst.aboutInst,
+                      institute.description,
                       maxLines: 1,
                       overflow: TextOverflow.ellipsis,
                       style: const TextStyle(
@@ -165,3 +192,5 @@ Widget buildInstuit(InstuitModel inst) => Center(
         ),
       ),
     );
+  }
+}

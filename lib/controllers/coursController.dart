@@ -37,8 +37,8 @@ class AllCourseController {
 
 class CourseSaleController {
   static Future<List<Sale>> getNewSales() async {
-    final response = await http.get(
-        Uri.parse('http://10.0.2.2:8000/api/course?discount=true&&limit=6'));
+    final response = await http
+        .get(Uri.parse('http://10.0.2.2:8000/api/course?discount=true'));
     print(response.body);
     return (jsonDecode(response.body)['data'] as List)
         .map((json) => Sale.fromJson(json))
@@ -56,3 +56,65 @@ class InstituteController {
         .toList();
   }
 }
+
+class CategoryController {
+  static Future<List<Course>> getNewCategory(int idCat) async {
+    final response =
+        await http.get(Uri.parse('http://10.0.2.2:8000/api/category'));
+    print(response.body);
+    return (jsonDecode(response.body)['data'] as List)
+        .map((json) => Course.fromJson(json))
+        .toList();
+  }
+}
+
+
+class CategoryCoursController {
+  static Future<List<Categor>> getNewCategoryCours(
+    
+  ) async {
+    final response =
+        await http.get(Uri.parse('http://10.0.2.2/api/category/1'));
+    print(response.body);
+    return (jsonDecode(response.body)['data'] as List)
+        .map((json) => Categor.fromJson(json))
+        .toList();
+  }
+}
+
+class CoursDetailsController {
+  static Future<CourseDetails> getNewDetails(int id) async {
+    final response =
+        await http.get(Uri.parse('http://10.0.2.2:8000/api/course/$id'));
+    try {
+      final courseDetail = CourseDetails.fromJson(
+          jsonDecode(response.body)['data'] as Map<String, dynamic>);
+
+      print(courseDetail);
+      return courseDetail;
+    } catch (e) {
+      print(e);
+      rethrow;
+    }
+  }
+}
+
+
+class InstituteDetailsController {
+  static Future<InstituteDetails> getNewInstituteDetails(int id) async {
+    final response =
+        await http.get(Uri.parse('http://10.0.2.2:8000/api/institute/$id'));
+    try {
+      final instituteDetails = InstituteDetails.fromJson(
+          jsonDecode(response.body)['data'] as Map<String, dynamic>);
+
+      print(instituteDetails);
+      return instituteDetails;
+    } catch (e) {
+      print(e);
+      rethrow;
+    }
+  }
+}
+
+

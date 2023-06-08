@@ -153,25 +153,51 @@ class _EditProfileState extends State<EditProfile> {
                       const SizedBox(
                         height: 10,
                       ),
-                      defaultTextFormField(
-                        hintText: ' ',
-                        sufixfun: () {
-                          return null;
-                        },
-                        validator: MultiValidator([
-                          //RequiredValidator(errorText: 'حقل تاريخ الميلاد اجباري'),
-                          // MinLengthValidator(8,
-                          //     errorText:
-                          //         'first name must be at least 8 digits long'),
-                      
-                          // PatternValidator(r'(?=.*?[#?!@$%^&*-])', errorText: 'first name must have at least one special character')
-                        ]),
-                        radius: 10,
-                        controller: birthdateregcontroller,
-                        keyboard: TextInputType.number,
-                        labText: ' ',
-                      ),
-                    ],
+                        Stack(
+                            children: [
+                              
+                               defaultTextFormField(
+                            hintText: ' ',
+                            sufixfun: () {
+                            },
+                            validator: MultiValidator([
+                              RequiredValidator(
+                                  errorText: 'حقل تاريخ الميلاد اجباري'),
+                              // MinLengthValidator(8,
+                              //     errorText:
+                              //         'first name must be at least 8 digits long'),
+                              // PatternValidator(r'(?=.*?[#?!@$%^&*-])', errorText: 'first name must have at least one special character')
+                            ]),
+                            radius: 10,
+                            controller: birthdateregcontroller,
+                            keyboard: TextInputType.number,
+                            labText: ' ',
+                          ),
+                          Padding(
+                            padding: const EdgeInsets.only(top:8,right:5),
+                            child: GestureDetector(
+                              onTap: () async {
+                                final DateTime? dateTime = await showDatePicker(
+                                  context: context,
+                                  initialDate: DateTime.now(),
+                                  firstDate: DateTime.now(),
+                                  lastDate: DateTime.now()
+                                      .add(const Duration(days: 30)),
+                                );
+                                if (dateTime != null) {
+                                  setState(() {
+                                    birthdateregcontroller.text =
+                                        '${dateTime.year}/${dateTime.month}/${dateTime.day}';
+                                  });
+                                }
+                              },
+                              child: 
+                              const Icon(Icons.date_range),
+                              ),
+                          ),
+                            ],
+                          ),
+                    ]
                   ),
                   Column(
                     mainAxisAlignment: MainAxisAlignment.start,
@@ -276,8 +302,7 @@ class _EditProfileState extends State<EditProfile> {
                         return null;
                       },
                       securTrue: secure,
-                    ),
-                   
+                    ),               
                     ],
                   ),
                   const SizedBox(height: 20,),

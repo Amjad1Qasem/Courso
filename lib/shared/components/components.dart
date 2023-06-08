@@ -8,7 +8,6 @@ import 'package:form_field_validator/form_field_validator.dart';
 import '../../modules/Instuites/instuites.dart';
 import 'package:courso/modules/Cours%20Details/RegistrationForm.dart';
 
-
 // Button Login
 Widget defaultButton({
   required double width,
@@ -111,12 +110,14 @@ Widget defaultApppar({
 
 // Coures
 Widget cours({
+  required int courseId,
   required ImageProvider coursImage,
   required String coursName,
   String? instutName,
   required bool isFree,
 }) =>
     _Cours(
+      courseId: courseId,
       coursImage: coursImage,
       coursName: coursName,
       instutName: instutName!,
@@ -124,11 +125,14 @@ Widget cours({
     );
 
 class _Cours extends StatelessWidget {
+  final int courseId;
+
   const _Cours({
     required this.coursImage,
     required this.coursName,
     required this.instutName,
     required this.isFree,
+    required this.courseId,
   });
 
   final ImageProvider coursImage;
@@ -143,7 +147,10 @@ class _Cours extends StatelessWidget {
         onTap: () {
           Navigator.push(
             context,
-            MaterialPageRoute(builder: (context) => Details()),
+            MaterialPageRoute(
+                builder: (context) => Details(
+                      CoursId: courseId,
+                    )),
           );
         },
         child: Padding(
@@ -187,26 +194,25 @@ class _Cours extends StatelessWidget {
                         height: 25,
                         decoration: BoxDecoration(
                             borderRadius: const BorderRadius.only(
-                              topLeft: Radius.circular(15),
-                              bottomRight: Radius.circular(15),
+                              topRight: Radius.circular(16),
+                              bottomLeft: Radius.circular(16),
                             ),
-                            color: isFree 
-                                
+                            color: isFree
                                 ? const Color(0xffFF0F00).withOpacity(0.5)
                                 : null),
-                       ),
-                       Padding(
-                        padding: const EdgeInsets.all(4.0),
+                      ),
+                      Padding(
+                        padding: const EdgeInsets.all(3.0),
                         child: Container(
                           width: 44,
                           height: 25,
                           decoration: BoxDecoration(
                               borderRadius: const BorderRadius.only(
-                                topLeft: Radius.circular(15),
-                                bottomRight: Radius.circular(15),
+                                topRight: Radius.circular(16),
+                                bottomLeft: Radius.circular(16),
                               ),
-                              color: isFree 
-                                  ?const Color(0xffFF0F00).withOpacity(0.5)
+                              color: isFree
+                                  ? const Color(0xffFF0F00).withOpacity(0.5)
                                   : null),
                           child: Text(
                             isFree ? 'مجاني' : '',
@@ -268,28 +274,33 @@ class _Cours extends StatelessWidget {
     );
   }
 }
-
 //instuit
 Widget instuitee({
+  required int ?instId,
   ImageProvider? instImage,
   String? instName,
   String? aboutInst,
 }) =>
     _instuitee(
+      instId: instId!,
       instImage: instImage!,
       instName: instName!,
       aboutInst: aboutInst!,
     );
-
+    
 class _instuitee extends StatelessWidget {
+  
   const _instuitee({
     required this.aboutInst,
     required this.instImage,
     required this.instName,
+    required this.instId,
+    
   });
   final ImageProvider instImage;
   final String instName;
   final String aboutInst;
+  final int instId;
 
   @override
   Widget build(BuildContext context) {
@@ -300,7 +311,10 @@ class _instuitee extends StatelessWidget {
           onTap: () {
             Navigator.push(
               context,
-              MaterialPageRoute(builder: (context) => InstuitPage(insttuitId: 1,)),
+              MaterialPageRoute(
+                  builder: (context) => InstuitPage(
+                        insttuitId : instId ,
+                      )),
             );
           },
           child: Container(
@@ -490,4 +504,3 @@ class _Category extends StatelessWidget {
     );
   }
 }
-
