@@ -10,7 +10,7 @@ import '../../models/class.dart';
 class Instuites extends StatelessWidget {
   Instuites({super.key});
   static String id = 'Instuites';
-
+  
   List<InstuitModel> instuitList = [
     InstuitModel(
       instImage: AssetImage('assets/images/ins1.png'),
@@ -54,7 +54,7 @@ class Instuites extends StatelessWidget {
         backgroundColor: const Color(0xFF72A7EE),
         elevation: 0.2,
         title: const Text(
-          'Institutes',
+          'المعهد',
           style: TextStyle(
             fontFamily: 'cairo',
             fontSize: 25,

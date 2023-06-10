@@ -12,6 +12,7 @@ var phoneregcontroller = TextEditingController();
 var emailregcontroller = TextEditingController();
 var passcontroller = TextEditingController();
 var formkey = GlobalKey<FormState>();
+
 bool secure = true;
 
 class EditProfile extends StatefulWidget {
@@ -329,6 +330,8 @@ class _EditProfileState extends State<EditProfile> {
                       ),
                     );
                   }),     
+              
+              
                 ],
               ),
             ),

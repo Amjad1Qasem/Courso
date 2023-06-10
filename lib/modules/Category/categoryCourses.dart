@@ -97,6 +97,7 @@ class CategoryCourses extends StatelessWidget {
                 child: CircularProgressIndicator(),
               );
             }
+            print('object');
             final cat = snapshot.data!;
             return GridView.builder(
                 padding: EdgeInsets.all(20),
@@ -113,8 +114,6 @@ class CategoryCourses extends StatelessWidget {
   }
 }
 
-
-
 // Build Item for list
 
 bool isFree = false;
@@ -123,6 +122,7 @@ bool isFree = false;
 Widget buildCours(Course course) => AllCourseItem(
       course: course,
     );
+
 class AllCourseItem extends StatelessWidget {
   final Course course;
   const AllCourseItem({

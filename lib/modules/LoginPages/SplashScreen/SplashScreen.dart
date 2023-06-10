@@ -1,7 +1,9 @@
 // ignore_for_file: file_names
 
+import 'package:courso/layout/Home_loayout/Home_layout.dart';
 import 'package:courso/modules/LoginPages/Login/Login.dart';
 import 'package:flutter/material.dart';
+import 'package:shared_preferences/shared_preferences.dart';
 
 class Splash extends StatefulWidget {
   const Splash({super.key});
@@ -19,9 +21,9 @@ class _SplashState extends State<Splash> {
       body: Center(
         child: Column(
           mainAxisAlignment: MainAxisAlignment.center,
-        // crossAxisAlignment: CrossAxisAlignment.center,
+          // crossAxisAlignment: CrossAxisAlignment.center,
           children: [
-            Center(
+            const Center(
               child: Image(
                   width: 240,
                   height: 240,
@@ -56,7 +58,9 @@ class _SplashState extends State<Splash> {
                 ],
               ),
             ),
-            const SizedBox(height: 50,),
+            const SizedBox(
+              height: 50,
+            ),
             Row(
               mainAxisAlignment: MainAxisAlignment.start,
               children: [
@@ -71,12 +75,19 @@ class _SplashState extends State<Splash> {
                           image: AssetImage('assets/images/shapintro2.png')),
                     ),
                     Padding(
-                      padding: const EdgeInsetsDirectional.only(
-                          start: 20, top: 100),
+                      padding:
+                          const EdgeInsetsDirectional.only(start: 20, top: 100),
                       child: GestureDetector(
-                        onTap: () {
-                          Navigator.of(context)
-                              .pushReplacementNamed(Login.id);
+                        onTap: () async {
+                          final SharedPreferences prefs =
+                              await SharedPreferences.getInstance();
+                          final token = prefs.getString('token');
+                          if (token != null) {
+                            // ignore: use_build_context_synchronously
+                            Navigator.of(context).pushReplacementNamed(Home_Layout.id);
+                          }
+                          // ignore: use_build_context_synchronously
+                          else{Navigator.of(context).pushReplacementNamed(Login.id);};
                         },
                         // ignore: avoid_unnecessary_containers
                         child: Container(

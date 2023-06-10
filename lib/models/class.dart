@@ -233,6 +233,10 @@ class InstituteDetails {
     List<ComingCourse> comingCourses =
         comingCoursesList.map((e) => ComingCourse.fromJson(e)).toList();
 
+         var currentCoursesList = json['current_courses'] as List;
+    List<ComingCourse> currentCourses =
+        currentCoursesList.map((e) => ComingCourse.fromJson(e)).toList();
+
     return InstituteDetails(
       id: json['id'],
       name: json['name'],
@@ -242,7 +246,7 @@ class InstituteDetails {
       website: json['website'],
       phone: json['phone'],
       facebook: json['facebook'],
-      currentCourses: json['current_courses'],
+      currentCourses: currentCourses,
       comingCourses: comingCourses,
     );
   }
@@ -273,6 +277,7 @@ class ComingCourse {
     );
   }
 }
+
 
 
 
