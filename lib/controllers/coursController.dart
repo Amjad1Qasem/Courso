@@ -3,19 +3,22 @@
 import 'dart:convert';
 import 'dart:io';
 
-
+import 'package:courso/FireBase_Healper/FireBase_Healper.dart';
 import 'package:courso/models/class.dart';
 import 'package:http/http.dart' as http;
 import 'package:shared_preferences/shared_preferences.dart';
+
 class CourseController {
   static Future<List<Course>> getNewCourses() async {
-    final SharedPreferences prefs = await SharedPreferences.getInstance();  
+    final SharedPreferences prefs = await SharedPreferences.getInstance();
     final token = prefs.getString('token');
-    final response = await http
-    
-        .get(Uri.parse('http://10.0.2.2:8000/api/course?new=true&&limit=6'),
-         headers: {'accept':'application/json' ,  HttpHeaders.authorizationHeader :'Bearer $token'},
-        );
+    final response = await http.get(
+      Uri.parse('http://10.0.2.2:8000/api/course?new=true&&limit=6'),
+      headers: {
+        'accept': 'application/json',
+        HttpHeaders.authorizationHeader: 'Bearer $token'
+      },
+    );
     print(response.body);
     //فك تشفير json
     //وتحويله الى ليست 'date'
@@ -29,12 +32,15 @@ class CourseController {
 
 class AllCourseController {
   static Future<List<Course>> getNewAllCourses() async {
-    final SharedPreferences prefs = await SharedPreferences.getInstance();  
-     final token = prefs.getString('token');
-    final response =
-        await http.get(Uri.parse('http://10.0.2.2:8000/api/course?new=true'),
-             headers: {'accept':'application/json' ,  HttpHeaders.authorizationHeader :'Bearer $token'},
-        );
+    final SharedPreferences prefs = await SharedPreferences.getInstance();
+    final token = prefs.getString('token');
+    final response = await http.get(
+      Uri.parse('http://10.0.2.2:8000/api/course?new=true'),
+      headers: {
+        'accept': 'application/json',
+        HttpHeaders.authorizationHeader: 'Bearer $token'
+      },
+    );
     print(response.body);
     //فك تشفير json
     //وتحويله الى ليست 'date'
@@ -48,12 +54,15 @@ class AllCourseController {
 
 class CourseSaleController {
   static Future<List<Sale>> getNewSales() async {
-    final SharedPreferences prefs = await SharedPreferences.getInstance();  
-     final token = prefs.getString('token');
-    final response = await http
-        .get(Uri.parse('http://10.0.2.2:8000/api/course?discount=true'),
-             headers: {'accept':'application/json' ,  HttpHeaders.authorizationHeader :'Bearer $token'},
-        );
+    final SharedPreferences prefs = await SharedPreferences.getInstance();
+    final token = prefs.getString('token');
+    final response = await http.get(
+      Uri.parse('http://10.0.2.2:8000/api/course?discount=true'),
+      headers: {
+        'accept': 'application/json',
+        HttpHeaders.authorizationHeader: 'Bearer $token'
+      },
+    );
     print(response.body);
     return (jsonDecode(response.body)['data'] as List)
         .map((json) => Sale.fromJson(json))
@@ -63,12 +72,15 @@ class CourseSaleController {
 
 class InstituteController {
   static Future<List<Institute>> getNewInstitutes() async {
-    final SharedPreferences prefs = await SharedPreferences.getInstance();  
-     final token = prefs.getString('token');
-    final response =
-        await http.get(Uri.parse('http://10.0.2.2:8000/api/institute'),
-             headers: {'accept':'application/json' ,  HttpHeaders.authorizationHeader :'Bearer $token'},
-        );
+    final SharedPreferences prefs = await SharedPreferences.getInstance();
+    final token = prefs.getString('token');
+    final response = await http.get(
+      Uri.parse('http://10.0.2.2:8000/api/institute'),
+      headers: {
+        'accept': 'application/json',
+        HttpHeaders.authorizationHeader: 'Bearer $token'
+      },
+    );
     print(response.body);
     return (jsonDecode(response.body)['data'] as List)
         .map((json) => Institute.fromJson(json))
@@ -78,12 +90,15 @@ class InstituteController {
 
 class CategoryController {
   static Future<List<Course>> getNewCategory(int idCat) async {
-    final SharedPreferences prefs = await SharedPreferences.getInstance();  
-     final token = prefs.getString('token');
-    final response =
-        await http.get(Uri.parse('http://10.0.2.2:8000/api/category/$idCat'),
-             headers: {'accept':'application/json' ,  HttpHeaders.authorizationHeader :'Bearer $token'},
-        );
+    final SharedPreferences prefs = await SharedPreferences.getInstance();
+    final token = prefs.getString('token');
+    final response = await http.get(
+      Uri.parse('http://10.0.2.2:8000/api/category/$idCat'),
+      headers: {
+        'accept': 'application/json',
+        HttpHeaders.authorizationHeader: 'Bearer $token'
+      },
+    );
     print(response.body);
     return (jsonDecode(response.body)['data']['courses'] as List)
         .map((json) => Course.fromJson(json))
@@ -93,12 +108,15 @@ class CategoryController {
 
 class CategoryCoursController {
   static Future<List<Categor>> getNewCategoryCours() async {
-    final SharedPreferences prefs = await SharedPreferences.getInstance();  
-     final token = prefs.getString('token');
-    final response =
-        await http.get(Uri.parse('http://10.0.2.2:8000/api/category'),
-             headers: {'accept':'application/json' ,  HttpHeaders.authorizationHeader :'Bearer $token'},
-        );
+    final SharedPreferences prefs = await SharedPreferences.getInstance();
+    final token = prefs.getString('token');
+    final response = await http.get(
+      Uri.parse('http://10.0.2.2:8000/api/category'),
+      headers: {
+        'accept': 'application/json',
+        HttpHeaders.authorizationHeader: 'Bearer $token'
+      },
+    );
     print(response.body);
     return (jsonDecode(response.body)['data'] as List)
         .map((json) => Categor.fromJson(json))
@@ -108,12 +126,15 @@ class CategoryCoursController {
 
 class CoursDetailsController {
   static Future<CourseDetails> getNewDetails(int id) async {
-    final SharedPreferences prefs = await SharedPreferences.getInstance();  
-     final token = prefs.getString('token');
-    final response =
-        await http.get(Uri.parse('http://10.0.2.2:8000/api/course/$id'),
-             headers: {'accept':'application/json' ,  HttpHeaders.authorizationHeader :'Bearer $token'},
-        );
+    final SharedPreferences prefs = await SharedPreferences.getInstance();
+    final token = prefs.getString('token');
+    final response = await http.get(
+      Uri.parse('http://10.0.2.2:8000/api/course/$id'),
+      headers: {
+        'accept': 'application/json',
+        HttpHeaders.authorizationHeader: 'Bearer $token'
+      },
+    );
     try {
       final courseDetail = CourseDetails.fromJson(
           jsonDecode(response.body)['data'] as Map<String, dynamic>);
@@ -128,12 +149,15 @@ class CoursDetailsController {
 
 class InstituteDetailsController {
   static Future<InstituteDetails> getNewInstituteDetails(int id) async {
-    final SharedPreferences prefs = await SharedPreferences.getInstance();  
-     final token = prefs.getString('token');
-    final response =
-        await http.get(Uri.parse('http://10.0.2.2:8000/api/institute/$id'),
-             headers: {'accept':'application/json' ,  HttpHeaders.authorizationHeader :'Bearer $token'},
-        );
+    final SharedPreferences prefs = await SharedPreferences.getInstance();
+    final token = prefs.getString('token');
+    final response = await http.get(
+      Uri.parse('http://10.0.2.2:8000/api/institute/$id'),
+      headers: {
+        'accept': 'application/json',
+        HttpHeaders.authorizationHeader: 'Bearer $token'
+      },
+    );
     try {
       final instituteDetails = InstituteDetails.fromJson(
           jsonDecode(response.body)['data'] as Map<String, dynamic>);
@@ -152,11 +176,17 @@ class LoginController {
     String email,
     String pass,
   ) async {
+    final fcmToken = await FirebaseHelper.createToken();
     final response = await http.post(
-        //لجعل الباك يعطيني خرج json 
-        headers: {'accept': 'application/json' ,},
-
-        body: {'email': email, 'password': pass},
+        //لجعل الباك يعطيني خرج json
+        headers: {
+          'accept': 'application/json',
+        },
+        body: {
+          'email': email,
+          'password': pass,
+          'fcm_token': fcmToken
+        },
         Uri.parse('http://10.0.2.2:8000/api/login'));
     print(response.body);
     //200 status =ok
@@ -172,7 +202,6 @@ class LoginController {
   }
 }
 
-
 class RegisterController {
   static Future<String?> getNewRegister(
     String first_name,
@@ -187,23 +216,25 @@ class RegisterController {
     String education_status,
     String socail_status,
   ) async {
-   
+    final fcmToken = await FirebaseHelper.createToken();
     final response = await http.post(
-        //لجعل الباك يعطيني خرج json 
-        headers: {'accept': 'application/json' , },
+        //لجعل الباك يعطيني خرج json
+        headers: {
+          'accept': 'application/json',
+        },
         body: {
-         'email': email,
-         'password': pass,
-          "education_status":education_status,
-          "socail_status":socail_status,
-          "address":address,
-          "nationality":nationality,
-          "sex":sex,
-          "birth_date":birth_date,
-          "last_name":last_name,
-          "first_name":first_name,
-          "phone":phone,
-           
+          'email': email,
+          'password': pass,
+          "education_status": education_status,
+          "socail_status": socail_status,
+          "address": address,
+          "nationality": nationality,
+          "sex": sex,
+          "birth_date": birth_date,
+          "last_name": last_name,
+          "first_name": first_name,
+          "phone": phone,
+          'fcm_token': fcmToken
         },
         Uri.parse('http://10.0.2.2:8000/api/register'));
     print(response.body);
@@ -220,19 +251,24 @@ class RegisterController {
   }
 }
 
-
 class suggestionController {
   static Future<String?> getNewsuggestion(
     String content,
     // ignore: non_constant_identifier_names
     String institute_id,
   ) async {
-    final SharedPreferences prefs = await SharedPreferences.getInstance();  
+    final SharedPreferences prefs = await SharedPreferences.getInstance();
     final token = prefs.getString('token');
     final response = await http.post(
-        //لجعل الباك يعطيني خرج json 
-        headers: {'accept':'application/json' ,  HttpHeaders.authorizationHeader :'Bearer $token'},
-        body: {'content': content,'institute_id':institute_id},
+        //لجعل الباك يعطيني خرج json
+        headers: {
+          'accept': 'application/json',
+          HttpHeaders.authorizationHeader: 'Bearer $token'
+        },
+        body: {
+          'content': content,
+          'institute_id': institute_id
+        },
         Uri.parse('http://10.0.2.2:8000/api/suggestion'));
     print(response.body);
     //200 status =ok
@@ -240,29 +276,34 @@ class suggestionController {
     //400> 100/100 error
     if (response.statusCode == 200) {
       final token = jsonDecode(response.body)['token'] as String;
-    
+
       await prefs.setString('token', token);
       return null;
     }
     return null;
-    
   }
 }
 
-
-
 class LogOutController {
-  static Future<void> getNewlogout(
-  ) async {
+  static Future<void> getNewlogout() async {
+    final fcmToken = await FirebaseHelper.createToken();
     final SharedPreferences prefs = await SharedPreferences.getInstance();
     final token = prefs.getString('token');
     final response = await http.post(
-        //لجعل الباك يعطيني خرج json 
-        headers: {'accept': 'application/json' , HttpHeaders.authorizationHeader :'Bearer $token'},    
+      body: {
+        'fcm_token': fcmToken
+      },
+        //لجعل الباك يعطيني خرج json
+        headers: {
+          'accept': 'application/json',
+          HttpHeaders.authorizationHeader: 'Bearer $token'
+        },
+        
         Uri.parse('http://10.0.2.2/api/logout'));
     print(response.body);
     if (response.statusCode == 204) {
       await prefs.remove('token');
+       FirebaseHelper.deleteToken();
     }
   }
 }
