@@ -1,5 +1,6 @@
 // ignore_for_file: file_names
 
+import 'package:courso/FireBase_Healper/FireBase_Healper.dart';
 import 'package:courso/layout/Home_loayout/Home_layout.dart';
 import 'package:courso/modules/LoginPages/Login/Login.dart';
 import 'package:flutter/material.dart';
@@ -14,6 +15,12 @@ class Splash extends StatefulWidget {
 }
 
 class _SplashState extends State<Splash> {
+  @override
+  void initState() {
+    super.initState();
+    FirebaseHelper.init(context);
+  }
+
   @override
   Widget build(BuildContext context) {
     return Scaffold(
@@ -84,10 +91,15 @@ class _SplashState extends State<Splash> {
                           final token = prefs.getString('token');
                           if (token != null) {
                             // ignore: use_build_context_synchronously
-                            Navigator.of(context).pushReplacementNamed(Home_Layout.id);
+                            Navigator.of(context)
+                                .pushReplacementNamed(Home_Layout.id);
                           }
                           // ignore: use_build_context_synchronously
-                          else{Navigator.of(context).pushReplacementNamed(Login.id);};
+                          else {
+                            Navigator.of(context)
+                                .pushReplacementNamed(Login.id);
+                          }
+                          ;
                         },
                         // ignore: avoid_unnecessary_containers
                         child: Container(
