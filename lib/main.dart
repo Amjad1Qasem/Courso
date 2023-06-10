@@ -2,7 +2,9 @@
 // import 'package:courso/modules/LoginPages/SignIn/Login2.dart';
 // import 'package:courso/modules/LoginPages/SignUp/Login.dart';
 // ignore_for_file: unused_import, duplicate_ignore
+import 'package:firebase_core/firebase_core.dart';
 
+import 'firebase_options.dart';
 import 'package:courso/Profile/Setting.dart';
 import 'package:courso/Profile/profilePage.dart';
 import 'package:courso/modules/Category/categoryCourses.dart';
@@ -24,9 +26,14 @@ import 'package:flutter_localizations/flutter_localizations.dart';
 import 'package:flutter_gen/gen_l10n/app_localizations.dart';
 import 'modules/LoginPages/Register/Register.dart';
 
-void main() {
+Future<void> main() async {
+  WidgetsFlutterBinding.ensureInitialized();
+  await Firebase.initializeApp(
+    options: DefaultFirebaseOptions.currentPlatform,
+);
   runApp(const MyApp());
 }
+
 
 class MyApp extends StatelessWidget {
   const MyApp({super.key});
@@ -47,7 +54,7 @@ class MyApp extends StatelessWidget {
         GlobalMaterialLocalizations.delegate,
       ],
       // initialRoute: Splash.id,
-      home: const  Home_Layout(),
+      home: const  Splash(),
       routes: {
         Splash.id: (context) => const Splash(),
         Register.id: (context) => const Register(),

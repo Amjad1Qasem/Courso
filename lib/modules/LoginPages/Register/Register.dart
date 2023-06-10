@@ -1,5 +1,6 @@
 // ignore_for_file: file_names, unused_import
 
+import 'package:courso/controllers/coursController.dart';
 import 'package:form_field_validator/form_field_validator.dart';
 import 'package:courso/modules/LoginPages/Login/Login.dart';
 import 'package:flutter/material.dart';
@@ -246,7 +247,7 @@ class _RegisterState extends State<Register> {
             //     ),
             //   ),
             // ),
-            Padding(
+          Padding(
           padding: const EdgeInsets.all(20.0),
           child: SingleChildScrollView(
             child: Form(
@@ -452,9 +453,9 @@ class _RegisterState extends State<Register> {
                                 RequiredValidator(
                                   errorText: 'حقل رقم الهاتف اجباري',
                                 ),
-                                // MinLengthValidator(8,
-                                //     errorText:
-                                //         'first name must be at least 8 digits long'),
+                                MinLengthValidator(10,
+                                    errorText:
+                                        'first name must be at least 10 digits long'),
 
                                 // PatternValidator(r'(?=.*?[#?!@$%^&*-])', errorText: 'first name must have at least one special character')
                               ]),
@@ -601,7 +602,7 @@ class _RegisterState extends State<Register> {
                               },
                               validator: MultiValidator([]),
                               radius: 10,
-                              controller: emailcontroller,
+                              controller: passcontroller,
                               keyboard: TextInputType.name,
                               labText: ' ',
                             ),
@@ -707,8 +708,8 @@ class _RegisterState extends State<Register> {
                               height: 10,
                             ),
                             Container(
-                              padding:
-                                  const EdgeInsetsDirectional.only(end: 6, start: 6),
+                              padding: const EdgeInsetsDirectional.only(
+                                  end: 6, start: 6),
                               decoration: BoxDecoration(
                                 borderRadius: BorderRadius.circular(10),
                                 border: Border.all(
@@ -760,106 +761,107 @@ class _RegisterState extends State<Register> {
                           ],
                         ),
                       ),
-                      const SizedBox(width: 10,),
+                      const SizedBox(
+                        width: 10,
+                      ),
                       Expanded(
-                    child: Column(
-                      mainAxisAlignment: MainAxisAlignment.start,
-                      children: [
-                        Row(
-                          mainAxisAlignment: MainAxisAlignment.spaceBetween,
+                        child: Column(
+                          mainAxisAlignment: MainAxisAlignment.start,
                           children: [
-                            defText(
-                                text: 'المستوى العلمي :',
-                                size: 18,
-                                fontWeight: FontWeight.w400,
-                                color: Colors.black),
+                            Row(
+                              mainAxisAlignment: MainAxisAlignment.spaceBetween,
+                              children: [
+                                defText(
+                                    text: 'المستوى العلمي :',
+                                    size: 18,
+                                    fontWeight: FontWeight.w400,
+                                    color: Colors.black),
+                              ],
+                            ),
+                            const SizedBox(
+                              height: 10,
+                            ),
+                            Container(
+                              padding: const EdgeInsetsDirectional.only(
+                                  end: 6, start: 6),
+                              decoration: BoxDecoration(
+                                borderRadius: BorderRadius.circular(10),
+                                border: Border.all(
+                                  color: const Color(0xff333333),
+                                  width: 1,
+                                ),
+                                color: const Color(0xffcfd9f0),
+                              ),
+                              child: DropdownButton(
+                                isExpanded: true,
+                                iconSize: 35,
+                                items: [
+                                  DropdownMenuItem(
+                                    // ignore: sort_child_properties_last
+                                    child: defText(
+                                        text: 'المرحلة الابتدائية',
+                                        size: 18,
+                                        fontWeight: FontWeight.w500,
+                                        color: const Color(0xf3333333)),
+                                    value: 'المرحلة الابتدائية',
+                                  ),
+                                  DropdownMenuItem(
+                                    // ignore: sort_child_properties_last
+                                    child: defText(
+                                        text: 'المرحلة الاعدادية',
+                                        size: 18,
+                                        fontWeight: FontWeight.w500,
+                                        color: const Color(0xf3333333)),
+                                    value: 'المرحلة الاعدادية',
+                                  ),
+                                  DropdownMenuItem(
+                                    // ignore: sort_child_properties_last
+                                    child: defText(
+                                        text: 'المرحلة الثانوية',
+                                        size: 18,
+                                        fontWeight: FontWeight.w500,
+                                        color: const Color(0xf3333333)),
+                                    value: 'المرحلة الثانوية',
+                                  ),
+                                  DropdownMenuItem(
+                                    // ignore: sort_child_properties_last
+                                    child: defText(
+                                        text: 'المرحلة الجامعية',
+                                        size: 18,
+                                        fontWeight: FontWeight.w500,
+                                        color: const Color(0xf3333333)),
+                                    value: 'المرحلة الجامعية',
+                                  ),
+                                  DropdownMenuItem(
+                                    // ignore: sort_child_properties_last
+                                    child: defText(
+                                        text: 'ماجستير',
+                                        size: 18,
+                                        fontWeight: FontWeight.w500,
+                                        color: const Color(0xf3333333)),
+                                    value: 'ماجستير',
+                                  ),
+                                  DropdownMenuItem(
+                                    // ignore: sort_child_properties_last
+                                    child: defText(
+                                        text: 'دكتوراه',
+                                        size: 18,
+                                        fontWeight: FontWeight.w500,
+                                        color: const Color(0xf3333333)),
+                                    value: 'دكتوراه',
+                                  ),
+                                ],
+                                onChanged: (String? val) {
+                                  setState(() {
+                                    CertificateType = val!;
+                                  });
+                                },
+                                value: CertificateType,
+                              ),
+                            ),
                           ],
                         ),
-                        const SizedBox(
-                          height: 10,
-                        ),
-                        Container(
-                          padding:
-                              const EdgeInsetsDirectional.only(end: 6, start: 6),
-                          decoration: BoxDecoration(
-                            borderRadius: BorderRadius.circular(10),
-                            border: Border.all(
-                              color: const Color(0xff333333),
-                              width: 1,
-                            ),
-                            color: const Color(0xffcfd9f0),
-                          ),
-                          child: DropdownButton(
-                            isExpanded: true,
-                            iconSize: 35,
-                            items: [
-                              DropdownMenuItem(
-                                // ignore: sort_child_properties_last
-                                child: defText(
-                                    text: 'المرحلة الابتدائية',
-                                    size: 18,
-                                    fontWeight: FontWeight.w500,
-                                    color: const Color(0xf3333333)),
-                                value: 'المرحلة الابتدائية',
-                              ),
-                              DropdownMenuItem(
-                                // ignore: sort_child_properties_last
-                                child: defText(
-                                    text: 'المرحلة الاعدادية',
-                                    size: 18,
-                                    fontWeight: FontWeight.w500,
-                                    color: const Color(0xf3333333)),
-                                value: 'المرحلة الاعدادية',
-                              ),
-                              DropdownMenuItem(
-                                // ignore: sort_child_properties_last
-                                child: defText(
-                                    text: 'المرحلة الثانوية',
-                                    size: 18,
-                                    fontWeight: FontWeight.w500,
-                                    color: const Color(0xf3333333)),
-                                value: 'المرحلة الثانوية',
-                              ),
-                              DropdownMenuItem(
-                                // ignore: sort_child_properties_last
-                                child: defText(
-                                    text: 'المرحلة الجامعية',
-                                    size: 18,
-                                    fontWeight: FontWeight.w500,
-                                    color: const Color(0xf3333333)),
-                                value: 'المرحلة الجامعية',
-                              ),
-                              DropdownMenuItem(
-                                // ignore: sort_child_properties_last
-                                child: defText(
-                                    text: 'ماجستير',
-                                    size: 18,
-                                    fontWeight: FontWeight.w500,
-                                    color: const Color(0xf3333333)),
-                                value: 'ماجستير',
-                              ),
-                              DropdownMenuItem(
-                                // ignore: sort_child_properties_last
-                                child: defText(
-                                    text: 'دكتوراه',
-                                    size: 18,
-                                    fontWeight: FontWeight.w500,
-                                    color: const Color(0xf3333333)),
-                                value: 'دكتوراه',
-                              ),
-                            ],
-                            onChanged: (String? val) {
-                              setState(() {
-                                CertificateType = val!;
-                              });
-                            },
-                            value: CertificateType,
-                          ),
-                        ),
-                      ],
-                    ),
-                  ),
-                 
+                      ),
                     ],
                   ),
                   const SizedBox(
@@ -874,21 +876,36 @@ class _RegisterState extends State<Register> {
                       child: defaultButton(
                         width: 242,
                         text: 'إنشاء حساب',
-                        function: () {
+                        function: () async {
                           if (Form.of(context).validate()) {
                             Form.of(context).save();
-                            // ignore: avoid_print
-                            print(firstnamecontroller.text);
-                            // ignore: avoid_print
-                            print(lastnamecontroller.text);
-                            // ignore: avoid_print
-                            print(phonecontroller.text);
-                            // ignore: avoid_print
-                            print(emailcontroller.text);
-                            // ignore: avoid_print
-                            print(passcontroller.text);
-                            Navigator.of(context)
-                                .pushReplacementNamed(Home_Layout.id);
+                            // ignore: avoid_print, non_constant_identifier_names
+                            final Error =
+                                await RegisterController.getNewRegister(
+                              firstnamecontroller.text,
+                              lastnamecontroller.text,
+                              birthdateregcontroller.text,
+                              phonecontroller.text,
+                              Selectedgender,
+                              nationalityregcontroller.text,
+                              locationregcontroller.text,
+                              emailcontroller.text,
+                              passcontroller.text,
+                              CertificateType,
+                              SocialStatus,
+                            );
+                            if (Error == null) {
+                              // ignore: use_build_context_synchronously
+                              Navigator.of(context)
+                                  .pushReplacementNamed(Home_Layout.id);
+                            } else {
+                              // ignore: use_build_context_synchronously
+                              showDialog(
+                                  context: context,
+                                  builder: (context) => AlertDialog(
+                                        title: Text(Error),
+                                      ));
+                            }
                           }
                           return null;
                         },
@@ -937,6 +954,7 @@ class _RegisterState extends State<Register> {
                   ),
                 ],
               ),
+           
             ),
           ),
         ),

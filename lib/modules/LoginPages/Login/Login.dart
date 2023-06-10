@@ -1,5 +1,6 @@
 // ignore_for_file: file_names, unnecessary_import, unused_import, avoid_print, duplicate_ignore
 
+import 'package:courso/controllers/coursController.dart';
 import 'package:courso/layout/Home_loayout/Home_layout.dart';
 import 'package:courso/modules/LoginPages/Register/Register.dart';
 import 'package:form_field_validator/form_field_validator.dart';
@@ -10,6 +11,7 @@ import '../../../shared/components/components.dart';
 
 var emailcontroller = TextEditingController();
 var passcontroller = TextEditingController();
+
 var formkey = GlobalKey<FormState>();
 bool secure = true;
 
@@ -38,7 +40,6 @@ class _LoginState extends State<Login> {
                   scrollDirection: Axis.horizontal,
                   clipBehavior: Clip.antiAliasWithSaveLayer,
                   child: Row(
-
                     mainAxisAlignment: MainAxisAlignment.start,
                     mainAxisSize: MainAxisSize.max,
                     children: [
@@ -117,33 +118,36 @@ class _LoginState extends State<Login> {
                   },
                   securTrue: secure,
                 ),
-               
                 const SizedBox(
                   height: 40,
                 ),
                 Builder(builder: (context) {
-                  return GestureDetector(
-                    onTap: () {
-                      print('object');
-                    },
-                    child: defaultButton(
-                      width: 242,
-                      text: 'تسجيل الدخول',
-                      function: () {
-                        if (Form.of(context).validate()) {
-                          Form.of(context).save();
-                          // ignore: avoid_print
-                          print(emailcontroller.text);
-                          // ignore: avoid_print
-                          print(passcontroller.text);
-                          Navigator.of(context).pushReplacementNamed(Home_Layout.id);
+                  return defaultButton(
+                    width: 242,
+                    text: 'تسجيل الدخول',
+                    function: () async {
+                      if (Form.of(context).validate()) {
+                        Form.of(context).save();
+                        // ignore: avoid_print, non_constant_identifier_names
+                        final Error = await LoginController.getNewLogin(
+                            emailcontroller.text, passcontroller.text);
+                        if (Error == null) {
+                          // ignore: use_build_context_synchronously
+                          Navigator.of(context)
+                              .pushReplacementNamed(Home_Layout.id);
+                        } else {
+                          // ignore: use_build_context_synchronously
+                          showDialog(
+                              context: context,
+                              builder: (context) => AlertDialog(
+                                    title: Text(Error),
+                                  ));
                         }
-                        return null;
-                      },
-                    ),
+                      }
+                      return null;
+                    },
                   );
                 }),
-             
                 const SizedBox(
                   height: 10,
                 ),
@@ -162,7 +166,7 @@ class _LoginState extends State<Login> {
                     TextButton(
                       onPressed: () {
                         Navigator.of(context).pushReplacementNamed(Register.id);
-                         emailcontroller.clear();
+                        emailcontroller.clear();
                         passcontroller.clear();
                       },
                       child: const Text(

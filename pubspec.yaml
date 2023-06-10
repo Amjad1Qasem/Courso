@@ -39,6 +39,10 @@ dependencies:
   bottom_picker: ^2.0.3
   http: ^0.13.6
   firebase_core: ^2.13.1
+  shared_preferences: ^2.1.2
+  get_it: ^7.6.0
+  flutter_local_notifications: ^14.1.1
+  firebase_messaging: ^14.6.2
   
   
   

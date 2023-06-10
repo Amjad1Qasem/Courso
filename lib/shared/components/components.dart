@@ -11,7 +11,7 @@ import 'package:courso/modules/Cours%20Details/RegistrationForm.dart';
 // Button Login
 Widget defaultButton({
   required double width,
-  required Function? Function() function,
+  required Function() function,
   required String text,
 }) =>
     TextButton(

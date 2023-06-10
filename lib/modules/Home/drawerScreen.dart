@@ -2,6 +2,7 @@
 
 import 'package:courso/Profile/Setting.dart';
 import 'package:courso/Profile/profilePage.dart';
+import 'package:courso/controllers/coursController.dart';
 import 'package:courso/layout/Home_loayout/Home_layout.dart';
 import 'package:courso/modules/Home/home.dart';
 import 'package:courso/modules/LoginPages/Login/Login.dart';
@@ -204,9 +205,12 @@ class _drawerScreenState extends State<drawerScreen> {
                     children: [
                       Expanded(
                         child: GestureDetector(
-                          onTap: () {
+                          onTap: () async {
+                                await LogOutController .getNewlogout();
                             Navigator.of(context)
                                 .pushReplacementNamed(Login.id);
+                               
+
                           },
                           // ignore: avoid_unnecessary_containers
                           child: Container(
