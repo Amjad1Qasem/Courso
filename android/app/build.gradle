@@ -65,8 +65,9 @@ android {
 flutter {
     source '../..'
 }
-
 dependencies {
+    implementation 'com.google.gms:play-services:17.0.0'
+
 
 
 }

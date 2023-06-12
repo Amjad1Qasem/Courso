@@ -247,7 +247,7 @@ class _RegisterState extends State<Register> {
             //     ),
             //   ),
             // ),
-          Padding(
+            Padding(
           padding: const EdgeInsets.all(20.0),
           child: SingleChildScrollView(
             child: Form(
@@ -293,7 +293,7 @@ class _RegisterState extends State<Register> {
                               },
                               validator: MultiValidator([
                                 RequiredValidator(
-                                    errorText: 'حقل الاسم اجباري'),
+                                    errorText: 'حقل الاسم مطلوب'),
                                 // MinLengthValidator(8,
                                 //     errorText:
                                 //         'first name must be at least 8 digits long'),
@@ -336,7 +336,7 @@ class _RegisterState extends State<Register> {
                               },
                               validator: MultiValidator([
                                 RequiredValidator(
-                                    errorText: 'حقل الكنية اجباري'),
+                                    errorText: 'حقل الكنية مطلوب'),
                                 // MinLengthValidator(8,
                                 //     errorText:
                                 //         'first name must be at least 8 digits long'),
@@ -385,7 +385,7 @@ class _RegisterState extends State<Register> {
                                     validator: MultiValidator([
                                       RequiredValidator(
                                           errorText:
-                                              'حقل تاريخ الميلاد اجباري'),
+                                              'حقل تاريخ الميلاد مطلوب'),
                                       // MinLengthValidator(8,
                                       //     errorText:
                                       //         'first name must be at least 8 digits long'),
@@ -451,11 +451,11 @@ class _RegisterState extends State<Register> {
                               },
                               validator: MultiValidator([
                                 RequiredValidator(
-                                  errorText: 'حقل رقم الهاتف اجباري',
+                                  errorText: 'حقل رقم الهاتف مطلوب',
                                 ),
                                 MinLengthValidator(10,
                                     errorText:
-                                        'first name must be at least 10 digits long'),
+                                        'الموبايل يجب ان يكون 10 أرقام'),
 
                                 // PatternValidator(r'(?=.*?[#?!@$%^&*-])', errorText: 'first name must have at least one special character')
                               ]),
@@ -562,7 +562,13 @@ class _RegisterState extends State<Register> {
                               sufixfun: () {
                                 return null;
                               },
-                              validator: MultiValidator([]),
+                              validator: MultiValidator([
+                                 RequiredValidator(
+                                    errorText: 'حقل الايميل مطلوب'),
+                                MinLengthValidator(8,
+                                    errorText:
+                                        ' الايميل يجب ان لا يقل عن 8 محرف'),
+                              ]),
                               radius: 10,
                               controller: emailcontroller,
                               keyboard: TextInputType.name,
@@ -596,15 +602,31 @@ class _RegisterState extends State<Register> {
                               height: 10,
                             ),
                             defaultTextFormField(
-                              hintText: 'example@gmail.com',
+                              hintText: ' ',
+                              validator: MultiValidator([
+                                RequiredValidator(
+                                    errorText: 'حقل كلمة المرور مطلوب'),
+                                MinLengthValidator(8,
+                                    errorText:
+                                        'كلمة المرور يجب ان لا تقل عن 8 محرف'),
+
+                                // PatternValidator(r'(?=.*?[#?!@$%^&*-])', errorText: 'password must have at least one special character')
+                              ]),
+                              controller: passcontroller,
+                              keyboard: TextInputType.visiblePassword,
+                              labText: '',
+                              radius: 15,
+                              prifix: Icons.lock,
+                              sufix: secure
+                                  ? Icons.visibility
+                                  : Icons.visibility_off,
                               sufixfun: () {
+                                setState(() {
+                                  secure = !secure;
+                                });
                                 return null;
                               },
-                              validator: MultiValidator([]),
-                              radius: 10,
-                              controller: passcontroller,
-                              keyboard: TextInputType.name,
-                              labText: ' ',
+                              securTrue: secure,
                             ),
                           ],
                         ),
@@ -635,11 +657,14 @@ class _RegisterState extends State<Register> {
                               height: 10,
                             ),
                             defaultTextFormField(
-                              hintText: ' ',
+                              hintText: '',
                               sufixfun: () {
                                 return null;
                               },
-                              validator: MultiValidator([]),
+                              validator: MultiValidator([
+                                RequiredValidator(
+                                    errorText: 'حقل الجنسية مطلوب'),
+                              ]),
                               radius: 10,
                               controller: nationalityregcontroller,
                               keyboard: TextInputType.name,
@@ -653,7 +678,8 @@ class _RegisterState extends State<Register> {
                       ),
                       Expanded(
                         flex: 2,
-                        child: Column(
+                        child:
+                     Column(
                           mainAxisAlignment: MainAxisAlignment.start,
                           children: [
                             Row(
@@ -674,7 +700,10 @@ class _RegisterState extends State<Register> {
                               sufixfun: () {
                                 return null;
                               },
-                              validator: MultiValidator([]),
+                              validator: MultiValidator([
+                                RequiredValidator(
+                                    errorText: 'حقل مكان الاقامة مطلوب'),
+                              ]),
                               radius: 10,
                               controller: locationregcontroller,
                               keyboard: TextInputType.name,
@@ -682,6 +711,7 @@ class _RegisterState extends State<Register> {
                             ),
                           ],
                         ),
+                     
                       ),
                     ],
                   ),
@@ -691,7 +721,8 @@ class _RegisterState extends State<Register> {
                   Row(
                     children: [
                       Expanded(
-                        child: Column(
+                        child: 
+                        Column(
                           mainAxisAlignment: MainAxisAlignment.start,
                           children: [
                             Row(
@@ -759,13 +790,14 @@ class _RegisterState extends State<Register> {
                               ),
                             ),
                           ],
-                        ),
+                        ),      
                       ),
                       const SizedBox(
                         width: 10,
                       ),
                       Expanded(
-                        child: Column(
+                        child:
+                         Column(
                           mainAxisAlignment: MainAxisAlignment.start,
                           children: [
                             Row(
@@ -860,7 +892,7 @@ class _RegisterState extends State<Register> {
                               ),
                             ),
                           ],
-                        ),
+                        ),     
                       ),
                     ],
                   ),
@@ -954,7 +986,6 @@ class _RegisterState extends State<Register> {
                   ),
                 ],
               ),
-           
             ),
           ),
         ),

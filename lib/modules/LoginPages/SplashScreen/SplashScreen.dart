@@ -18,7 +18,7 @@ class _SplashState extends State<Splash> {
   @override
   void initState() {
     super.initState();
-    FirebaseHelper.init(context);
+   // FirebaseHelper.init(context);
   }
 
   @override

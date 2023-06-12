@@ -3,13 +3,13 @@ import 'package:flutter/material.dart';
 
 class Notifications extends StatelessWidget {
   const Notifications({super.key});
-  static String id = '/Notifications';
+  static String id = 'Notifications';
 
   @override
   Widget build(BuildContext context) {
     return Scaffold(
       appBar: AppBar(
-        backgroundColor: const Color(0xFF72A7EE),
+        backgroundColor: const Color(0xFFf2f7ff),
         elevation: 0.2,
         title: const Text(
           'Notifications',
@@ -27,11 +27,30 @@ class Notifications extends StatelessWidget {
           crossAxisAlignment: CrossAxisAlignment.center,
           mainAxisAlignment: MainAxisAlignment.center,
           children: [
-            defText(
-                text: 'لا يوجد اي اشعارات جديدة',
-                size: 20,
-                fontWeight: FontWeight.w500,
-                color: Colors.black.withOpacity(0.5))
+            Row(
+              children: const [
+                Image(image: AssetImage('assets/images/C1.png'))
+              ],
+            ),
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+            // defText(
+            //     text: 'لا يوجد اي اشعارات جديدة',
+            //     size: 20,
+            //     fontWeight: FontWeight.w500,
+            //     color: Colors.black.withOpacity(0.5))
           ],
         ),
       ),

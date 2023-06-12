@@ -697,7 +697,11 @@ class _DetailsState extends State<Details> {
                         Padding(
                           padding: const EdgeInsets.symmetric(horizontal: 30),
                           child: GestureDetector(
-                            onTap: () {
+                            onTap: () async{
+
+                              
+                              //  final Error = await suggestionController.getNewsuggestion();
+
                               Navigator.push(
                                   context,
                                   MaterialPageRoute(

@@ -2,6 +2,8 @@
 // import 'package:courso/modules/LoginPages/SignIn/Login2.dart';
 // import 'package:courso/modules/LoginPages/SignUp/Login.dart';
 // ignore_for_file: unused_import, duplicate_ignore
+import 'package:courso/modules/Notifications/DoneConfirm.dart';
+import 'package:courso/modules/Notifications/MassegNot.dart';
 import 'package:firebase_core/firebase_core.dart';
 
 import 'firebase_options.dart';
@@ -28,9 +30,9 @@ import 'modules/LoginPages/Register/Register.dart';
 
 Future<void> main() async {
   WidgetsFlutterBinding.ensureInitialized();
-  await Firebase.initializeApp(
-    options: DefaultFirebaseOptions.currentPlatform,
-);
+//   await Firebase.initializeApp(
+//     options: DefaultFirebaseOptions.currentPlatform,
+// );
   runApp(const MyApp());
 }
 
@@ -54,7 +56,7 @@ class MyApp extends StatelessWidget {
         GlobalMaterialLocalizations.delegate,
       ],
       // initialRoute: Splash.id,
-      home: const  Splash(),
+      home:   MassegNot(Date: '1/1/2024', UserName: 'Lisa', CourseName: 'ICDL', Time: '10:30',),
       routes: {
         Splash.id: (context) => const Splash(),
         Register.id: (context) => const Register(),
@@ -69,7 +71,9 @@ class MyApp extends StatelessWidget {
         Done.id: (context) => const Done(),
         InstuitPage.id: (context) => const  InstuitPage(insttuitId: 1,),
         Profile.id: (context) => const Profile(),
-      },
+         MassegNot.id: (context) =>  MassegNot(Date: '1/1/2024', UserName: 'Lisa', CourseName: 'ICDL', Time: '10:30',),
+         DoneConfirm.id: (context) => const DoneConfirm(),
+     },
       onUnknownRoute: (settings) =>
           MaterialPageRoute(builder: (_) => const Setting()),
       //home: Splash(),

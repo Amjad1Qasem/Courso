@@ -167,8 +167,10 @@ class _drawerScreenState extends State<drawerScreen> {
                       Expanded(
                         child: GestureDetector(
                           onTap: () {
-                            Navigator.of(context)
-                                .pushReplacementNamed(Setting.id);
+                            Navigator.push(
+                              context,
+                              MaterialPageRoute(builder: (context)=>const Setting())
+                            );
                           },
                           // ignore: avoid_unnecessary_containers
                           child: Container(
@@ -206,11 +208,9 @@ class _drawerScreenState extends State<drawerScreen> {
                       Expanded(
                         child: GestureDetector(
                           onTap: () async {
-                                await LogOutController .getNewlogout();
+                            await LogOutController.getNewlogout();
                             Navigator.of(context)
                                 .pushReplacementNamed(Login.id);
-                               
-
                           },
                           // ignore: avoid_unnecessary_containers
                           child: Container(

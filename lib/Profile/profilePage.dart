@@ -2,6 +2,8 @@
 
 import 'package:courso/Profile/EdirProfile.dart';
 import 'package:courso/Profile/Setting.dart';
+import 'package:courso/controllers/coursController.dart';
+import 'package:courso/models/class.dart';
 import 'package:courso/shared/components/components.dart';
 import 'package:flutter/material.dart';
 
@@ -45,8 +47,8 @@ class Profile extends StatelessWidget {
                       children: [
                         // ignore: prefer_const_constructors
                         CircleAvatar(
-                          backgroundImage:
-                              const AssetImage('assets/images/userImagepng.png'),
+                          backgroundImage: const AssetImage(
+                              'assets/images/userImagepng.png'),
                           radius: 75,
                         ),
                         const SizedBox(
@@ -93,7 +95,8 @@ class Profile extends StatelessWidget {
                                       height: 44,
                                       decoration: BoxDecoration(
                                         borderRadius: BorderRadius.circular(12),
-                                        color: const Color(0xff0163e2).withOpacity(0.5),
+                                        color: const Color(0xff0163e2)
+                                            .withOpacity(0.5),
                                       ),
                                       child: Padding(
                                         padding: const EdgeInsets.symmetric(
@@ -111,7 +114,9 @@ class Profile extends StatelessWidget {
                                   onPressed: () {
                                     Navigator.push(
                                       context,
-                                      MaterialPageRoute(builder: (context)=>const Setting()),
+                                      MaterialPageRoute(
+                                          builder: (context) =>
+                                              const Setting()),
                                     );
                                   },
                                   child: Container(
@@ -119,7 +124,8 @@ class Profile extends StatelessWidget {
                                       height: 44,
                                       decoration: BoxDecoration(
                                         borderRadius: BorderRadius.circular(12),
-                                        color: const Color(0xff0163e2).withOpacity(0.5),
+                                        color: const Color(0xff0163e2)
+                                            .withOpacity(0.5),
                                       ),
                                       child: Padding(
                                         padding: const EdgeInsets.symmetric(
@@ -150,33 +156,48 @@ class Profile extends StatelessWidget {
                   mainAxisAlignment: MainAxisAlignment.start,
                   children: [
                     Container(
-                      alignment: Alignment.center,
-                      width: 120,
-                      height: 40,
-                      decoration: const BoxDecoration(
-                        color:  Color(0XFF0063e2),
-                        borderRadius: BorderRadius.only(topLeft: Radius.circular(5),bottomLeft: Radius.circular(5))
-                        
-                        ),
-                      child: defText(text: 'دوراتي :', size: 18, fontWeight: FontWeight.w600, color: Colors.white)),
+                        alignment: Alignment.center,
+                        width: 120,
+                        height: 40,
+                        decoration: const BoxDecoration(
+                            color: Color(0XFF0063e2),
+                            borderRadius: BorderRadius.only(
+                                topLeft: Radius.circular(5),
+                                bottomLeft: Radius.circular(5))),
+                        child: defText(
+                            text: 'دوراتي :',
+                            size: 18,
+                            fontWeight: FontWeight.w600,
+                            color: Colors.white)),
                   ],
                 ),
-
-                Mycours(
-                    coursImage: const AssetImage('assets/images/C2.png'),
-                    coursName: ' قيادة الحاسب ICDL',
-                    instutName: ' معهد رواد الحضارة',
-                    typeCours: 'مستمرة  الآن'),
-                Mycours(
-                    coursImage: const AssetImage('assets/images/C3.png'),
-                    coursName: 'أساسيات CCNA',
-                    instutName: 'الجمعية المعلوماتية السورية',
-                    typeCours: 'انتهت'),
-                Mycours(
-                    coursImage: const AssetImage('assets/images/C6.png'),
-                    coursName: 'إدارة الموارد البشرية',
-                    instutName: 'معهد الفرسان الثلاثة',
-                    typeCours: 'انتهت'),
+                FutureBuilder<List<Course>>(
+                    future: MyCourseController.getNewMyCourses(),
+                    builder: (context, snapshot) {
+                      if (!snapshot.hasData) {
+                        return Center(child: CircularProgressIndicator());
+                      }
+                      final courses = snapshot.data!;
+                      return Column(
+                        children: 
+                          courses.map((course) => Mycours(
+                                                coursImage:
+                                                    NetworkImage(course.image),
+                                                coursName: course.name,
+                                                instutName: course.institute,
+                                                isFree: course.isFree,
+                                                courseId: course.id,
+                                              )).toList()
+                          // Mycours(
+                          //     // coursImage:
+                          //     //     const AssetImage('assets/images/C2.png'),
+                          //     // coursName: ' قيادة الحاسب ICDL',
+                          //     // instutName: ' معهد رواد الحضارة',
+                          //     // typeCours: 'مستمرة  الآن'
+                          //     ), 
+                        
+                      );
+                    }),
                 const SizedBox(
                   height: 5,
                 ),
@@ -191,10 +212,11 @@ class Profile extends StatelessWidget {
 
 // ignore: non_constant_identifier_names
 Widget Mycours({
+  required int courseId,
   required ImageProvider coursImage,
   required String coursName,
   required String instutName,
-  required String typeCours,
+  required bool isFree,
 }) =>
     Padding(
       padding: const EdgeInsetsDirectional.only(
@@ -260,7 +282,7 @@ Widget Mycours({
                       overflow: TextOverflow.ellipsis,
                     ),
                     Text(
-                      typeCours,
+                      isFree as String,
                       style: const TextStyle(
                           fontFamily: 'cairo',
                           fontSize: 13,

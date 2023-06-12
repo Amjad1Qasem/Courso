@@ -89,20 +89,20 @@ class Setting extends StatelessWidget {
                   ),
                 ),
                 const SizedBox(height: 15,),
-                GestureDetector(
-                  onTap: (){},
-                  // ignore: avoid_unnecessary_containers
-                  child: Container(
-                    child: Row(
-                      mainAxisAlignment: MainAxisAlignment.start,
-                      children: [
-                        const Icon(Icons.logout_outlined,size: 30,color: Colors.black54,),
-                        const SizedBox(width: 15,),
-                        defText(text: 'Log out', size: 18, fontWeight: FontWeight.w500, color: Colors.black),
-                      ],
-                    ),
-                  ),
-                ),
+                // GestureDetector(
+                //   onTap: (){},
+                //   // ignore: avoid_unnecessary_containers
+                //   child: Container(
+                //     child: Row(
+                //       mainAxisAlignment: MainAxisAlignment.start,
+                //       children: [
+                //         const Icon(Icons.logout_outlined,size: 30,color: Colors.black54,),
+                //         const SizedBox(width: 15,),
+                //         defText(text: 'Log out', size: 18, fontWeight: FontWeight.w500, color: Colors.black),
+                //       ],
+                //     ),
+                //   ),
+                // ),
                   
               ],
                   ),

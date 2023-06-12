@@ -8,7 +8,6 @@ import 'package:courso/modules/Instuites/InstuitPage.dart';
 import 'package:courso/modules/Instuites/instuites.dart';
 import 'package:courso/shared/components/components.dart';
 import 'package:flutter/material.dart';
-
 import '../../models/class.dart';
 
 class Home extends StatefulWidget {
@@ -197,7 +196,7 @@ class _HomeState extends State<Home> {
                                       return Center(
                                           child: CircularProgressIndicator());
                                     }
-                                    final courses = snapshot.data!;
+                                     final courses = snapshot.data!;
                                     return Row(
                                       children: courses
                                           .map((course) => cours(

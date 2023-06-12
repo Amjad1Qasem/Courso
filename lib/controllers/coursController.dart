@@ -52,6 +52,31 @@ class AllCourseController {
   }
 }
 
+class MyCourseController {
+  static Future<List<Course>> getNewMyCourses() async {
+    final SharedPreferences prefs = await SharedPreferences.getInstance();
+    final token = prefs.getString('token');
+    final response = await http.get(
+      Uri.parse('http://10.0.2.2/api/user/courses'),
+      headers: {
+        'accept': 'application/json',
+        HttpHeaders.authorizationHeader: 'Bearer $token'
+      },
+    );
+    print(response.body);
+    //فك تشفير json
+    //وتحويله الى ليست 'date'
+    return (jsonDecode(response.body)['data'] as List)
+        //تحويل كل عنصر من ال (json) الcours
+        .map((json) => Course.fromJson(json))
+        //   إضافة الكائنات المحولة إلى القائمة وإرجاعها
+        .toList();
+  }
+}
+
+
+
+
 class CourseSaleController {
   static Future<List<Sale>> getNewSales() async {
     final SharedPreferences prefs = await SharedPreferences.getInstance();
@@ -250,6 +275,61 @@ class RegisterController {
     return 'هذا الايميل موجود بالفعل';
   }
 }
+
+
+
+
+// class RegisterOnCoursController {
+//   static Future<String?> getNewRegisterOnCours(
+//     String first_name,
+//     String last_name,
+//     String birth_date,
+//     String phone,
+//     String sex,
+//     String nationality,
+//     String address,
+//     String email,
+//     String pass,
+//     String education_status,
+//     String socail_status,
+//   ) async {
+//     final fcmToken = await FirebaseHelper.createToken();
+//     final response = await http.post(
+//         //لجعل الباك يعطيني خرج json
+//         headers: {
+//           'accept': 'application/json',
+//         },
+//         body: {
+//           'email': email,
+//           'password': pass,
+//           "education_status": education_status,
+//           "socail_status": socail_status,
+//           "address": address,
+//           "nationality": nationality,
+//           "sex": sex,
+//           "birth_date": birth_date,
+//           "last_name": last_name,
+//           "first_name": first_name,
+//           "phone": phone,
+//           'fcm_token': fcmToken
+//         },
+//         Uri.parse('http://10.0.2.2:8000/api/register'));
+//     print(response.body);
+//     //200 status =ok
+//     //300 > 50/100 error/ok
+//     //400> 100/100 error
+//     if (response.statusCode == 200) {
+//       final token = jsonDecode(response.body)['token'] as String;
+//       final SharedPreferences prefs = await SharedPreferences.getInstance();
+//       await prefs.setString('token', token);
+//       return null;
+//     }
+//     return 'هذا الايميل موجود بالفعل';
+//   }
+// }
+
+
+
 
 class suggestionController {
   static Future<String?> getNewsuggestion(
