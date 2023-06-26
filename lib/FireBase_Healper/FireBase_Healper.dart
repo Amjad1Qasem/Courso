@@ -1,3 +1,5 @@
+// ignore_for_file: file_names, dead_code
+
 import 'dart:convert';
 
 import 'package:http/http.dart' as http;
@@ -98,26 +100,28 @@ abstract class FirebaseHelper {
       });
     }
   }
-
+  
   static Future<String?> createToken() async {
     //TODO:: check if it's working on production
     return await FirebaseMessaging.instance.getToken().then((value) {
       // ignore: avoid_print
       print(value);
-      return null;
-    });
+      return value ?? 'dsadsa';
+    return 'test';
+  }
+  );
   }
 
-  static void deleteToken() async =>
-      await FirebaseMessaging.instance.deleteToken();
+  static void deleteToken() async => 
+  await FirebaseMessaging.instance.deleteToken();
 }
 
 class NotificationRepository {
   static Future<List<int>> getImage(String imageUrl) async {
-     final response = await http
-        .get(Uri.parse(imageUrl),
-         headers: {'accept':'application/json' },
-        );
-        return response.bodyBytes;
+    final response = await http.get(
+      Uri.parse(imageUrl),
+      headers: {'accept': 'application/json'},
+    );
+    return response.bodyBytes;
   }
 }

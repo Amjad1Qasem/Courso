@@ -1,4 +1,4 @@
-// ignore_for_file: prefer_const_constructors, must_be_immutable, unused_import, avoid_print, file_names
+// ignore_for_file: prefer_const_constructors, must_be_immutable, unused_import, avoid_print, file_names, prefer_const_constructors_in_immutables
 
 import 'package:courso/controllers/coursController.dart';
 import 'package:courso/modules/Cours%20Details/CoursDetails.dart';

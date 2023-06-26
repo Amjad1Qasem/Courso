@@ -118,6 +118,7 @@ class _LoginState extends State<Login> {
                   },
                   securTrue: secure,
                 ),
+            
                 const SizedBox(
                   height: 40,
                 ),
@@ -148,6 +149,7 @@ class _LoginState extends State<Login> {
                     },
                   );
                 }),
+          
                 const SizedBox(
                   height: 10,
                 ),

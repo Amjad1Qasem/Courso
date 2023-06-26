@@ -1,3 +1,4 @@
+// ignore_for_file: file_names
 // // ignore_for_file: camel_case_types, file_names, avoid_print, duplicate_ignore, non_constant_identifier_names
 
 // import 'package:bottom_picker/bottom_picker.dart';

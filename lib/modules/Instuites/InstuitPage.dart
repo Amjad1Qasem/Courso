@@ -290,13 +290,12 @@ class _InstuitPageState extends State<InstuitPage> {
                                     return null;
                                   },
                                   validator: MultiValidator([
-                                    RequiredValidator(
-                                        errorText:
-                                            'password must not be empty'),
+                                    // RequiredValidator(
+                                    //     errorText:
+                                    //         ''),
                                     // MinLengthValidator(8,
                                     //     errorText:
                                     //         'password must be at least 8 digits long'),
-
                                     // PatternValidator(r'(?=.*?[#?!@$%^&*-])', errorText: 'password must have at least one special character')
                                   ]),
                                   radius: 10,

@@ -13,7 +13,7 @@ class Menu extends StatelessWidget {
        Stack(
         children: const  [
           drawerScreen(),
-          Home(),
+          Home(UserId: 1,),
         ],
     );
   }

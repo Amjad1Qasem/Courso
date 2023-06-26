@@ -1,8 +1,11 @@
-// ignore_for_file: file_names, non_constant_identifier_names, unused_import
+// ignore_for_file: file_names, non_constant_identifier_names, unused_import, library_prefixes, duplicate_ignore
 
+import 'package:courso/controllers/coursController.dart';
+import 'package:courso/models/class.dart';
 import 'package:courso/shared/components/components.dart';
 import 'package:flutter/material.dart';
 import 'package:form_field_validator/form_field_validator.dart';
+import 'package:courso/models/class.dart' as Models;
 
 var Searchcontroller = TextEditingController();
 
@@ -14,56 +17,7 @@ class Search extends StatefulWidget {
 }
 
 class _SearchState extends State<Search> {
-  final List<Map<String, dynamic>> allCourses = [
-    {
-      "id": 1,
-      "CoursName": 'دورة CCNA',
-      "The Instuit": 'الجمعية المعلوماتية السورية'
-    },
-    {
-      "id": 2,
-      "CoursName": 'إدارة الموارد البشرية',
-      "The Instuit": 'مركز الأمين'
-    },
-    {"id": 3, "CoursName": 'التوعية الصحية', "The Instuit": 'منظمة اليونسيف'},
-    {"id": 4, "CoursName": 'التسويق الالكتروني', "The Instuit": 'معهد الأمين'},
-    {
-      "id": 5,
-      "CoursName": 'UI/UX desgin',
-      "The Instuit": 'معهد DTC (الاونروا)'
-    },
-  ];
-
-  // This list holds the data for the list view
-  List<Map<String, dynamic>> foundCours = [];
-  @override
-  initState() {
-    // at the beginning, all users are shown
-    foundCours = allCourses;
-    super.initState();
-  }
-
-  // This function is called whenever the text field changes
-  void _runFilter(String enteredKeyword) {
-    List<Map<String, dynamic>> results = [];
-    if (enteredKeyword.isEmpty) {
-      // if the search field is empty or only contains white-space, we'll display all users
-      results = allCourses;
-    } else {
-      results = allCourses
-          .where((user) => user["CoursName"]
-              .toLowerCase()
-              .contains(enteredKeyword.toLowerCase()))
-          .toList();
-      // we use the toLowerCase() method to make it case-insensitive
-    }
-
-    // Refresh the UI
-    setState(() {
-      foundCours = results;
-    });
-  }
-
+  Models.Search? search;
   @override
   Widget build(BuildContext context) {
     return Scaffold(
@@ -80,16 +34,19 @@ class _SearchState extends State<Search> {
           color: Colors.white,
         ),
       ),
-     
       body: Padding(
-        padding: const EdgeInsetsDirectional.only(start: 20, end: 5, top: 10),
+        padding: const EdgeInsetsDirectional.only(start: 20, end: 20, top: 10,bottom: 20),
         child: Column(
           children: [
             Row(
               children: [
                 Expanded(
                   child: TextField(
-                    onChanged: (value) => _runFilter(value),
+                    onSubmitted: (value) async {
+                      search =
+                          await SearchController.getNewSearchCourses(value);
+                      setState(() {});
+                    },
                     decoration: const InputDecoration(
                         filled: true,
                         fillColor: Color(0xffCFD9F0),
@@ -109,55 +66,205 @@ class _SearchState extends State<Search> {
                                 BorderRadius.all(Radius.circular(12)))),
                   ),
                 ),
-                IconButton(
-                    onPressed: () {},
-                    icon: const Icon(
-                      Icons.menu_rounded,
-                      size: 40,
-                      color: Colors.black54,
-                    ))
+                // IconButton(
+                //     onPressed: () {},
+                //     icon: const Icon(
+                //       Icons.menu_rounded,
+                //       size: 40,
+                //       color: Colors.black54,
+                //     ))
               ],
             ),
             const SizedBox(
               height: 20,
             ),
-            Expanded(
-              child: foundCours.isNotEmpty
-                  ? ListView.builder(
-                      itemCount: foundCours.length,
-                      itemBuilder: (context, index) => Card(
-                        key: ValueKey(foundCours[index]["id"]),
-                        color: const Color(0xffffffff),
-                        margin: const EdgeInsets.symmetric(vertical: 10),
-                        child: ListTile(
-                          leading: Text(
-                            foundCours[index]["id"].toString(),
-                            style: const TextStyle(
-                                fontSize: 24, fontFamily: 'cairo'),
-                          ),
-                          title: Text(
-                            foundCours[index]['CoursName'],
-                            style: const TextStyle(
-                              fontFamily: 'cairo',
-                            ),
-                          ),
-                          subtitle: Text(
-                            '${foundCours[index]["The Instuit"]}',
-                            style: const TextStyle(
-                              fontFamily: 'cairo',
-                            ),
-                          ),
+            Column(
+                children: search?.courses
+                        .map((course) => MySearchCour(
+                              coursImage: NetworkImage(course.image),
+                              coursName: course.name,
+                              instutName: course.institute,
+                              isFree: course.isFree,
+                              courseId: course.id,
+                            ))
+                        .toList() ??[]
+                        
                         ),
-                      ),
-                    )
-                  : const Text(
-                      'No results found',
-                      style: TextStyle(fontSize: 24),
-                    ),
-            ),
-          ],
+        // search?.institutes.map((institute) => MySearchInst(instituteId: institute.id, instituteImage: institute.image, InstutName: institute.name, description: institute.description).toList()??[]
+        ],
         ),
       ),
     );
   }
 }
+
+// ignore: non_constant_identifier_names
+Widget MySearchCour({
+  required int courseId,
+  required ImageProvider coursImage,
+  required String coursName,
+  required String instutName,
+  required bool isFree,
+}) =>
+    Padding(
+      padding: const EdgeInsetsDirectional.only(
+          start: 20, end: 20, top: 10, bottom: 10),
+      child: Container(
+        width: double.infinity,
+        height: 120,
+        decoration: BoxDecoration(
+          boxShadow: const [
+            BoxShadow(
+              blurStyle: BlurStyle.normal,
+              offset: Offset(-2, 2),
+              color: Colors.black54,
+              blurRadius: 2,
+            ),
+          ],
+          borderRadius: BorderRadius.circular(10),
+          color: Colors.white,
+        ),
+        child: Row(
+          children: [
+            Column(
+              mainAxisAlignment: MainAxisAlignment.center,
+              children: [
+                Container(
+                    decoration: BoxDecoration(
+                      borderRadius: BorderRadius.circular(10),
+                    ),
+                    clipBehavior: Clip.antiAliasWithSaveLayer,
+                    // ignore: prefer_const_constructors
+                    child: Image(
+                      image: coursImage,
+                      width: 150,
+                      height: 120,
+                      fit: BoxFit.cover,
+                    ))
+              ],
+            ),
+            Expanded(
+              child: Padding(
+                padding: const EdgeInsets.symmetric(horizontal: 8),
+                child: Column(
+                  crossAxisAlignment: CrossAxisAlignment.start,
+                  children: [
+                    Text(
+                      coursName,
+                      style: const TextStyle(
+                          fontFamily: 'cairo',
+                          fontSize: 20,
+                          fontWeight: FontWeight.w600,
+                          color: Color(0xff333333)),
+                      maxLines: 1,
+                      overflow: TextOverflow.ellipsis,
+                    ),
+                    Text(
+                      instutName,
+                      style: const TextStyle(
+                          fontFamily: 'cairo',
+                          fontSize: 15,
+                          fontWeight: FontWeight.w500,
+                          color: Color(0xff333333)),
+                      maxLines: 1,
+                      overflow: TextOverflow.ellipsis,
+                    ),
+                    Text(
+                      isFree ? 'مجاني' : '',
+                      style: const TextStyle(
+                          fontFamily: 'cairo',
+                          fontSize: 13,
+                          fontWeight: FontWeight.w400,
+                          color: Color.fromARGB(255, 255, 0, 0)),
+                      maxLines: 1,
+                      overflow: TextOverflow.ellipsis,
+                    ),
+                  ],
+                ),
+              ),
+            )
+          ],
+        ),
+      ),
+    );
+
+
+// ignore: non_constant_identifier_names
+Widget MySearchInst({
+  required int instituteId,
+  required ImageProvider instituteImage,
+  required String InstutName,
+  required String description,
+}) =>
+    Padding(
+      padding: const EdgeInsetsDirectional.only(
+          start: 20, end: 20, top: 10, bottom: 10),
+      child: Container(
+        width: double.infinity,
+        height: 120,
+        decoration: BoxDecoration(
+          boxShadow: const [
+            BoxShadow(
+              blurStyle: BlurStyle.normal,
+              offset: Offset(-2, 2),
+              color: Colors.black54,
+              blurRadius: 2,
+            ),
+          ],
+          borderRadius: BorderRadius.circular(10),
+          color: Colors.white,
+        ),
+        child: Row(
+          children: [
+            Column(
+              mainAxisAlignment: MainAxisAlignment.center,
+              children: [
+                Container(
+                    decoration: BoxDecoration(
+                      borderRadius: BorderRadius.circular(10),
+                    ),
+                    clipBehavior: Clip.antiAliasWithSaveLayer,
+                    // ignore: prefer_const_constructors
+                    child: Image(
+                      image: instituteImage,
+                      width: 150,
+                      height: 120,
+                      fit: BoxFit.cover,
+                    ))
+              ],
+            ),
+            Expanded(
+              child: Padding(
+                padding: const EdgeInsets.symmetric(horizontal: 8),
+                child: Column(
+                  crossAxisAlignment: CrossAxisAlignment.start,
+                  children: [
+                    Text(
+                      InstutName,
+                      style: const TextStyle(
+                          fontFamily: 'cairo',
+                          fontSize: 20,
+                          fontWeight: FontWeight.w600,
+                          color: Color(0xff333333)),
+                      maxLines: 1,
+                      overflow: TextOverflow.ellipsis,
+                    ),
+                    Text(
+                      description,
+                      style: const TextStyle(
+                          fontFamily: 'cairo',
+                          fontSize: 15,
+                          fontWeight: FontWeight.w500,
+                          color: Color(0xff333333)),
+                      maxLines: 1,
+                      overflow: TextOverflow.ellipsis,
+                    ),
+                    
+                  ],
+                ),
+              ),
+            )
+          ],
+        ),
+      ),
+    );
