@@ -1,4 +1,4 @@
-// ignore_for_file: unused_import, avoid_print, file_names
+// ignore_for_file: unused_import, avoid_print, file_names, use_build_context_synchronously
 
 import 'package:courso/Profile/Setting.dart';
 import 'package:courso/Profile/profilePage.dart';

@@ -1,4 +1,4 @@
-// ignore_for_file: file_names, unused_import
+// ignore_for_file: file_names, unused_import, non_constant_identifier_names, body_might_complete_normally_nullable, duplicate_ignore
 
 import 'package:courso/controllers/coursController.dart';
 import 'package:form_field_validator/form_field_validator.dart';
@@ -380,7 +380,8 @@ class _RegisterState extends State<Register> {
                               Stack(
                                 children: [
                                   defaultTextFormField(
-                                    hintText: ' ',
+                                    hintText: '',
+                                    prifix: Icons.date_range,
                                     sufixfun: () {},
                                     validator: MultiValidator([
                                       RequiredValidator(
@@ -405,8 +406,8 @@ class _RegisterState extends State<Register> {
                                             await showDatePicker(
                                           context: context,
                                           initialDate: DateTime.now(),
-                                          firstDate: DateTime.now(),
-                                          lastDate: DateTime.now()
+                                          firstDate: DateTime(2000),
+                                          lastDate: DateTime(2024)
                                               .add(const Duration(days: 30)),
                                         );
                                         if (dateTime != null) {
@@ -416,7 +417,7 @@ class _RegisterState extends State<Register> {
                                           });
                                         }
                                       },
-                                      child: const Icon(Icons.date_range),
+                                      child: const Icon(Icons.date_range,color: Color(0xffcfd9f0),size: 30,),
                                     ),
                                   ),
                                 ],

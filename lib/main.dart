@@ -1,11 +1,10 @@
 // ignore: unused_import
 // import 'package:courso/modules/LoginPages/SignIn/Login2.dart';
 // import 'package:courso/modules/LoginPages/SignUp/Login.dart';
-// ignore_for_file: unused_import, duplicate_ignore
+// ignore_for_file: unused_import, duplicate_ignore, prefer_const_constructors
 import 'package:courso/modules/Notifications/DoneConfirm.dart';
 import 'package:courso/modules/Notifications/MassegNot.dart';
 import 'package:firebase_core/firebase_core.dart';
-
 import 'firebase_options.dart';
 import 'package:courso/Profile/Setting.dart';
 import 'package:courso/Profile/profilePage.dart';
@@ -30,9 +29,9 @@ import 'modules/LoginPages/Register/Register.dart';
 
 Future<void> main() async {
   WidgetsFlutterBinding.ensureInitialized();
-//   await Firebase.initializeApp(
-//     options: DefaultFirebaseOptions.currentPlatform,
-// );
+  await Firebase.initializeApp(
+    options: DefaultFirebaseOptions.currentPlatform,
+);
   runApp(const MyApp());
 }
 
@@ -56,7 +55,7 @@ class MyApp extends StatelessWidget {
         GlobalMaterialLocalizations.delegate,
       ],
       // initialRoute: Splash.id,
-      home:   MassegNot(Date: '1/1/2024', UserName: 'Lisa', CourseName: 'ICDL', Time: '10:30',),
+      home:   Splash(),
       routes: {
         Splash.id: (context) => const Splash(),
         Register.id: (context) => const Register(),
@@ -64,15 +63,15 @@ class MyApp extends StatelessWidget {
         Home_Layout.id: (context) => const Home_Layout(),
         Notifications.id: (context) => const Notifications(),
         drawerScreen.id: (context) => const drawerScreen(),
-        Home.id: (context) => const Home(),
+        Home.id: (context) => const Home(UserId: 1,),
         Instuites.id: (context) => Instuites(),
         Details.id: (context) => const Details(CoursId: 1,),
         //registrationForm.id: (context) => const registrationForm(),
         Done.id: (context) => const Done(),
         InstuitPage.id: (context) => const  InstuitPage(insttuitId: 1,),
         Profile.id: (context) => const Profile(),
-         MassegNot.id: (context) =>  MassegNot(Date: '1/1/2024', UserName: 'Lisa', CourseName: 'ICDL', Time: '10:30',),
-         DoneConfirm.id: (context) => const DoneConfirm(),
+        //MassegNot.id: (context) =>  MassegNot(Date: '1/1/2024', UserName: 'Lisa', CourseName: 'ICDL', Time: '10:30',),
+        DoneConfirm.id: (context) => const DoneConfirm(),
      },
       onUnknownRoute: (settings) =>
           MaterialPageRoute(builder: (_) => const Setting()),

@@ -60,14 +60,17 @@ android {
             signingConfig signingConfigs.debug
         }
     }
+    dependencies {
+        implementation 'com.google.android.gms:play-services-vision:20.1.3'
+    }
+repositories {
+    google()
+    jcenter()
 }
-
 flutter {
     source '../..'
 }
-dependencies {
-    implementation 'com.google.gms:play-services:17.0.0'
-
 
 
 }
+

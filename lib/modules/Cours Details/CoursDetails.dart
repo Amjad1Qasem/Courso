@@ -1,7 +1,7 @@
 // ignore: duplicate_ignore
 // ignore: file_names
 
-// ignore_for_file: file_names, prefer_const_constructors, duplicate_ignore
+// ignore_for_file: file_names, prefer_const_constructors, duplicate_ignore, unused_import, non_constant_identifier_names, unused_local_variable, avoid_print
 
 // ignore: unused_import
 import 'dart:ffi';
@@ -41,7 +41,6 @@ class _DetailsState extends State<Details> {
             }
             final Coursdetail = snapshot.data!;
 
-            
             return SingleChildScrollView(
               child: Column(
                 children: [
@@ -413,7 +412,7 @@ class _DetailsState extends State<Details> {
                                       ]
                                           //selected: true,
                                           ),
-                                     DataRow(
+                                      DataRow(
                                           selected: true,
                                           //  color: MaterialStatePropertyAll(Color.fromARGB(255, 251, 161, 154)),
                                           cells: [
@@ -423,7 +422,10 @@ class _DetailsState extends State<Details> {
                                                   fontFamily: 'cairo'),
                                             )),
                                             DataCell(Text(
-                                              Coursdetail.saturdayStartTime == null ? 'مغلق' : '${Coursdetail.saturdayStartTime} - ${Coursdetail.saturdayStartTime}',
+                                              Coursdetail.saturdayStartTime ==
+                                                      null
+                                                  ? 'مغلق'
+                                                  : '${Coursdetail.saturdayStartTime} - ${Coursdetail.saturdayStartTime}',
                                               style: TextStyle(
                                                   fontFamily: 'cairo'),
                                             )),
@@ -689,7 +691,6 @@ class _DetailsState extends State<Details> {
                                 color: const Color(0xff333333))
                           ],
                         ),
-
                         ///TextButton///
                         const SizedBox(
                           height: 50,
@@ -697,30 +698,36 @@ class _DetailsState extends State<Details> {
                         Padding(
                           padding: const EdgeInsets.symmetric(horizontal: 30),
                           child: GestureDetector(
-                            onTap: () async{
-
-                              
-                              //  final Error = await suggestionController.getNewsuggestion();
-
-                              Navigator.push(
-                                  context,
-                                  MaterialPageRoute(
-                                      builder: (context) =>
-                                           Done()));
+                            onTap: () async {
+                              try {
+                                String response =
+                                    await RegisterOnCoursController
+                                        .getNewRegisterOnCours(widget.CoursId);
+                                //ignore: use_build_context_synchronously
+                                Navigator.push(
+                                    context,
+                                    MaterialPageRoute(
+                                        builder: (context) => Done()));
+                              } catch (e) {
+                                print(e);
+                              }
                             },
                             child: Container(
-                                width: double.infinity,
-                                height: 45,
-                                decoration: BoxDecoration(
-                                    borderRadius: BorderRadius.circular(13),
-                                    color: const Color(0xff0163E2)),
-                                child: Center(
-                                  child: defText(
-                                      text: 'احجز مقعدك الأن',
-                                      size: 18,
-                                      fontWeight: FontWeight.w500,
-                                      color: Colors.white),
-                                )),
+                              width: double.infinity,
+                              height: 45,
+                              decoration: BoxDecoration(
+                                borderRadius: BorderRadius.circular(13),
+                                color: const Color(0xff0163E2),
+                              ),
+                              child: Center(
+                                child: defText(
+                                  text: 'احجز مقعدك الأن',
+                                  size: 18,
+                                  fontWeight: FontWeight.w500,
+                                  color: Colors.white,
+                                ),
+                              ),
+                            ),
                           ),
                         ),
                         // defaultButton(

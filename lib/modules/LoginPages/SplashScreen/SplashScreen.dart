@@ -1,4 +1,4 @@
-// ignore_for_file: file_names
+// ignore_for_file: file_names, use_build_context_synchronously, duplicate_ignore, empty_statements
 
 import 'package:courso/FireBase_Healper/FireBase_Healper.dart';
 import 'package:courso/layout/Home_loayout/Home_layout.dart';
@@ -18,7 +18,7 @@ class _SplashState extends State<Splash> {
   @override
   void initState() {
     super.initState();
-   // FirebaseHelper.init(context);
+    FirebaseHelper.init(context);
   }
 
   @override

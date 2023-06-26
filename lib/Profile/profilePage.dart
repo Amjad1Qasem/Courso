@@ -3,6 +3,7 @@
 import 'package:courso/Profile/EdirProfile.dart';
 import 'package:courso/Profile/Setting.dart';
 import 'package:courso/controllers/coursController.dart';
+import 'package:courso/models/class.dart' as models;
 import 'package:courso/models/class.dart';
 import 'package:courso/shared/components/components.dart';
 import 'package:flutter/material.dart';
@@ -10,6 +11,7 @@ import 'package:flutter/material.dart';
 class Profile extends StatelessWidget {
   const Profile({super.key});
   static String id = 'Profile';
+
 
   @override
   Widget build(BuildContext context) {
@@ -33,6 +35,7 @@ class Profile extends StatelessWidget {
         child: Column(
           children: [
             Container(
+              
               decoration: const BoxDecoration(
                   color: Color.fromARGB(255, 208, 231, 255),
                   borderRadius: BorderRadius.only(
@@ -40,44 +43,61 @@ class Profile extends StatelessWidget {
                     bottomRight: Radius.circular(40),
                   )),
               child: Center(
-                child: Padding(
-                  padding: const EdgeInsets.all(20.0),
-                  child: Column(
-                      crossAxisAlignment: CrossAxisAlignment.center,
+                child: Column(
+                  children: [
+                    Padding(
+                      padding: const EdgeInsets.all(20.0),
+                      child: FutureBuilder<models.Profile>(
+                          future:
+                           ProfileController.getNewprofile(),
+                          builder: (context, snapshot) {
+                            if (!snapshot.hasData) {
+                              return const Center(
+                                  child: CircularProgressIndicator());
+                            }
+                            final p = snapshot.data!;
+                            return Column(
+                                crossAxisAlignment: CrossAxisAlignment.center,
+                                children: [
+                                  // ignore: prefer_const_constructors
+                                  CircleAvatar(
+                                    // backgroundImage: const AssetImage(
+                                    //     'assets/images/userImagepng.png'),
+                                    backgroundImage: NetworkImage(p.image),
+                                    radius: 75,
+                                  ),
+                                  const SizedBox(
+                                    height: 0,
+                                  ),
+                                  defText(
+                                      text: '${p.firstName}' ' ${p.lastName}',
+                                      size: 25,
+                                      fontWeight: FontWeight.bold,
+                                      color: const Color(0xff2D527C)),
+                                  const SizedBox(
+                                    height: 0,
+                                  ),
+                                  defText(
+                                      text: p.email,
+                                      size: 15,
+                                      fontWeight: FontWeight.bold,
+                                      color: const Color(0xff333333)),
+                                  const SizedBox(
+                                    height: 0,
+                                  ),
+                                  defText(
+                                      text: p.phone,
+                                      size: 15,
+                                      fontWeight: FontWeight.bold,
+                                      color: const Color(0xff333333)),
+                                  const SizedBox(
+                                    height: 10,
+                                  ),
+                                ]);
+                          }),
+                    ),
+                    Column(
                       children: [
-                        // ignore: prefer_const_constructors
-                        CircleAvatar(
-                          backgroundImage: const AssetImage(
-                              'assets/images/userImagepng.png'),
-                          radius: 75,
-                        ),
-                        const SizedBox(
-                          height: 0,
-                        ),
-                        defText(
-                            text: 'Lisa Jain',
-                            size: 25,
-                            fontWeight: FontWeight.bold,
-                            color: const Color(0xff2D527C)),
-                        const SizedBox(
-                          height: 0,
-                        ),
-                        defText(
-                            text: 'LisaJain@email.com',
-                            size: 15,
-                            fontWeight: FontWeight.bold,
-                            color: const Color(0xff333333)),
-                        const SizedBox(
-                          height: 0,
-                        ),
-                        defText(
-                            text: '+963-994722907',
-                            size: 15,
-                            fontWeight: FontWeight.bold,
-                            color: const Color(0xff333333)),
-                        const SizedBox(
-                          height: 10,
-                        ),
                         Row(
                           children: [
                             Expanded(
@@ -137,13 +157,18 @@ class Profile extends StatelessWidget {
                                                 fontWeight: FontWeight.w400,
                                                 color: Colors.white)),
                                       ))),
-                            )
+                            ),
+                            const SizedBox(
+                          height: 10,
+                        ),
                           ],
                         ),
                         const SizedBox(
                           height: 10,
                         ),
-                      ]),
+                      ],
+                    ),
+                  ],
                 ),
               ),
             ),
@@ -175,28 +200,28 @@ class Profile extends StatelessWidget {
                     future: MyCourseController.getNewMyCourses(),
                     builder: (context, snapshot) {
                       if (!snapshot.hasData) {
-                        return Center(child: CircularProgressIndicator());
+                        return const Center(child: CircularProgressIndicator());
                       }
                       final courses = snapshot.data!;
                       return Column(
-                        children: 
-                          courses.map((course) => Mycours(
-                                                coursImage:
-                                                    NetworkImage(course.image),
-                                                coursName: course.name,
-                                                instutName: course.institute,
-                                                isFree: course.isFree,
-                                                courseId: course.id,
-                                              )).toList()
+                          children: courses
+                              .map((course) => Mycours(
+                                    coursImage: NetworkImage(course.image),
+                                    coursName: course.name,
+                                    instutName: course.institute,
+                                    isFree: course.isFree,
+                                    courseId: course.id,
+                                  ))
+                              .toList()
                           // Mycours(
                           //     // coursImage:
                           //     //     const AssetImage('assets/images/C2.png'),
                           //     // coursName: ' قيادة الحاسب ICDL',
                           //     // instutName: ' معهد رواد الحضارة',
                           //     // typeCours: 'مستمرة  الآن'
-                          //     ), 
-                        
-                      );
+                          //     ),
+
+                          );
                     }),
                 const SizedBox(
                   height: 5,
@@ -282,7 +307,7 @@ Widget Mycours({
                       overflow: TextOverflow.ellipsis,
                     ),
                     Text(
-                      isFree as String,
+                      isFree ? 'مجاني' : '',
                       style: const TextStyle(
                           fontFamily: 'cairo',
                           fontSize: 13,

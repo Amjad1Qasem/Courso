@@ -1,3 +1,5 @@
+// ignore_for_file: file_names, unused_import, non_constant_identifier_names, unnecessary_brace_in_string_interps
+
 import 'package:courso/layout/Home_loayout/Home_layout.dart';
 import 'package:courso/modules/Notifications/DoneConfirm.dart';
 import 'package:courso/modules/Notifications/notifications.dart';

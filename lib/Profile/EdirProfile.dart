@@ -1,5 +1,6 @@
-// ignore_for_file: file_names
+// ignore_for_file: file_names, unused_import, non_constant_identifier_names, body_might_complete_normally_nullable
 
+import 'package:courso/Profile/profilePage.dart';
 import 'package:courso/controllers/coursController.dart';
 import 'package:courso/layout/Home_loayout/Home_layout.dart';
 import 'package:courso/modules/LoginPages/Register/Register.dart';
@@ -170,6 +171,7 @@ class _EditProfileState extends State<EditProfile> {
                             // PatternValidator(r'(?=.*?[#?!@$%^&*-])', errorText: 'first name must have at least one special character')
                           ]),
                           radius: 10,
+                          prifix: Icons.date_range,
                           controller: birthdateregcontroller,
                           keyboard: TextInputType.number,
                           labText: ' ',
@@ -181,8 +183,8 @@ class _EditProfileState extends State<EditProfile> {
                               final DateTime? dateTime = await showDatePicker(
                                 context: context,
                                 initialDate: DateTime.now(),
-                                firstDate: DateTime.now(),
-                                lastDate: DateTime.now()
+                                firstDate: DateTime(2000),
+                                lastDate: DateTime(2024)
                                     .add(const Duration(days: 30)),
                               );
                               if (dateTime != null) {
@@ -192,7 +194,11 @@ class _EditProfileState extends State<EditProfile> {
                                 });
                               }
                             },
-                            child: const Icon(Icons.date_range),
+                            child: const Icon(
+                              Icons.date_range,
+                              color: Color(0xffcfd9f0),
+                              size: 30,
+                            ),
                           ),
                         ),
                       ],
@@ -520,7 +526,7 @@ class _EditProfileState extends State<EditProfile> {
                           if (Form.of(context).validate()) {
                             Form.of(context).save();
                             final Error =
-                                await RegisterController.getNewRegister(
+                                await EditProfileController.getNewEditProfile(
                               firstnamecontroller.text,
                               lastnamecontroller.text,
                               birthdateregcontroller.text,
@@ -536,7 +542,7 @@ class _EditProfileState extends State<EditProfile> {
                             if (Error == null) {
                               // ignore: use_build_context_synchronously
                               Navigator.of(context)
-                                  .pushReplacementNamed(Home_Layout.id);
+                                  .pushReplacementNamed(Profile.id);
                             } else {
                               // ignore: use_build_context_synchronously
                               showDialog(
@@ -545,6 +551,7 @@ class _EditProfileState extends State<EditProfile> {
                                         title: Text(Error),
                                       ));
                             }
+
                             return null;
                           }
                         },

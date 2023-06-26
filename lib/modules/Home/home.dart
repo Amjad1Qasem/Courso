@@ -1,4 +1,4 @@
-// ignore_for_file: prefer_const_constructors, avoid_print, unused_import, dead_code
+// ignore_for_file: prefer_const_constructors, avoid_print, unused_import, dead_code, non_constant_identifier_names
 
 import 'package:courso/controllers/coursController.dart';
 import 'package:courso/modules/Cours%20Details/CoursDetails.dart';
@@ -11,8 +11,12 @@ import 'package:flutter/material.dart';
 import '../../models/class.dart';
 
 class Home extends StatefulWidget {
-  const Home({super.key});
+  const Home({
+    super.key,
+    required this.UserId,
+  });
   static String id = 'Home';
+  final int UserId;
 
   @override
   State<Home> createState() => _HomeState();
@@ -89,25 +93,34 @@ class _HomeState extends State<Home> {
               elevation: 0.2,
               title: Directionality(
                 textDirection: TextDirection.ltr,
-                child: Row(
-                  children: const [
-                    CircleAvatar(
-                      radius: 20,
-                      backgroundImage:
-                          AssetImage('assets/images/userImagepng.png'),
-                    ),
-                    SizedBox(
-                      width: 8,
-                    ),
-                    Text(
-                      'Lisa Jain',
-                      style: TextStyle(
-                        fontSize: 20,
-                        fontFamily: 'cairo',
-                      ),
-                    ),
-                  ],
-                ),
+                child: FutureBuilder<Profile>(
+                    future: ProfileController.getNewprofile(),
+                    builder: (context, snapshot) {
+                      if (!snapshot.hasData) {
+                        return Center(child: CircularProgressIndicator());
+                      }
+                      print(
+                          "ddddddddddddddddddddddddddddddddddddddddddddddddd");
+                      final prof = snapshot.data!;
+                      return Row(
+                        children: [
+                          CircleAvatar(
+                              radius: 20,
+                              backgroundImage:
+                                  AssetImage('assets/images/c1.png')),
+                          SizedBox(
+                            width: 8,
+                          ),
+                          Text(
+                            '${prof.firstName}' ' ${prof.lastName}',
+                            style: TextStyle(
+                              fontSize: 20,
+                              fontFamily: 'cairo',
+                            ),
+                          ),
+                        ],
+                      );
+                    }),
               ),
               leading:
                   // [
@@ -149,8 +162,7 @@ class _HomeState extends State<Home> {
               // ],
             ),
             backgroundColor: const Color(0xffF2F7FF),
-            body:
-             SingleChildScrollView(
+            body: SingleChildScrollView(
               child: Column(
                 children: [
                   const SizedBox(
@@ -178,10 +190,10 @@ class _HomeState extends State<Home> {
                                     color: Colors.black),
                                 onPressed: () {
                                   Navigator.push(
-                                    context,
-                                    MaterialPageRoute(builder: (context)=>AllCourses())
-                                  );
-                                 },
+                                      context,
+                                      MaterialPageRoute(
+                                          builder: (context) => AllCourses()));
+                                },
                               ),
                             ],
                           ),
@@ -189,17 +201,24 @@ class _HomeState extends State<Home> {
                             scrollDirection: Axis.horizontal,
                             child: Padding(
                               padding: const EdgeInsets.all(10.0),
+
                               child: FutureBuilder<List<Course>>(
                                   future: CourseController.getNewCourses(),
-                                  builder: (context, snapshot) {
+                               
+                                 builder: (context, snapshot) {
                                     if (!snapshot.hasData) {
                                       return Center(
                                           child: CircularProgressIndicator());
                                     }
-                                     final courses = snapshot.data!;
-                                    return Row(
-                                      children: courses
-                                          .map((course) => cours(
+
+                                    final courses = snapshot.data!;
+                                    return 
+                                    
+                                    Row(
+                                      children:
+                                       courses
+                                          .map((course) =>
+                                          cours(
                                                 coursImage:
                                                     NetworkImage(course.image),
                                                 coursName: course.name,
@@ -241,9 +260,9 @@ class _HomeState extends State<Home> {
                                     color: Colors.black),
                                 onPressed: () {
                                   Navigator.push(
-                                    context,
-                                    MaterialPageRoute(builder: (context)=>SaleCourses())
-                                  );
+                                      context,
+                                      MaterialPageRoute(
+                                          builder: (context) => SaleCourses()));
                                 },
                               ),
                             ],
@@ -267,7 +286,7 @@ class _HomeState extends State<Home> {
                                                     NetworkImage(sale.image),
                                                 coursName: sale.name,
                                                 instutName: sale.institute,
-                                                isFree: sale.isFree, 
+                                                isFree: sale.isFree,
                                                 courseId: sale.id,
                                               ))
                                           .toList(),
@@ -303,10 +322,10 @@ class _HomeState extends State<Home> {
                                     fontWeight: FontWeight.w300,
                                     color: Colors.black),
                                 onPressed: () {
-                                   Navigator.push(
-                                    context,
-                                    MaterialPageRoute(builder: (context)=>Instuites())
-                                  );
+                                  Navigator.push(
+                                      context,
+                                      MaterialPageRoute(
+                                          builder: (context) => Instuites()));
                                 },
                               ),
                             ],
@@ -332,7 +351,7 @@ class _HomeState extends State<Home> {
                                                 instName: institute.name,
                                                 aboutInst:
                                                     institute.description,
-                                                     instId:institute.id ,
+                                                instId: institute.id,
                                               ))
                                           .toList(),
                                     );

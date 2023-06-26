@@ -1,3 +1,5 @@
+// ignore_for_file: file_names, dead_code
+
 import 'dart:convert';
 
 import 'package:http/http.dart' as http;
@@ -98,20 +100,20 @@ abstract class FirebaseHelper {
       });
     }
   }
-
+  
   static Future<String?> createToken() async {
-    // //TODO:: check if it's working on production
-    // return await FirebaseMessaging.instance.getToken().then((value) {
-    //   // ignore: avoid_print
-    //   print(value);
-    //   return value ?? 'dsadsa';
+    //TODO:: check if it's working on production
+    return await FirebaseMessaging.instance.getToken().then((value) {
+      // ignore: avoid_print
+      print(value);
+      return value ?? 'dsadsa';
     return 'test';
   }
-  //);
-  //}
+  );
+  }
 
-  static void deleteToken() async => 0;
-  //await FirebaseMessaging.instance.deleteToken();
+  static void deleteToken() async => 
+  await FirebaseMessaging.instance.deleteToken();
 }
 
 class NotificationRepository {

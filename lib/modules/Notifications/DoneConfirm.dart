@@ -1,3 +1,5 @@
+// ignore_for_file: file_names, unused_import
+
 import 'package:courso/layout/Home_loayout/Home_layout.dart';
 import 'package:courso/modules/Notifications/notifications.dart';
 import 'package:courso/shared/components/components.dart';

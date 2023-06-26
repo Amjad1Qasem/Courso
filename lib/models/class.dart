@@ -76,17 +76,89 @@ class Institute {
   }
 }
 
+class Search {
+  List<Course> courses;
+  List<Institute> institutes;
+
+  Search({required this.courses, required this.institutes});
+
+  factory Search.fromJson(Map<String, dynamic> json) {
+    final List<dynamic> coursesJson = json['courses'] ?? [];
+    final List<dynamic> institutesJson = json['institutes'] ?? [];
+
+    final courses = coursesJson.map((courseJson) => Course.fromJson(courseJson)).toList();
+    final institutes = institutesJson.map((instituteJson) => Institute.fromJson(instituteJson)).toList();
+
+    return Search(courses: courses, institutes: institutes);
+  }
+}
+
+
+class Profile {
+  int id;
+  String image;
+  String phone;
+  String firstName;
+  String lastName;
+  int birthDate;
+  String sex;
+  String nationality;
+  String address;
+  String socialStatus;
+  String educationStatus;
+  String email;
+  DateTime emailVerifiedAt;
+  int isAdmin;
+  DateTime createdAt;
+  DateTime updatedAt;
+
+  Profile({
+   required this.id,
+   required this.image,
+   required this.phone,
+   required this.firstName,
+   required this.lastName,
+   required this.birthDate,
+   required this.sex,
+   required this.nationality,
+   required this.address,
+   required this.socialStatus,
+   required this.educationStatus,
+   required this.email,
+   required this.emailVerifiedAt,
+   required this.isAdmin,
+   required this.createdAt,
+   required this.updatedAt,
+  });
+
+  factory Profile.fromJson(Map<String, dynamic> json) {
+    return Profile(
+      id: json['id'],
+      image: json['image'],
+      phone: json['phone'],
+      firstName: json['first_name'],
+      lastName: json['last_name'],
+      birthDate: json['birth_date'],
+      sex: json['sex'],
+      nationality: json['nationality'],
+      address: json['address'],
+      socialStatus: json['socail_status'],
+      educationStatus: json['education_status'],
+      email: json['email'],
+      emailVerifiedAt: json['email_verified_at'] != null ? DateTime.parse(json['email_verified_at']) : DateTime(1970),
+      isAdmin: json['is_admin'],
+      createdAt: DateTime.parse(json['created_at']),
+      updatedAt: DateTime.parse(json['updated_at']),
+    );
+  }
+}
+
 class Categor {
   int id;
   String name;
   String image;
 
-  Categor({
-     required this.id,
-     required this.name, 
-     required this.image
-     
-      });
+  Categor({required this.id, required this.name, required this.image});
 
   factory Categor.fromJson(Map<String, dynamic> json) {
     return Categor(
@@ -106,22 +178,22 @@ class CourseDetails {
   String instituteName;
   String instituteImage;
   List<String> teachers;
-  int  regularPrice;
-  int ? salePrice;
-  String ? sundayStartTime;
-  String ? sundayEndTime;
-  String ? mondayStartTime;
-  String ? mondayEndTime;
-  String ? tuesdayStartTime;
-  String ? tuesdayEndTime;
-  String ? wednesdayStartTime;
-  String ? wednesdayEndTime;
-  String ? thursdayStartTime;
-  String ? thursdayEndTime;
-  String ? fridayStartTime;
-  String ? fridayEndTime;
-  String ? saturdayStartTime;
-  String ? saturdayEndTime;
+  int regularPrice;
+  int? salePrice;
+  String? sundayStartTime;
+  String? sundayEndTime;
+  String? mondayStartTime;
+  String? mondayEndTime;
+  String? tuesdayStartTime;
+  String? tuesdayEndTime;
+  String? wednesdayStartTime;
+  String? wednesdayEndTime;
+  String? thursdayStartTime;
+  String? thursdayEndTime;
+  String? fridayStartTime;
+  String? fridayEndTime;
+  String? saturdayStartTime;
+  String? saturdayEndTime;
   String address;
   String mainPoints;
   String registerOpen;
@@ -174,7 +246,7 @@ class CourseDetails {
       teachers: List<String>.from(json['teachers']),
       regularPrice: json['regular_price'],
       salePrice: json['sale_price'],
-     sundayStartTime: json['sunday_start_time'],
+      sundayStartTime: json['sunday_start_time'],
       sundayEndTime: json['sunday_end_time'],
       mondayStartTime: json['monday_start_time'],
       mondayEndTime: json['monday_end_time'],
@@ -198,11 +270,6 @@ class CourseDetails {
   }
 }
 
-
-
-
-
-
 class InstituteDetails {
   int id;
   String name;
@@ -216,16 +283,16 @@ class InstituteDetails {
   List<ComingCourse> comingCourses;
 
   InstituteDetails({
-   required this.id,
-   required this.name,
-   required this.image,
-   required this.description,
-   required this.address,
-   required this.website,
-   required this.phone,
-   required this.facebook,
-   required this.currentCourses,
-   required this.comingCourses,
+    required this.id,
+    required this.name,
+    required this.image,
+    required this.description,
+    required this.address,
+    required this.website,
+    required this.phone,
+    required this.facebook,
+    required this.currentCourses,
+    required this.comingCourses,
   });
 
   factory InstituteDetails.fromJson(Map<String, dynamic> json) {
@@ -233,7 +300,7 @@ class InstituteDetails {
     List<ComingCourse> comingCourses =
         comingCoursesList.map((e) => ComingCourse.fromJson(e)).toList();
 
-         var currentCoursesList = json['current_courses'] as List;
+    var currentCoursesList = json['current_courses'] as List;
     List<ComingCourse> currentCourses =
         currentCoursesList.map((e) => ComingCourse.fromJson(e)).toList();
 
@@ -260,11 +327,11 @@ class ComingCourse {
   bool isFree;
 
   ComingCourse({
-   required this.id,
-   required this.name,
-   required this.image,
-   required this.institute,
-   required this.isFree,
+    required this.id,
+    required this.name,
+    required this.image,
+    required this.institute,
+    required this.isFree,
   });
 
   factory ComingCourse.fromJson(Map<String, dynamic> json) {
@@ -277,20 +344,6 @@ class ComingCourse {
     );
   }
 }
-
-
-
-
-
-
-
-
-
-
-
-
-
-
 
 // class CoursModel {
 //   final ImageProvider coursImage;
