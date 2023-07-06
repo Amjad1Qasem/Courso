@@ -1,13 +1,17 @@
 // ignore_for_file: unnecessary_new, non_constant_identifier_names, prefer_const_constructors
 
+import 'package:courso/controllers/coursController.dart';
+import 'package:courso/models/class.dart';
 import 'package:courso/shared/components/components.dart';
 import 'package:flutter/material.dart';
 
-GlobalKey<ScaffoldState> ScaffoldKey = new GlobalKey<ScaffoldState>();
+
 
 class Notifications extends StatelessWidget {
-  const Notifications({super.key});
-  static String id = 'Notifications';
+  const Notifications({super.key,});
+  static String id = 'notificationId';
+  // final int NotId;
+
 
   @override
   Widget build(BuildContext context) {
@@ -27,78 +31,41 @@ class Notifications extends StatelessWidget {
         ),
         centerTitle: true,
       ),
-      body: Center(
-        child: Padding(
-          padding: const EdgeInsets.all(20.0),
-          child: Column(
-            crossAxisAlignment: CrossAxisAlignment.center,
-            //mainAxisAlignment: MainAxisAlignment.center,
-            children: [
-              GestureDetector(
-                onTap: (){
-
-                },
-                child: Row(
-                  children: [
-                    const Image(
-                      image: AssetImage('assets/images/C1.png'),
-                      width: 80,
-                      height: 80,
-                    ),
-                    const SizedBox(
-                      width: 20,
-                    ),
-                      const Expanded(
-                      child: Text(
-                        'قام معهد الحضارة بارسال اشعار ',
-                        overflow: TextOverflow.ellipsis,
-                        maxLines: 2,
-                        style: TextStyle(
-                            fontSize: 18,
-                            fontWeight: FontWeight.w500,
-                            fontFamily: 'cairo'),
-                      ),
-                    ),
-                    IconButton(
-                      icon: const Icon(Icons.more_vert, size: 25),
-                      onPressed: () {
-                        ScaffoldMessenger.of(context).showSnackBar(
-                          SnackBar(
-                              behavior: SnackBarBehavior.floating,
-                              backgroundColor:
-                                  const Color.fromARGB(255, 23, 29, 36)
-                                      .withOpacity(0.9),
-                              margin: const EdgeInsetsDirectional.only(
-                                  start: 6, end: 6, bottom: 6),
-                              content: Padding(
-                                padding:
-                                    const EdgeInsetsDirectional.only(start: 10),
-                                child: defText(
-                                    text: 'هل تريد حذف هذا الاشعار ؟',
-                                    size: 20,
-                                    fontWeight: FontWeight.w500,
-                                    color: Colors.white),
-                              ),
-                              duration: const Duration(minutes: 1),
-                              action: SnackBarAction(
-                                  label: 'تأكيد', onPressed: () {
-                                    
-                                  })),
-                        );
-                      },
-                    )
-                  ],
-                ),
+      body: 
+      FutureBuilder<List<Notificat>>(
+        future: NotController.getNewNot(),
+        builder: (context, snapshot) {
+         if (!snapshot.hasData) {
+                        return Center(child: CircularProgressIndicator());
+                      }
+                      final N = snapshot.data!;
+          return
+           Padding(
+             padding: const EdgeInsets.all(20.0),
+             child:
+              SingleChildScrollView(
+                child: Column(
+                 crossAxisAlignment: CrossAxisAlignment.center,
+                 //mainAxisAlignment: MainAxisAlignment.center,
+                 children: N.map((notification) =>  GestureDetector(
+                     onTap: (){
+                       
+                     },
+                     child: 
+                     ListTile(
+                       textColor: Color(0xff333333),
+                       leading: Image(image: NetworkImage(notification.courseImage)),
+                       title: Text(notification.courseName),
+                       subtitle: Text(notification.approved? " تمت الموافقة على طلب التسجيل":"  لم يتم الموافقة على طلب التسجيل  "),
+                    
+                    
+                     ),
+                   ),
+                    ).toList()
+                            ),
               ),
-
-              // defText(
-              //     text: 'لا يوجد اي اشعارات جديدة',
-              //     size: 20,
-              //     fontWeight: FontWeight.w500,
-              //     color: Colors.black.withOpacity(0.5))
-            ],
-          ),
-        ),
+           );
+        }
       ),
     );
   }

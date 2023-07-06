@@ -102,7 +102,6 @@ abstract class FirebaseHelper {
   }
   
   static Future<String?> createToken() async {
-    //TODO:: check if it's working on production
     return await FirebaseMessaging.instance.getToken().then((value) {
       // ignore: avoid_print
       print(value);

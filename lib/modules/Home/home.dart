@@ -99,18 +99,9 @@ class _HomeState extends State<Home> {
                       if (!snapshot.hasData) {
                         return Center(child: CircularProgressIndicator());
                       }
-                      print(
-                          "ddddddddddddddddddddddddddddddddddddddddddddddddd");
                       final prof = snapshot.data!;
                       return Row(
-                        children: [
-                          CircleAvatar(
-                              radius: 20,
-                              backgroundImage:
-                                  AssetImage('assets/images/c1.png')),
-                          SizedBox(
-                            width: 8,
-                          ),
+                        children: [                  
                           Text(
                             '${prof.firstName}' ' ${prof.lastName}',
                             style: TextStyle(

@@ -1,4 +1,4 @@
-// ignore_for_file: file_names, unnecessary_import, unused_import, avoid_print, duplicate_ignore
+// ignore_for_file: file_names, unnecessary_import, unused_import, avoid_print, duplicate_ignore, use_build_context_synchronously
 
 import 'package:courso/controllers/coursController.dart';
 import 'package:courso/layout/Home_loayout/Home_layout.dart';
@@ -134,6 +134,8 @@ class _LoginState extends State<Login> {
                             emailcontroller.text, passcontroller.text);
                         if (Error == null) {
                           // ignore: use_build_context_synchronously
+                          emailcontroller.clear();
+                          passcontroller.clear();
                           Navigator.of(context)
                               .pushReplacementNamed(Home_Layout.id);
                         } else {
@@ -149,7 +151,6 @@ class _LoginState extends State<Login> {
                     },
                   );
                 }),
-          
                 const SizedBox(
                   height: 10,
                 ),

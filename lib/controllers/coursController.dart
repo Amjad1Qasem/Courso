@@ -75,6 +75,21 @@ class MyCourseController {
   }
 }
 
+
+class DeletController {
+  Future<void> deleteNotification(int NotId) async {
+    final url = Uri.parse('http://10.0.2.2/api/notification/$NotId');
+    final response = await http.delete(url);
+    if (response.statusCode != 200) {
+      final responseBody = jsonDecode(response.body);
+      throw Exception('Failed to delete notification: ${responseBody['message']}');
+    }
+  }
+}
+
+
+
+
 class CourseSaleController {
   static Future<List<Sale>> getNewSales() async {
     final SharedPreferences prefs = await SharedPreferences.getInstance();
@@ -194,6 +209,7 @@ class InstituteDetailsController {
   }
 }
 
+
 class RegisterController {
   static Future<String?> getNewRegister(
     // ignore: non_constant_identifier_names
@@ -211,7 +227,6 @@ class RegisterController {
   ) async {
     final fcmToken = await FirebaseHelper.createToken();
     final response = await http.post(
-        //لجعل الباك يعطيني خرج json
         headers: {
           'accept': 'application/json',
         },
@@ -240,9 +255,12 @@ class RegisterController {
       await prefs.setString('token', token);
       return null;
     }
-    return 'الرجاء التأكد من صحة الحقول';
+
+    return jsonDecode(response.body)['message'].toString().contains('phone') ? 
+    'هذا الرقم موجود بالفعل' : 'هذا الايميل موجود بالفعل';
   }
 }
+
 
 class LoginController {
   static Future<String?> getNewLogin(
@@ -332,6 +350,58 @@ class LogOutController {
 }
 
 
+
+class ProfilePostController {
+  static Future<String?> getNewProfilePost(
+    // ignore: non_constant_identifier_names
+    String first_name,
+    String last_name,
+    String birth_date,
+    String phone,
+    String sex,
+    String nationality,
+    String address,
+    String email,
+    String pass,
+    String education_status,
+    String socail_status,
+  ) async {
+  
+    final response = await http.post(
+        headers: {
+          'accept': 'application/json',
+        },
+        body: {
+          'email': email,
+          'password': pass,
+          "education_status": education_status,
+          "socail_status": socail_status,
+          "address": address,
+          "nationality": nationality,
+          "sex": sex,
+          "birth_date": birth_date,
+          "last_name": last_name,
+          "first_name": first_name,
+          "phone": phone,
+          
+        },
+        Uri.parse('http://localhost:8000/api/profile'));
+    print(response.body);
+    //200 status =ok
+    //300 > 50/100 error/ok
+    //400> 100/100 error
+    if (response.statusCode == 200) {
+      final token = jsonDecode(response.body)['token'] as String;
+      final SharedPreferences prefs = await SharedPreferences.getInstance();
+      await prefs.setString('token', token);
+      return null;
+    }
+
+    return jsonDecode(response.body)['message'].toString().contains('phone') ? 
+    'هذا الرقم موجود بالفعل' : 'هذا الايميل موجود بالفعل';
+  }
+}
+
 class ProfileController {
   static Future<Profile> getNewprofile() async {
     final SharedPreferences prefs = await SharedPreferences.getInstance();
@@ -401,7 +471,7 @@ class EditProfileController {
     String education_status,
     String socail_status,
   ) async {
-    final fcmToken = await FirebaseHelper.createToken();
+    
     final SharedPreferences prefs = await SharedPreferences.getInstance();
     final token = prefs.getString('token');
     final response = await http.post(
@@ -411,6 +481,8 @@ class EditProfileController {
           HttpHeaders.authorizationHeader: 'Bearer $token'
         },
         body: {
+          "first_name": first_name,
+          "last_name": last_name,
           'email': email,
           'password': pass,
           "education_status": education_status,
@@ -419,44 +491,65 @@ class EditProfileController {
           "nationality": nationality,
           "sex": sex,
           "birth_date": birth_date,
-          "last_name": last_name,
-          "first_name": first_name,
           "phone": phone,
-          'fcm_token': fcmToken
+
         },
-        Uri.parse('http://localhost:8000/api/register'));
+        Uri.parse('http://localhost:8000/api/profile'));
     print(response.body);
     //200 status =ok
     //300 > 50/100 error/ok
     //400> 100/100 error
-    if (response.statusCode == 200) {
-      final token = jsonDecode(response.body)['token'] as String;
-      final SharedPreferences prefs = await SharedPreferences.getInstance();
-      await prefs.setString('token', token);
+      if (response.statusCode == 200) {
       return null;
     }
-    return ' بوجد خطأ ';
+    return jsonDecode(response.body)['message'].toString().contains('phone') ? 
+    'هذا الرقم موجود بالفعل' : 'هذا الايميل موجود بالفعل';
   }
 }
 
 class RegisterOnCoursController {
   static Future<String> getNewRegisterOnCours(int courseId) async {
+     
     final SharedPreferences prefs = await SharedPreferences.getInstance();
     final token = prefs.getString('token');
     final response = await http.post(
-      Uri.parse('http://localhost:8000/api/registeration/$courseId'),
+      Uri.parse('http://localhost:8000/api/registeration'),
       headers: {
-        'Content-Type': 'application/json',
-        'Authorization': 'Bearer $token',
+        'accept': 'application/json',
+        HttpHeaders.authorizationHeader: 'Bearer $token'
       },
-      body: jsonEncode({
-        'course_id': courseId,
-      }),
+      body: {
+        'course_id': courseId.toString(),
+      },
     );
-    if (response.statusCode == 200) {
+    print(response.body);
+    if (response.statusCode == 204) {
       return response.body;
     } else {
       throw Exception('Failed to register for course.');
     }
   }
 }
+
+
+class NotController {
+  static Future<List<Notificat>> getNewNot() async {
+
+    final SharedPreferences prefs = await SharedPreferences.getInstance();
+    final token = prefs.getString('token');  
+    final response = await http.get(
+      Uri.parse('http://localhost:8000/api/notification'),
+      headers: {
+        'accept': 'application/json',
+        HttpHeaders.authorizationHeader: 'Bearer $token'
+      },
+    );
+    print(response.body);
+    return (jsonDecode(response.body)['data'] as List)
+        .map((json) => Notificat.fromJson(json))
+        .toList();
+  }
+}
+
+
+

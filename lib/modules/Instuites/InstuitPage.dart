@@ -84,8 +84,8 @@ class _InstuitPageState extends State<InstuitPage> {
                             child: ClipRRect(
                               borderRadius: BorderRadius.circular(10.0),
                               child: Image(
-                                  width: 335,
-                                  height: 305,
+                                  width: 300,
+                                  height: 250,
                                   fit: BoxFit.cover,
                                   image: NetworkImage(Instdetail.image)),
                             ),
@@ -103,7 +103,8 @@ class _InstuitPageState extends State<InstuitPage> {
                         top: 8,
                       ),
                       child: Column(
-                        mainAxisAlignment: MainAxisAlignment.start,
+                        mainAxisAlignment: MainAxisAlignment.end,
+                        crossAxisAlignment: CrossAxisAlignment.start,
                         children: [
                           defText(
                               text: Instdetail.name,
@@ -391,7 +392,8 @@ class _InstuitPageState extends State<InstuitPage> {
                                     padding: const EdgeInsets.all(10.0),
                                     child: Row(children: [
                                       ...Instdetail.comingCourses
-                                          .map((Instdetail) => cours(
+                                          .map((Instdetail) => 
+                                          cours(
                                                 coursImage: NetworkImage(
                                                     Instdetail.image),
                                                 coursName: Instdetail.name,
@@ -409,54 +411,55 @@ class _InstuitPageState extends State<InstuitPage> {
                     const SizedBox(
                       height: 20,
                     ),
-                    SingleChildScrollView(
-                      child: Padding(
-                        padding: const EdgeInsets.all(15.0),
-                        child: Column(
-                          crossAxisAlignment: CrossAxisAlignment.start,
-                          children: [
-                            Row(
-                              mainAxisAlignment: MainAxisAlignment.spaceBetween,
-                              children: [
-                                defText(
-                                    text: ' الدورات القادمة :',
-                                    size: 25,
-                                    fontWeight: FontWeight.w400,
-                                    color: Colors.black),
-                                TextButton(
-                                  child: defText(
-                                      text: 'عرض الكل',
-                                      size: 15,
-                                      fontWeight: FontWeight.w400,
-                                      color: Colors.black),
-                                  onPressed: () {},
-                                ),
-                              ],
-                            ),
-                            SingleChildScrollView(
-                                scrollDirection: Axis.horizontal,
-                                child: Padding(
-                                    padding: const EdgeInsets.all(10.0),
-                                    child: Row(children: [
-                                      ...Instdetail.currentCourses
-                                          .map((Instdetail) => cours(
-                                                coursImage: NetworkImage(
-                                                    Instdetail.image),
-                                                coursName: Instdetail.name,
-                                                instutName:
-                                                    Instdetail.institute,
-                                                isFree: Instdetail.isFree,
-                                                courseId: Instdetail.id,
-                                              ))
-                                          .toList(),
-                                    ]))),
-                            const SizedBox(
-                              height: 20,
-                            ),
-                          ],
-                        ),
-                      ),
-                    ),
+                    // SingleChildScrollView(
+                    //   child: Padding(
+                    //     padding: const EdgeInsets.all(15.0),
+                    //     child: Column(
+                    //       crossAxisAlignment: CrossAxisAlignment.start,
+                    //       children: [
+                    //         Row(
+                    //           mainAxisAlignment: MainAxisAlignment.spaceBetween,
+                    //           children: [
+                    //             defText(
+                    //                 text: ' الدورات القادمة :',
+                    //                 size: 25,
+                    //                 fontWeight: FontWeight.w400,
+                    //                 color: Colors.black),
+                    //             TextButton(
+                    //               child: defText(
+                    //                   text: 'عرض الكل',
+                    //                   size: 15,
+                    //                   fontWeight: FontWeight.w400,
+                    //                   color: Colors.black),
+                    //               onPressed: () {},
+                    //             ),
+                    //           ],
+                    //         ),
+                    //         SingleChildScrollView(
+                    //             scrollDirection: Axis.horizontal,
+                    //             child: Padding(
+                    //                 padding: const EdgeInsets.all(10.0),
+                    //                 child: Row(children: [
+                    //                   ...Instdetail.currentCourses
+                    //                       .map((Instdetail) => cours(
+                    //                             coursImage: NetworkImage(
+                    //                                 Instdetail.image),
+                    //                             coursName: Instdetail.name,
+                    //                             instutName:
+                    //                                 Instdetail.institute,
+                    //                             isFree: Instdetail.isFree,
+                    //                             courseId: Instdetail.id,
+                    //                           ))
+                    //                       .toList(),
+                    //                 ]))),
+                    //         const SizedBox(
+                    //           height: 20,
+                    //         ),
+                    //       ],
+                    //     ),
+                    //   ),
+                    // ),
+               
                   ],
                 ),
               ),

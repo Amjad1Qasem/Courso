@@ -52,6 +52,8 @@ class MyApp extends StatelessWidget {
         AppLocalizations.delegate,
         GlobalCupertinoLocalizations.delegate,
         GlobalWidgetsLocalizations.delegate,
+
+        
         GlobalMaterialLocalizations.delegate,
       ],
       // initialRoute: Splash.id,

@@ -51,9 +51,11 @@ Widget defaultTextFormField({
   IconData? sufix,
   IconData? prifix,
   bool securTrue = false,
+  bool readonly = false,
 }) =>
     TextFormField(
       //cursorColor: Colors.red,
+      readOnly: readonly,
       validator: validator!,
       style: const TextStyle(
         color: Color(0xFF333333),
@@ -109,6 +111,7 @@ Widget defaultApppar({
     );
 
 // Coures
+
 Widget cours({
   required int courseId,
   required ImageProvider coursImage,

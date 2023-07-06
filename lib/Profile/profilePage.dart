@@ -60,15 +60,15 @@ class Profile extends StatelessWidget {
                                 crossAxisAlignment: CrossAxisAlignment.center,
                                 children: [
                                   // ignore: prefer_const_constructors
-                                  CircleAvatar(
-                                    // backgroundImage: const AssetImage(
-                                    //     'assets/images/userImagepng.png'),
-                                    backgroundImage: NetworkImage(p.image),
-                                    radius: 75,
-                                  ),
-                                  const SizedBox(
-                                    height: 0,
-                                  ),
+                                  // CircleAvatar(
+                                  //   // backgroundImage: const AssetImage(
+                                  //   //     'assets/images/userImagepng.png'),
+                                  //   backgroundImage: NetworkImage(p.image),
+                                  //   radius: 75,
+                                  // ),
+                                  // const SizedBox(
+                                  //   height: 0,
+                                  // ),
                                   defText(
                                       text: '${p.firstName}' ' ${p.lastName}',
                                       size: 25,
@@ -133,6 +133,9 @@ class Profile extends StatelessWidget {
                               child: TextButton(
                                   onPressed: () {
                                     Navigator.push(
+                                      
+
+
                                       context,
                                       MaterialPageRoute(
                                           builder: (context) =>
@@ -280,6 +283,7 @@ Widget Mycours({
                     ))
               ],
             ),
+            
             Expanded(
               child: Padding(
                 padding: const EdgeInsets.symmetric(horizontal: 8),

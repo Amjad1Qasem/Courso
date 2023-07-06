@@ -94,13 +94,72 @@ class Search {
 }
 
 
+// class Profile {
+//   int id;
+//   String image;
+//   String phone;
+//   String firstName;
+//   String lastName;
+//   DateTime birthDate;
+//   String sex;
+//   String nationality;
+//   String address;
+//   String socialStatus;
+//   String educationStatus;
+//   String email;
+//   DateTime emailVerifiedAt;
+//   int isAdmin;
+//   DateTime createdAt;
+//   DateTime updatedAt;
+
+//   Profile({
+//    required this.id,
+//    required this.image,
+//    required this.phone,
+//    required this.firstName,
+//    required this.lastName,
+//    required this.birthDate,
+//    required this.sex,
+//    required this.nationality,
+//    required this.address,
+//    required this.socialStatus,
+//    required this.educationStatus,
+//    required this.email,
+//    required this.emailVerifiedAt,
+//    required this.isAdmin,
+//    required this.createdAt,
+//    required this.updatedAt,
+//   });
+
+//   factory Profile.fromJson(Map<String, dynamic> json) {
+//     return Profile(
+//       id: json['id'],
+//       image: json['image'],
+//       phone: json['phone'],
+//       firstName: json['first_name'],
+//       lastName: json['last_name'],
+//       birthDate:  DateTime.parse(json['birth_date']),
+//       sex: json['sex'],
+//       nationality: json['nationality'],
+//       address: json['address'],
+//       socialStatus: json['socail_status'],
+//       educationStatus: json['education_status'],
+//       email: json['email'],
+//       emailVerifiedAt: json['email_verified_at'] != null ? DateTime.parse(json['email_verified_at']) : DateTime(1970),
+//       isAdmin: json['is_admin'],
+//       createdAt: DateTime.parse(json['created_at']),
+//       updatedAt: DateTime.parse(json['updated_at']),
+//     );
+//   }
+// }
+
 class Profile {
   int id;
   String image;
   String phone;
   String firstName;
   String lastName;
-  int birthDate;
+  DateTime birthDate;
   String sex;
   String nationality;
   String address;
@@ -108,27 +167,25 @@ class Profile {
   String educationStatus;
   String email;
   DateTime emailVerifiedAt;
-  int isAdmin;
   DateTime createdAt;
   DateTime updatedAt;
-
+  
   Profile({
-   required this.id,
-   required this.image,
-   required this.phone,
-   required this.firstName,
-   required this.lastName,
-   required this.birthDate,
-   required this.sex,
-   required this.nationality,
-   required this.address,
-   required this.socialStatus,
-   required this.educationStatus,
-   required this.email,
-   required this.emailVerifiedAt,
-   required this.isAdmin,
-   required this.createdAt,
-   required this.updatedAt,
+  required this.id,
+  required this.image,
+  required this.phone,
+  required this.firstName,
+  required this.lastName,
+  required this.birthDate,
+  required this.sex,
+  required this.nationality,
+  required this.address,
+  required this.socialStatus,
+  required this.educationStatus,
+  required this.email,
+  required this.emailVerifiedAt,
+  required this.createdAt,
+  required this.updatedAt,
   });
 
   factory Profile.fromJson(Map<String, dynamic> json) {
@@ -138,20 +195,22 @@ class Profile {
       phone: json['phone'],
       firstName: json['first_name'],
       lastName: json['last_name'],
-      birthDate: json['birth_date'],
+      birthDate: DateTime.fromMillisecondsSinceEpoch(json['birth_date']),
       sex: json['sex'],
       nationality: json['nationality'],
       address: json['address'],
       socialStatus: json['socail_status'],
       educationStatus: json['education_status'],
       email: json['email'],
-      emailVerifiedAt: json['email_verified_at'] != null ? DateTime.parse(json['email_verified_at']) : DateTime(1970),
-      isAdmin: json['is_admin'],
+        emailVerifiedAt: json['email_verified_at'] != null ? DateTime.parse(json['email_verified_at']) : DateTime(1970),
       createdAt: DateTime.parse(json['created_at']),
       updatedAt: DateTime.parse(json['updated_at']),
     );
   }
 }
+
+
+
 
 class Categor {
   int id;
@@ -318,6 +377,39 @@ class InstituteDetails {
     );
   }
 }
+
+
+
+class Notificat {
+  int id;
+  String courseImage;
+  String courseName;
+  bool approved;
+  int registrationId;
+
+  Notificat({
+    required this.id,
+    required this.courseImage,
+    required this.courseName,
+    required this.approved,
+    required this.registrationId,
+  });
+
+  factory Notificat.fromJson(Map<String, dynamic> json) {
+    return Notificat(
+      id: json['id'],
+      courseImage: json['course_image'],
+      courseName: json['course_name'],
+      approved: json['approved'],
+      registrationId: json['registeration_id'],
+    );
+  }
+}
+
+
+
+
+
 
 class ComingCourse {
   int id;

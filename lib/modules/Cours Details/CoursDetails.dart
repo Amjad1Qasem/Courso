@@ -40,7 +40,6 @@ class _DetailsState extends State<Details> {
               );
             }
             final Coursdetail = snapshot.data!;
-
             return SingleChildScrollView(
               child: Column(
                 children: [
@@ -676,14 +675,14 @@ class _DetailsState extends State<Details> {
                         Row(
                           textBaseline: TextBaseline.alphabetic,
                           children: [
-                            const Image(
-                              image: AssetImage('assets/images/checkIcon.png'),
-                              width: 25,
-                              height: 25,
-                            ),
-                            const SizedBox(
-                              width: 13,
-                            ),
+                            // const Image(
+                            //   image: AssetImage('assets/images/checkIcon.png'),
+                            //   width: 25,
+                            //   height: 25,
+                            // ),
+                            // const SizedBox(
+                            //   width: 13,
+                            // ),
                             defText(
                                 text: Coursdetail.mainPoints,
                                 size: 15,
@@ -704,11 +703,9 @@ class _DetailsState extends State<Details> {
                                     await RegisterOnCoursController
                                         .getNewRegisterOnCours(widget.CoursId);
                                 //ignore: use_build_context_synchronously
-                                Navigator.push(
-                                    context,
-                                    MaterialPageRoute(
-                                        builder: (context) => Done()));
-                              } catch (e) {
+                             Navigator.of(context).pushReplacementNamed(Done.id);
+                              }
+                               catch (e) {
                                 print(e);
                               }
                             },

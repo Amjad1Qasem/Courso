@@ -1,4 +1,4 @@
-// ignore_for_file: file_names, unused_import, non_constant_identifier_names, body_might_complete_normally_nullable, duplicate_ignore
+// ignore_for_file: file_names, unused_import, non_constant_identifier_names, body_might_complete_normally_nullable, duplicate_ignore, unused_local_variable
 
 import 'package:courso/controllers/coursController.dart';
 import 'package:form_field_validator/form_field_validator.dart';
@@ -13,13 +13,14 @@ var phonecontroller = TextEditingController();
 var emailcontroller = TextEditingController();
 var passcontroller = TextEditingController();
 var locationregcontroller = TextEditingController();
-var nationalityregcontroller = TextEditingController();
+// var nationalityregcontroller = TextEditingController();
 var birthdateregcontroller = TextEditingController();
 //var formkey = GlobalKey<FormState>();
 bool secure = true;
 GlobalKey<FormState> formkey = GlobalKey<FormState>();
 GlobalKey checkboxkey = GlobalKey();
 String Selectedgender = 'ذكر';
+String nationalityregcontroller  ='سوري';
 String SocialStatus = 'لا أعمل';
 String CertificateType = 'المرحلة الابتدائية';
 bool ischacked = false;
@@ -38,215 +39,6 @@ class _RegisterState extends State<Register> {
       child: Scaffold(
         backgroundColor: Colors.white,
         body:
-            //  Padding(
-            //   padding: const EdgeInsets.all(20.0),
-            //   child: Center(
-            //     child: SingleChildScrollView(
-            //       child: Form(
-            //         key: formkey,
-            //         child: Column(
-            //           children: [
-            //             const Image(
-            //               image: AssetImage('assets/images/Hello-pana.png'),
-            //               width: 200,
-            //               height: 200,
-            //             ),
-            //             defaultTextFormField(
-            //               hintText: ' ',
-            //               sufixfun: () {
-            //                 setState(() {});
-            //                 return null;
-            //               },
-            //               validator: MultiValidator([
-            //                 RequiredValidator(
-            //                     errorText: 'first name must not be empty'),
-            //                 // MinLengthValidator(8,
-            //                 //     errorText:
-            //                 //         'first name must be at least 8 digits long'),
-
-            //                 // PatternValidator(r'(?=.*?[#?!@$%^&*-])', errorText: 'first name must have at least one special character')
-            //               ]),
-            //               radius: 15,
-            //               controller: firstnamecontroller,
-            //               keyboard: TextInputType.name,
-            //               labText: 'الاسم ',
-            //               prifix: Icons.person,
-            //             ),
-            //             const SizedBox(
-            //               height: 10,
-            //             ),
-            //             defaultTextFormField(
-            //               hintText: ' ',
-            //               sufixfun: () {
-            //                 setState(() {});
-            //                 return null;
-            //               },
-            //               validator: MultiValidator([
-            //                 RequiredValidator(
-            //                     errorText: 'last name must not be empty'),
-            //                 // MinLengthValidator(8,
-            //                 //     errorText:
-            //                 //         'last name must be at least 8 digits long'),
-
-            //                 // PatternValidator(r'(?=.*?[#?!@$%^&*-])', errorText: 'last name must have at least one special character')
-            //               ]),
-            //               radius: 15,
-            //               controller: lastnamecontroller,
-            //               keyboard: TextInputType.emailAddress,
-            //               labText: 'الكنية',
-            //               prifix: Icons.person,
-            //             ),
-            //             const SizedBox(
-            //               height: 10,
-            //             ),
-            //             defaultTextFormField(
-            //               hintText: ' ',
-            //               sufixfun: () {
-            //                 setState(() {});
-            //                 return null;
-            //               },
-            //               validator: MultiValidator([
-            //                 RequiredValidator(
-            //                     errorText: ' phone must not be empty'),
-            //                 MinLengthValidator(10,
-            //                     errorText: 'phone must be at least 10 digits long'),
-            //                 // PatternValidator(r'(?=.*?[#?!@$%^&*-])', errorText: 'phone must have at least one special character')
-            //               ]),
-            //               radius: 15,
-            //               controller: phonecontroller,
-            //               keyboard: TextInputType.number,
-            //               labText: 'الهاتف',
-            //               prifix: Icons.phone_android,
-            //             ),
-            //             const SizedBox(
-            //               height: 10,
-            //             ),
-            //             defaultTextFormField(
-            //               hintText: ' ',
-            //               sufixfun: () {
-            //                 setState(() {});
-            //                 return null;
-            //               },
-            //               validator: MultiValidator([
-            //                 RequiredValidator(
-            //                     errorText: ' email must not be empty'),
-            //                 MinLengthValidator(8,
-            //                     errorText: 'email must be at least 8 digits long'),
-            //                 // PatternValidator(r'(?=.*?[#?!@$%^&*-])', errorText: 'email must have at least one special character')
-            //               ]),
-            //               radius: 15,
-            //               controller: emailcontroller,
-            //               keyboard: TextInputType.emailAddress,
-            //               labText: 'الايميل',
-            //               prifix: Icons.email,
-            //             ),
-            //             const SizedBox(
-            //               height: 10,
-            //             ),
-            //             defaultTextFormField(
-            //               hintText: ' ',
-            //               validator: MultiValidator([
-            //                 RequiredValidator(
-            //                     errorText: 'password must not be empty'),
-            //                 MinLengthValidator(8,
-            //                     errorText:
-            //                         'password must be at least 8 digits long'),
-            //                 // PatternValidator(r'(?=.*?[#?!@$%^&*-])', errorText: 'passwords must have at least one special character')
-            //               ]),
-            //               controller: passcontroller,
-            //               keyboard: TextInputType.visiblePassword,
-            //               labText: 'كلمة المرور',
-            //               radius: 15,
-            //               prifix: Icons.lock,
-            //               sufix: secure ? Icons.visibility : Icons.visibility_off,
-            //               sufixfun: () {
-            //                 setState(() {
-            //                   secure = !secure;
-            //                 });
-            //                 return null;
-            //               },
-            //               securTrue: secure,
-            //             ),
-            //             const SizedBox(
-            //               height: 5,
-            //             ),
-            //             Builder(builder: (context) {
-            //               return GestureDetector(
-            //                 onTap: () {
-            //                   // ignore: avoid_print
-            //                   print('object');
-            //                 },
-            //                 child: defaultButton(
-            //                   width: 242,
-            //                   text: 'إنشاء حساب',
-            //                   function: () {
-            //                     if (Form.of(context).validate()) {
-            //                       Form.of(context).save();
-            //                       // ignore: avoid_print
-            //                       print(firstnamecontroller.text);
-            //                       // ignore: avoid_print
-            //                       print(lastnamecontroller.text);
-            //                       // ignore: avoid_print
-            //                       print(phonecontroller.text);
-            //                       // ignore: avoid_print
-            //                       print(emailcontroller.text);
-            //                       // ignore: avoid_print
-            //                       print(passcontroller.text);
-            //                       Navigator.of(context).pushReplacementNamed(Home_Layout.id);
-            //                     }
-            //                     return null;
-            //                   },
-            //                 ),
-            //               );
-            //             }),
-            //             const SizedBox(
-            //               height: 5,
-            //             ),
-            //             Row(
-            //               mainAxisAlignment: MainAxisAlignment.center,
-            //               children: [
-            //                 const Text(
-            //                   'هل تملك حساب مسبقاً ?',
-            //                   textDirection: TextDirection.rtl,
-            //                   style: TextStyle(
-            //                     fontFamily: 'cairo',
-            //                     fontSize: 14,
-            //                   ),
-            //                 ),
-            //                 TextButton(
-            //                   onPressed: () {
-            //                     firstnamecontroller.clear();
-            //                     lastnamecontroller.clear();
-            //                     phonecontroller.clear();
-            //                     emailcontroller.clear();
-            //                     passcontroller.clear();
-            //                     Navigator.of(context)
-            //                         .pushReplacementNamed(Login.id);
-            //                   },
-            //                   child: const Text(
-            //                     'تسجيل الدخول',
-            //                     textDirection: TextDirection.ltr,
-            //                     style: TextStyle(
-            //                       color: Colors.red,
-            //                       fontFamily: 'cairo',
-            //                       fontSize: 14,
-            //                     ),
-            //                   ),
-            //                 ),
-
-            //               ],
-            //             ),
-            //             Container(
-            //               width: 250,
-            //               height: 1,
-            //               color: const Color(0xff333333).withOpacity(0.3),
-            //             ),
-            //           ],
-            //         ),
-            //       ),
-            //     ),
-            //   ),
-            // ),
             Padding(
           padding: const EdgeInsets.all(20.0),
           child: SingleChildScrollView(
@@ -380,6 +172,7 @@ class _RegisterState extends State<Register> {
                               Stack(
                                 children: [
                                   defaultTextFormField(
+                                    readonly: true,
                                     hintText: '',
                                     prifix: Icons.date_range,
                                     sufixfun: () {},
@@ -405,9 +198,9 @@ class _RegisterState extends State<Register> {
                                         final DateTime? dateTime =
                                             await showDatePicker(
                                           context: context,
-                                          initialDate: DateTime.now(),
-                                          firstDate: DateTime(2000),
-                                          lastDate: DateTime(2024)
+                                          initialDate: DateTime.utc(2016,1,1),
+                                          firstDate: DateTime(1950),
+                                          lastDate: DateTime(2016)
                                               .add(const Duration(days: 30)),
                                         );
                                         if (dateTime != null) {
@@ -454,11 +247,12 @@ class _RegisterState extends State<Register> {
                                 RequiredValidator(
                                   errorText: 'حقل رقم الهاتف مطلوب',
                                 ),
+                                 MaxLengthValidator(10, 
+                          errorText:'الموبايل يجب ان يكون 10 أرقام'),
                                 MinLengthValidator(10,
                                     errorText:
                                         'الموبايل يجب ان يكون 10 أرقام'),
 
-                                // PatternValidator(r'(?=.*?[#?!@$%^&*-])', errorText: 'first name must have at least one special character')
                               ]),
                               radius: 10,
                               controller: phonecontroller,
@@ -559,13 +353,14 @@ class _RegisterState extends State<Register> {
                               height: 10,
                             ),
                             defaultTextFormField(
-                              hintText: 'example@gmail.com',
+                              hintText: 'Example@gmail.com',
                               sufixfun: () {
                                 return null;
                               },
                               validator: MultiValidator([
                                  RequiredValidator(
                                     errorText: 'حقل الايميل مطلوب'),
+                                     PatternValidator(r'(?=.*?[#?!@$%^&*-])', errorText: 'الرجاء التحقق من هذا الحقل'),
                                 MinLengthValidator(8,
                                     errorText:
                                         ' الايميل يجب ان لا يقل عن 8 محرف'),
@@ -639,13 +434,47 @@ class _RegisterState extends State<Register> {
                   ),
                   Row(
                     children: [
+                      // Expanded(
+                      //   flex: 1,
+                      //   child: Column(
+                      //     mainAxisAlignment: MainAxisAlignment.start,
+                      //     children: [
+                      //       Row(
+                      //         mainAxisAlignment: MainAxisAlignment.spaceBetween,
+                      //         children: [
+                      //           defText(
+                      //               text: 'الجنسية :',
+                      //               size: 18,
+                      //               fontWeight: FontWeight.w400,
+                      //               color: Colors.black),
+                      //         ],
+                      //       ),
+                      //       const SizedBox(
+                      //         height: 10,
+                      //       ),
+                      //       defaultTextFormField(
+                      //         hintText: '',
+                      //         sufixfun: () {
+                      //           return null;
+                      //         },
+                      //         validator: MultiValidator([
+                      //           RequiredValidator(
+                      //               errorText: 'حقل الجنسية مطلوب'),
+                      //         ]),
+                      //         radius: 10,
+                      //         controller: nationalityregcontroller,
+                      //         keyboard: TextInputType.name,
+                      //         labText: ' ',
+                      //       ),
+                      //     ],
+                      //   ),
+                      // ),
                       Expanded(
-                        flex: 1,
+                        flex: 2,
                         child: Column(
-                          mainAxisAlignment: MainAxisAlignment.start,
                           children: [
                             Row(
-                              mainAxisAlignment: MainAxisAlignment.spaceBetween,
+                              mainAxisAlignment: MainAxisAlignment.start,
                               children: [
                                 defText(
                                     text: 'الجنسية :',
@@ -657,23 +486,61 @@ class _RegisterState extends State<Register> {
                             const SizedBox(
                               height: 10,
                             ),
-                            defaultTextFormField(
-                              hintText: '',
-                              sufixfun: () {
-                                return null;
-                              },
-                              validator: MultiValidator([
-                                RequiredValidator(
-                                    errorText: 'حقل الجنسية مطلوب'),
-                              ]),
-                              radius: 10,
-                              controller: nationalityregcontroller,
-                              keyboard: TextInputType.name,
-                              labText: ' ',
+                            Container(
+                              padding: const EdgeInsetsDirectional.only(
+                                  end: 6, start: 6),
+                              decoration: BoxDecoration(
+                                borderRadius: BorderRadius.circular(10),
+                                border: Border.all(
+                                  color: const Color(0xff333333),
+                                  width: 1,
+                                ),
+                                color: const Color(0xffcfd9f0),
+                              ),
+                              child: DropdownButton(
+                                iconSize: 30,
+                                isExpanded: true,
+                                items: [
+                                  DropdownMenuItem(
+                                    // ignore: sort_child_properties_last
+                                    child: defText(
+                                        text: 'سوري',
+                                        size: 18,
+                                        fontWeight: FontWeight.w500,
+                                        color: const Color(0xf3333333)),
+                                    value: 'سوري',
+                                  ),
+                                  DropdownMenuItem(
+                                    // ignore: sort_child_properties_last
+                                    child: defText(
+                                        text: 'فلسطيني / سوري',
+                                        size: 18,
+                                        fontWeight: FontWeight.w500,
+                                        color: const Color(0xf3333333)),
+                                    value: 'فلسطيني / سوري',
+                                  ),
+                                   DropdownMenuItem(
+                                    // ignore: sort_child_properties_last
+                                    child: defText(
+                                        text: 'فلسطيني / اردني',
+                                        size: 18,
+                                        fontWeight: FontWeight.w500,
+                                        color: const Color(0xf3333333)),
+                                    value: 'فلسطيني / اردني',
+                                  ),
+                                ],
+                                onChanged: (String? val) {
+                                  setState(() {
+                                    nationalityregcontroller = val!;
+                                  });
+                                },
+                                value: nationalityregcontroller,
+                              ),
                             ),
                           ],
                         ),
                       ),
+
                       const SizedBox(
                         width: 10,
                       ),
@@ -714,6 +581,7 @@ class _RegisterState extends State<Register> {
                         ),
                      
                       ),
+                    
                     ],
                   ),
                   const SizedBox(
@@ -793,110 +661,117 @@ class _RegisterState extends State<Register> {
                           ],
                         ),      
                       ),
-                      const SizedBox(
-                        width: 10,
-                      ),
-                      Expanded(
-                        child:
-                         Column(
-                          mainAxisAlignment: MainAxisAlignment.start,
-                          children: [
-                            Row(
-                              mainAxisAlignment: MainAxisAlignment.spaceBetween,
-                              children: [
-                                defText(
-                                    text: 'المستوى العلمي :',
-                                    size: 18,
-                                    fontWeight: FontWeight.w400,
-                                    color: Colors.black),
-                              ],
-                            ),
-                            const SizedBox(
-                              height: 10,
-                            ),
-                            Container(
-                              padding: const EdgeInsetsDirectional.only(
-                                  end: 6, start: 6),
-                              decoration: BoxDecoration(
-                                borderRadius: BorderRadius.circular(10),
-                                border: Border.all(
-                                  color: const Color(0xff333333),
-                                  width: 1,
-                                ),
-                                color: const Color(0xffcfd9f0),
-                              ),
-                              child: DropdownButton(
-                                isExpanded: true,
-                                iconSize: 35,
-                                items: [
-                                  DropdownMenuItem(
-                                    // ignore: sort_child_properties_last
-                                    child: defText(
-                                        text: 'المرحلة الابتدائية',
-                                        size: 18,
-                                        fontWeight: FontWeight.w500,
-                                        color: const Color(0xf3333333)),
-                                    value: 'المرحلة الابتدائية',
-                                  ),
-                                  DropdownMenuItem(
-                                    // ignore: sort_child_properties_last
-                                    child: defText(
-                                        text: 'المرحلة الاعدادية',
-                                        size: 18,
-                                        fontWeight: FontWeight.w500,
-                                        color: const Color(0xf3333333)),
-                                    value: 'المرحلة الاعدادية',
-                                  ),
-                                  DropdownMenuItem(
-                                    // ignore: sort_child_properties_last
-                                    child: defText(
-                                        text: 'المرحلة الثانوية',
-                                        size: 18,
-                                        fontWeight: FontWeight.w500,
-                                        color: const Color(0xf3333333)),
-                                    value: 'المرحلة الثانوية',
-                                  ),
-                                  DropdownMenuItem(
-                                    // ignore: sort_child_properties_last
-                                    child: defText(
-                                        text: 'المرحلة الجامعية',
-                                        size: 18,
-                                        fontWeight: FontWeight.w500,
-                                        color: const Color(0xf3333333)),
-                                    value: 'المرحلة الجامعية',
-                                  ),
-                                  DropdownMenuItem(
-                                    // ignore: sort_child_properties_last
-                                    child: defText(
-                                        text: 'ماجستير',
-                                        size: 18,
-                                        fontWeight: FontWeight.w500,
-                                        color: const Color(0xf3333333)),
-                                    value: 'ماجستير',
-                                  ),
-                                  DropdownMenuItem(
-                                    // ignore: sort_child_properties_last
-                                    child: defText(
-                                        text: 'دكتوراه',
-                                        size: 18,
-                                        fontWeight: FontWeight.w500,
-                                        color: const Color(0xf3333333)),
-                                    value: 'دكتوراه',
-                                  ),
-                                ],
-                                onChanged: (String? val) {
-                                  setState(() {
-                                    CertificateType = val!;
-                                  });
-                                },
-                                value: CertificateType,
-                              ),
-                            ),
-                          ],
-                        ),     
-                      ),
+                    
                     ],
                   ),
+                    const SizedBox(
+                        width: 18,
+                      ),
+                      Row(
+                        children: [
+                          Expanded(
+                            child:
+                             Column(
+                              mainAxisAlignment: MainAxisAlignment.start,
+                              children: [
+                                Row(
+                                  mainAxisAlignment: MainAxisAlignment.spaceBetween,
+                                  children: [
+                                    defText(
+                                        text: 'المستوى العلمي :',
+                                        size: 18,
+                                        fontWeight: FontWeight.w400,
+                                        color: Colors.black),
+                                  ],
+                                ),
+                                const SizedBox(
+                                  height: 10,
+                                ),
+                                Container(
+                                  padding: const EdgeInsetsDirectional.only(
+                                      end: 6, start: 6),
+                                  decoration: BoxDecoration(
+                                    borderRadius: BorderRadius.circular(10),
+                                    border: Border.all(
+                                      color: const Color(0xff333333),
+                                      width: 1,
+                                    ),
+                                    color: const Color(0xffcfd9f0),
+                                  ),
+                                  child: DropdownButton(
+                                    isExpanded: true,
+                                    iconSize: 35,
+                                    items: [
+                                      DropdownMenuItem(
+                                        // ignore: sort_child_properties_last
+                                        child: defText(
+                                            text: 'المرحلة الابتدائية',
+                                            size: 18,
+                                            fontWeight: FontWeight.w500,
+                                            color: const Color(0xf3333333)),
+                                        value: 'المرحلة الابتدائية',
+                                      ),
+                                      DropdownMenuItem(
+                                        // ignore: sort_child_properties_last
+                                        child: defText(
+                                            text: 'المرحلة الاعدادية',
+                                            size: 18,
+                                            fontWeight: FontWeight.w500,
+                                            color: const Color(0xf3333333)),
+                                        value: 'المرحلة الاعدادية',
+                                      ),
+                                      DropdownMenuItem(
+                                        // ignore: sort_child_properties_last
+                                        child: defText(
+                                            text: 'المرحلة الثانوية',
+                                            size: 18,
+                                            fontWeight: FontWeight.w500,
+                                            color: const Color(0xf3333333)),
+                                        value: 'المرحلة الثانوية',
+                                      ),
+                                      DropdownMenuItem(
+                                        // ignore: sort_child_properties_last
+                                        child: defText(
+                                            text: 'المرحلة الجامعية',
+                                            size: 18,
+                                            fontWeight: FontWeight.w500,
+                                            color: const Color(0xf3333333)),
+                                        value: 'المرحلة الجامعية',
+                                      ),
+                                      DropdownMenuItem(
+                                        // ignore: sort_child_properties_last
+                                        child: defText(
+                                            text: 'ماجستير',
+                                            size: 18,
+                                            fontWeight: FontWeight.w500,
+                                            color: const Color(0xf3333333)),
+                                        value: 'ماجستير',
+                                      ),
+                                      DropdownMenuItem(
+                                        // ignore: sort_child_properties_last
+                                        child: defText(
+                                            text: 'دكتوراه',
+                                            size: 18,
+                                            fontWeight: FontWeight.w500,
+                                            color: const Color(0xf3333333)),
+                                        value: 'دكتوراه',
+                                      ),
+                                    ],
+                                    onChanged: (String? val) {
+                                      setState(() {
+                                        CertificateType = val!;
+                                      });
+                                    },
+                                    value: CertificateType,
+                                  ),
+                                ),
+                              ],
+                            ),     
+                          ),
+                        ],
+                      ),
+                    
+                     
                   const SizedBox(
                     height: 18,
                   ),
@@ -920,12 +795,13 @@ class _RegisterState extends State<Register> {
                               birthdateregcontroller.text,
                               phonecontroller.text,
                               Selectedgender,
-                              nationalityregcontroller.text,
+                              nationalityregcontroller,
                               locationregcontroller.text,
                               emailcontroller.text,
                               passcontroller.text,
                               CertificateType,
                               SocialStatus,
+                              
                             );
                             if (Error == null) {
                               // ignore: use_build_context_synchronously
@@ -966,7 +842,15 @@ class _RegisterState extends State<Register> {
                           phonecontroller.clear();
                           emailcontroller.clear();
                           passcontroller.clear();
+                          birthdateregcontroller.clear();
+                          locationregcontroller.clear();
+                          String Selectedgender = 'ذكر';
+                          String SocialStatus = 'لا أعمل';
+                          String Selectednationality  ='سوري';
+                          String CertificateType = 'المرحلة الابتدائية';
+
                           Navigator.of(context).pushReplacementNamed(Login.id);
+                          
                         },
                         child: const Text(
                           'تسجيل الدخول',
