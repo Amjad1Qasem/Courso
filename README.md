@@ -37,7 +37,7 @@ you go to reserve a seat for your course
   
 
 
-![App UI](/ui.png)
+![](/Courso/windows/Ved.mp4)
 
 
 
